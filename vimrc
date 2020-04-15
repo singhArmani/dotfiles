@@ -1,5 +1,50 @@
+" General configuration---------------------
+set nocompatible
 set number
 set numberwidth=5
+
+" Vim history
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many levels of undo
+set wildignore=*.swp,*.bak,*.pyc,*.class 
+set scrolloff=4          " Keep at least 4 lines below cursor
+syntax enable            " Enable syntax highlighting.
+
+"Disable entering comment automatically by vim upon entering a new line
+set formatoptions-=cro
+set spell                " Enable spellchecking
+" General configuration ends------------------
+
+" User interface options---------------------
+set noerrorbells
+set visualbell              " Flash the screen instead of beeping on errors"
+set mouse=a                 " Enable mouse for scrolling and resizing"
+set title                   " Set the window's title, reflecting the file currently being edited"
+" User interface ends------------------------
+
+" Swap and backup file options - disable all of them"
+" No backup or swap file
+set nobackup
+set noswapfile
+set nowb
+" end-----------------------------
+
+"Indentation options-------------
+set autoindent         " New lines inherit the indentation of previous line"
+set tabstop=4          " show existing tab with 4 spaces width
+set shiftwidth=2       " when indenting with '>', use 4 spaces width
+set expandtab          " On pressing tab, insert 4 spaces
+filetype plugin indent on
+set nowrap             " Don't wrap lines"
+" end-----------------------------
+
+" Search options------------------
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                    "    case-sensitive otherwise
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
+" end-----------------------------
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
@@ -141,21 +186,6 @@ function! s:check_back_space() abort
 endfunction
 "--------------------------------------------
 
-" Indentation
-" show existing tab with 4 spaces width
-"set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
- filetype plugin on
-
-" Searching
-set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-                    "    case-sensitive otherwise
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
 
 " Linting ALE
 let g:ale_fixers = {}
@@ -238,22 +268,11 @@ nnoremap k gk
 nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
 
-" Vim history
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-set wildignore=*.swp,*.bak,*.pyc,*.class 
-set scrolloff=4          " Keep at least 4 lines below cursor
-
 " Auto Save
 let g:auto_save = 1  " enable AutoSave on Vim startup
 
 
-" No backup or swap file
-set nobackup
-set noswapfile
 
-"Disable entering comment automatically by vim upon entering a new line
-set formatoptions-=cro
 
 " Tab key mappings
 map <leader>tn :tabnew<cr>
