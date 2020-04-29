@@ -12,7 +12,7 @@ syntax enable            " Enable syntax highlighting.
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
-set spell                " Enable spellchecking
+" set spell                " Enable spellchecking
 " General configuration ends------------------
 
 " User interface options---------------------
@@ -224,6 +224,9 @@ nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>l <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
 
+" Vertical split using leader key
+map <leader>sn :vnew<cr>
+
 " Tab navigation
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
@@ -329,6 +332,11 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Fzf with ag search and ignoring files/directories
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+
+" Start a search query by pressing \
+nnoremap \  :Ag<space>
+"search for word under cursor by pressing |
+nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
 
 " Rainbow parenthesis
 let g:rainbow_active = 1
