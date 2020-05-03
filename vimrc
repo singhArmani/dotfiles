@@ -27,6 +27,7 @@ set title                   " Set the window's title, reflecting the file curren
 set nobackup
 set noswapfile
 set nowb
+set autoread
 " end-----------------------------
 
 "Indentation options-------------
@@ -54,6 +55,9 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
+
+" Merge tool(https://github.com/samoshkin/vim-mergetool)
+Plug 'samoshkin/vim-mergetool'
 
 " Track the engine.
 Plug 'SirVer/ultisnips'
@@ -350,8 +354,30 @@ vnoremap K :m '<-2<cr>gv=gv
 noremap <S-l> gt
 noremap <S-h> gT
 
-" Quit files with Leader + q
-noremap <leader>q :q<cr>
+" Quit files with Leader + q(incooperating vim-merge context aware
+" QuitWindow() function) 
+" https://github.com/samoshkin/vim-mergetool#quitting-merge-mode
+function s:QuitWindow()
+
+  " If we're in merge mode, exit
+  if get(g:, 'mergetool_in_merge_mode', 0)
+    call mergetool#stop()
+    return
+  endif
+
+  if &diff
+    " Quit diff mode intelligently...
+  endif
+
+  quit
+endfunction
+
+command QuitWindow call s:QuitWindow()
+nnoremap <silent> <leader>q :QuitWindow<CR>
+
+" If there's any issue with above QuitWindow function then just remove it
+" and uncomment the line below
+"nnoremap <silent> <leader>q :q<CR>
 
 " Clone Paragraph with cp
 noremap cp yap<S-}>p
@@ -374,6 +400,10 @@ nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gr :Gread<CR>
 nnoremap <space>gw :Gwrite<CR><CR>
 nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+" Show commit history of the current branch we are in
+nnoremap <space>gg :silent! Glog --oneline --decorate --graph<CR>
+" Show commit history for all branches 
+nnoremap <space>gG :silent! Glog --oneline --decorate --graph --all<CR>
 nnoremap <space>gp :Ggrep<Space>
 nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gb :Git branch<Space>
@@ -382,7 +412,37 @@ nnoremap <space>gps :Gpush<CR>
 nnoremap <space>gpl :Gpull<CR>
 nnoremap <leader>gB :Blame<CR> 
 "Mapping ends-----------------------------
- 
+
+" Merge tool (vim-mergetool) configuration-----
+" merge mode toggle
+nmap <leader>mt <plug>(MergetoolToggle)
+
+" toggle to other common layout (mbr) (merged, base, and remote)
+nnoremap <silent> <leader>mb :call mergetool#toggle_layout('mr,b')<CR>
+nmap <expr> <S-Left> &diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'
+nmap <expr> <S-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
+nmap <expr> <S-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
+nmap <expr> <S-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
+
+" vim-airline merge mode detection(https://github.com/samoshkin/vim-mergetool#merge-mode-detection)
+function! AirlineDiffmergePart()
+  if get(g:, 'mergetool_in_merge_mode', 0)
+    return '↸'
+  endif
+
+  if &diff
+    return '↹'
+  endif
+
+  return ''
+endfunction
+
+call airline#parts#define_function('_diffmerge', 'AirlineDiffmergePart')
+call airline#parts#define_accent('_diffmerge', 'bold')
+
+let g:airline_section_z = airline#section#create(['_diffmerge'])
+
+" Merge tool configuration end------
 
 " Jovica tip: Git blame---------------
 command! -nargs=* Blame call s:GitBlame()
