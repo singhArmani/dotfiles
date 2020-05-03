@@ -395,6 +395,10 @@ nnoremap <space>gA :Git add . %:p<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gc :Gcommit -v -q<CR>
 nnoremap <space>gt :Gcommit -v -q %:p<CR>
+
+" skip the staging area
+nnoremap <space>gh :Gcommit -a -v -q<CR>
+
 nnoremap <space>gd :Gdiff<CR>
 nnoremap <space>ge :Gedit<CR>
 nnoremap <space>gr :Gread<CR>
