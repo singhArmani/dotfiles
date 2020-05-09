@@ -201,7 +201,6 @@ endfunction
 " Linting ALE
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['eslint']
-  "diagnostic.displayByAle": true,
 
 " Fix files automatically on save
 let g:ale_fix_on_save = 1
