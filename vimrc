@@ -91,18 +91,12 @@ Plug 'tomasr/molokai'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
 
 " Auto Save
 Plug '907th/vim-auto-save'
-
-" Prettier
-" post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
-" Lint Engine
-Plug 'dense-analysis/ale'
 
 " Indent Guide
 Plug 'nathanaelkane/vim-indent-guides'
@@ -198,17 +192,6 @@ endfunction
 "--------------------------------------------
 
 
-" Linting ALE
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['eslint']
-
-" Fix files automatically on save
-let g:ale_fix_on_save = 1
-
-" When working with .ts files, ALE supports automatic import from external modules.
-let g:ale_completion_tsserver_autoimport = 1
-
-
 " Exiting to normal mode from insert mode
 imap jk <esc>
 imap kj <esc>
@@ -216,11 +199,37 @@ imap kj <esc>
 "Backspace fix 
 set backspace=indent,eol,start
 
+" Vim sessions
+let g:sessions_dir = '~/vim-sessions'
+exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
+
 " neoclide configuration--------------
+" ref: https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 
 " perform code action
 nmap <leader>do <Plug>(coc-codeaction)
+
+" workspace symbols
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+
+" renaming a symbol 
+nmap <leader>rn <Plug>(coc-rename)
+
+" jumping to errors in a file 
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Loading coc prettier/eslint only when these tools are installed in the
+" project dir.
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 " coc config ends-------------------------
 
 " Cursor line
