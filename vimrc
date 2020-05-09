@@ -47,8 +47,13 @@ set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 " end-----------------------------
 
+" Leader Key 
+" change the mapleader from \ to <space>
+let mapleader = "\<Space>"
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
@@ -75,6 +80,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'luochen1990/rainbow'
 " Language Syntax highlighting
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Themes
 Plug 'NLKNguyen/papercolor-theme'
@@ -127,9 +134,9 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 set background=dark
-"colorscheme Gruvbox
+colorscheme Gruvbox
 "colorscheme Molokai
-colorscheme PaperColor
+"colorscheme PaperColor
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
@@ -194,6 +201,7 @@ endfunction
 " Linting ALE
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['eslint']
+  "diagnostic.displayByAle": true,
 
 " Fix files automatically on save
 let g:ale_fix_on_save = 1
@@ -201,9 +209,6 @@ let g:ale_fix_on_save = 1
 " When working with .ts files, ALE supports automatic import from external modules.
 let g:ale_completion_tsserver_autoimport = 1
 
-" Leader Key 
-" change the mapleader from \ to <space>
-let mapleader = "\<Space>"
 
 " Exiting to normal mode from insert mode
 imap jk <esc>
@@ -211,6 +216,13 @@ imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
+
+" neoclide configuration--------------
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+
+" perform code action
+nmap <leader>do <Plug>(coc-codeaction)
+" coc config ends-------------------------
 
 " Cursor line
 autocmd InsertEnter,InsertLeave * set cul!
@@ -328,6 +340,7 @@ nmap ]c <Plug>(GitGutterNextHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap <Leader>hs <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterUndoHunk
+nnoremap <Leader>tg :GitGutterSignsToggle<CR>
 
 " Cursor shape
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -390,30 +403,30 @@ nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
 " fugitive git bindings
-nnoremap <space>ga :Git add %:p<CR><CR>
-nnoremap <space>gA :Git add . %:p<CR><CR>
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gA :Git add . %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
 
 " skip the staging area
-nnoremap <space>gh :Gcommit -a -v -q<CR>
+nnoremap <leader>gh :Gcommit -a -v -q<CR>
 
-nnoremap <space>gd :Gdiff<CR>
-nnoremap <space>ge :Gedit<CR>
-nnoremap <space>gr :Gread<CR>
-nnoremap <space>gw :Gwrite<CR><CR>
-nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
 " Show commit history of the current branch we are in
-nnoremap <space>gg :silent! Glog --oneline --decorate --graph<CR>
+nnoremap <leader>gg :silent! Glog --oneline --decorate --graph<CR>
 " Show commit history for all branches 
-nnoremap <space>gG :silent! Glog --oneline --decorate --graph --all<CR>
-nnoremap <space>gp :Ggrep<Space>
-nnoremap <space>gm :Gmove<Space>
-nnoremap <space>gb :Git branch<Space>
-nnoremap <space>go :Git checkout<Space>
-nnoremap <space>gps :Gpush<CR>
-nnoremap <space>gpl :Gpull<CR>
+nnoremap <leader>gG :silent! Glog --oneline --decorate --graph --all<CR>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Gpush<CR>
+nnoremap <leader>gpl :Gpull<CR>
 nnoremap <leader>gB :Blame<CR> 
 "Mapping ends-----------------------------
 
