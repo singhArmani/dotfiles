@@ -138,6 +138,10 @@ set encoding=UTF-8
 " Airline theme
 let g:airline_theme='base16'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 " Concealing
 set conceallevel=2
@@ -255,6 +259,19 @@ map <leader>sn :vnew<cr>
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
 
+" Buffer
+" Move to the previous buffer with "gp"
+nnoremap gp :bp<CR>
+
+" Move to the next buffer with "gn"
+nnoremap gn :bn<CR>
+
+" List all possible buffers with "gl"
+nnoremap gl :ls<CR>
+
+" List all possible buffers with "gb" and accept a new buffer argument [1]
+nnoremap gb :ls<CR>:b
+" buffer ends----------------
 
 " GoTo code navigation.----------------
 nmap <silent> gd <Plug>(coc-definition)
@@ -297,8 +314,6 @@ nmap <silent> <leader>so :so $MYVIMRC<CR>
 
 " Auto Save
 let g:auto_save = 1  " enable AutoSave on Vim startup
-
-
 
 
 " Tab key mappings
