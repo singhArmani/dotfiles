@@ -2,14 +2,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/amandeepsingh/.oh-my-zsh"
+export ZSH="/Users/asingh4/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-
+EDITOR=vim
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,22 +97,40 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias c="clear"
+alias dev="cd ~/Desktop/Dev/"
+alias lg="cd ~/Desktop/Dev/learning-git"
+alias forg="cd ~/Desktop/Dev/atlassian-frontend/packages/forge/"
+alias aux="cd ~/Desktop/Dev/aux/packages/forge-ui/"
+alias docs="cd ~/Desktop/Dev/forge-docs/"
 
-# Using ag as one of the search too fzf
-#determines search program for fzf
-#if type ag &> /dev/null; then
-#    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
-#fi
-#refer rg over ag
-# if type rg &> /dev/null; then
-#    export FZF_DEFAULT_COMMAND='rg --files --hidden'
-#fi
-#
+# vim, zshrc, gitconfig,
+alias vc="vi ~/.vimrc"
+alias zc="vi ~/.zshrc"
+alias gitc="vi ~/.gitconfig"
+alias tx=tmuxinator
+alias tc="vi ~/.tmux.conf"
+alias tk="tmux kill-server"
+alias work=tmuxinator ~/workpace/dev.forge
+
+
+# nvm path---------------
+# Uncomment this if you need nvm ever
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 # Command aliases
 alias gs='git status '
 alias ga='git add '
+alias gap='git add --patch '
 alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
+alias gc='git commit '
+alias gd='git diff '
 alias gco='git checkout '
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias rbi='git rebase -i origin/master'
+alias rbc='git rebase --continue'
 
