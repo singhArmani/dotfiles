@@ -1,5 +1,3 @@
-" General configuration---------------------
-set nocompatible
 set number
 set numberwidth=5
 
@@ -20,6 +18,8 @@ set noerrorbells
 set visualbell              " Flash the screen instead of beeping on errors"
 set mouse=a                 " Enable mouse for scrolling and resizing"
 set title                   " Set the window's title, reflecting the file currently being edited"
+set splitbelow              " Split panes to bottom
+set splitright              " Split pane to right
 " User interface ends------------------------
 
 " Swap and backup file options - disable all of them"
@@ -60,6 +60,7 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'moll/vim-bbye'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -74,7 +75,9 @@ Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdcommenter'
 
 " Auto pair
-Plug 'jiangmiao/auto-pairs'
+" Remove this if coc.vim auto pair doesn't work
+" Plug 'jiangmiao/auto-pairs'
+
 
 " Rainbow Parenthesis
 Plug 'luochen1990/rainbow'
@@ -87,7 +90,8 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
-" You can change theme. Current theme is 'papercolor'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ayu-theme/ayu-vim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -131,12 +135,14 @@ set background=dark
 colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
+"colorscheme Palenight
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
 
 " Airline theme
 let g:airline_theme='base16'
+"let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -234,11 +240,13 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+" Format using prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " coc config ends-------------------------
 
 " Cursor line
 autocmd InsertEnter,InsertLeave * set cul!
-set relativenumber
 
 " Indent guide enabled
 " NOTE: disabling it as prettier will fix it. Turn it on when you 
@@ -253,18 +261,22 @@ nnoremap <leader>l <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
 
 " Vertical split using leader key
-map <leader>sn :vnew<cr>
+map <leader>sv :vsp<cr>
+
+" Horizontal split using leader key
+map <leader>sv :vsp<cr>
+map <leader>sh :sp<cr>
 
 " Tab navigation
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
 
 " Buffer
-" Move to the previous buffer with "gp"
-nnoremap gp :bp<CR>
+" Move to the previous buffer with "Shift+p"
+nnoremap <S-p> :bp<CR>
 
-" Move to the next buffer with "gn"
-nnoremap gn :bn<CR>
+" Move to the next buffer with "Shift+n"
+nnoremap <S-n> :bn<CR>
 
 " List all possible buffers with "gl"
 nnoremap gl :ls<CR>
@@ -361,22 +373,38 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " Git gutter key mapping
 nmap ]c <Plug>(GitGutterNextHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
-nmap <Leader>hs <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterUndoHunk
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+nmap <Leader>hu <Plug>(GitGutterUndoHunk)
 nnoremap <Leader>tg :GitGutterSignsToggle<CR>
 
-" Cursor shape
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Cursor shape (without tmux)
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" Fzf with ag search and ignoring files/directories
+" Cursor shape (with tmux)
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Fzf with ag search and ignoring files/directories---------------------------
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
-" Start a search query by pressing \
-nnoremap \  :Ag<space>
-"search for word under cursor by pressing |
-nnoremap \| :Ag <C-R><C-W><cr>:cw<cr>
+" Start a search query by pressing '
+map ' :Ag<space>
+"search for word under cursor by pressing "
+nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
+
+" Passing args to :Ag
+" Ref: https://github.com/junegunn/fzf.vim/issues/92#issuecomment-191248596 
+function! s:ag_with_opts(arg, bang)
+  let tokens  = split(a:arg)
+  let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
+  let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
+  call fzf#vim#ag(query, ag_opts, a:bang ? {} : {'down': '40%'})
+endfunction
+
+autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
+" Ag ends------------------
 
 " Rainbow parenthesis
 let g:rainbow_active = 1
@@ -414,6 +442,9 @@ nnoremap <silent> <leader>q :QuitWindow<CR>
 " If there's any issue with above QuitWindow function then just remove it
 " and uncomment the line below
 "nnoremap <silent> <leader>q :q<CR>
+
+" delete buffers without closing your windows
+:nnoremap <Leader>bb :Bdelete<CR>
 
 " Clone Paragraph with cp
 noremap cp yap<S-}>p
