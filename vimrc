@@ -71,6 +71,10 @@ Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine
 Plug 'honza/vim-snippets'
 
+" Focus
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
@@ -251,6 +255,10 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Cursor line
 autocmd InsertEnter,InsertLeave * set cul!
+
+" Goyo & limelight Integration
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Indent guide enabled
 " NOTE: disabling it as prettier will fix it. Turn it on when you 
