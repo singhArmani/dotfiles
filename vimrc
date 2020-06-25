@@ -93,6 +93,7 @@ Plug 'tomasr/molokai'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'reedes/vim-colors-pencil'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -133,11 +134,12 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 set background=dark
-colorscheme Gruvbox
+"colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
 "colorscheme solarized
+colorscheme pencil
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
