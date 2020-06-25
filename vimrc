@@ -92,6 +92,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -136,6 +137,7 @@ colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
+"colorscheme solarized
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
