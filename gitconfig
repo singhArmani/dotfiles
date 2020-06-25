@@ -1,0 +1,37 @@
+[merge]
+tool = vim_mergetool
+conflictStyle = diff3
+
+[mergetool "vim_mergetool"]
+cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+trustExitCode = true
+
+[alias]
+    cb = checkout -b
+	unstage = reset HEAD --
+	last = log -1 HEAD
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    pf = push --force-with-lease
+    fom = fetch origin master
+    rbi = rebase -i origin/master
+    rbc = rebase --continue
+    fix = commit --amend --no-edit 
+    exp = commit -v
+    log = log --oneline --graph
+    logs = shortlog
+    bb = checkout -
+
+[core]
+	excludesfile = /Users/asingh4/.gitignore_global
+	attributesfile = ~/.gitattributes
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[diff "image"]
+	textconv = imgcat
+[user]
+	name = Aman Singh
+	email = asingh4@atlassian.com
+
