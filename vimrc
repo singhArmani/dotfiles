@@ -102,7 +102,8 @@ Plug 'reedes/vim-colors-pencil'
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-  \ 'coc-tsserver'
+  \ 'coc-tsserver',
+  \ 'coc-snippets',
   \ ]
 
 " Auto Save
