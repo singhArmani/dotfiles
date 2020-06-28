@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/asingh4/.oh-my-zsh"
+export ZSH="/Users/amandeepsingh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -100,18 +100,15 @@ source $ZSH/oh-my-zsh.sh
 alias c="clear"
 alias dev="cd ~/Desktop/Dev/"
 alias lg="cd ~/Desktop/Dev/learning-git"
-alias forg="cd ~/Desktop/Dev/atlassian-frontend/packages/forge/"
-alias aux="cd ~/Desktop/Dev/aux/packages/forge-ui/"
-alias docs="cd ~/Desktop/Dev/forge-docs/"
 
 # vim, zshrc, gitconfig,
 alias vc="vi ~/.vimrc"
 alias zc="vi ~/.zshrc"
 alias gitc="vi ~/.gitconfig"
-alias tx=tmuxinator
+alias mux=tmuxinator
 alias tc="vi ~/.tmux.conf"
 alias tk="tmux kill-server"
-alias work=tmuxinator ~/workpace/dev.forge
+alias work=tmuxinator start ~/workspace/keystone
 
 
 # nvm path---------------

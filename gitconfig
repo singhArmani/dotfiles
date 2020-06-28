@@ -10,7 +10,7 @@ trustExitCode = true
     cb = checkout -b
 	unstage = reset HEAD --
 	last = log -1 HEAD
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(bold blue)[%an]' --abbrev-commit --date=relative
     pf = push --force-with-lease
     fom = fetch origin master
     rbi = rebase -i origin/master
@@ -22,7 +22,7 @@ trustExitCode = true
     bb = checkout -
 
 [core]
-	excludesfile = /Users/asingh4/.gitignore_global
+	excludesfile = /Users/amandeepsingh/.gitignore_global
 	attributesfile = ~/.gitattributes
 [filter "lfs"]
 	required = true
@@ -33,5 +33,5 @@ trustExitCode = true
 	textconv = imgcat
 [user]
 	name = Aman Singh
-	email = asingh4@atlassian.com
+	email = aman.singh@thinkmill.com.au
 

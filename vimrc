@@ -383,6 +383,9 @@ map ; :Files<CR>
 " Ignore node_modules
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+" Git commit message auto spell checking and text wrapping 
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
 " Git gutter key mapping
 nmap ]c <Plug>(GitGutterNextHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
