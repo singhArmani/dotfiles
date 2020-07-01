@@ -20,6 +20,7 @@ trustExitCode = true
     log = log --oneline --graph
     logs = shortlog
     bb = checkout -
+    bb = checkout -
 
 [core]
 	excludesfile = /Users/amandeepsingh/.gitignore_global

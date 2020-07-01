@@ -120,6 +120,7 @@ alias work=tmuxinator start ~/workspace/keystone
 
 # Command aliases
 alias gs='git status '
+alias gss='git status --branch --short'
 alias ga='git add '
 alias gap='git add --patch '
 alias gb='git branch '
