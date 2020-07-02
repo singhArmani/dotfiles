@@ -10,6 +10,73 @@ export ZSH="/Users/amandeepsingh/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 EDITOR=vim
+
+plugins=(git zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias c="clear"
+alias dev="cd ~/Desktop/Dev/"
+alias lg="cd ~/Desktop/Dev/learning-git"
+
+# vim, zshrc, gitconfig,
+alias vc="vi ~/.vimrc"
+alias zc="vi ~/.zshrc"
+alias gitc="vi ~/.gitconfig"
+alias mux=tmuxinator
+alias tc="vi ~/.tmux.conf"
+alias tkill="tmux kill-server"
+alias work="cd ~/workspace/ && tmuxinator start keystone"
+alias dot="cd ~/dotfiles/"
+
+
+# nvm path---------------
+# Uncomment this if you need nvm ever
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Command aliases
+alias gs='git status '
+alias gss='git status --branch --short'
+alias ga='git add '
+alias gap='git add --patch '
+alias gb='git branch '
+alias gc='git commit '
+alias gd='git diff '
+alias gco='git checkout '
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias rbi='git rebase -i origin/master'
+alias rbc='git rebase --continue'
+
+# thefuck 
+eval $(thefuck --alias)
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -68,67 +135,3 @@ EDITOR=vim
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias c="clear"
-alias dev="cd ~/Desktop/Dev/"
-alias lg="cd ~/Desktop/Dev/learning-git"
-
-# vim, zshrc, gitconfig,
-alias vc="vi ~/.vimrc"
-alias zc="vi ~/.zshrc"
-alias gitc="vi ~/.gitconfig"
-alias mux=tmuxinator
-alias tc="vi ~/.tmux.conf"
-alias tk="tmux kill-server"
-alias work=tmuxinator start ~/workspace/keystone
-
-
-# nvm path---------------
-# Uncomment this if you need nvm ever
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-# Command aliases
-alias gs='git status '
-alias gss='git status --branch --short'
-alias ga='git add '
-alias gap='git add --patch '
-alias gb='git branch '
-alias gc='git commit '
-alias gd='git diff '
-alias gco='git checkout '
-alias gcb='git checkout -b'
-alias gcm='git checkout master'
-alias rbi='git rebase -i origin/master'
-alias rbc='git rebase --continue'
-
