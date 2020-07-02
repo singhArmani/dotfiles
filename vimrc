@@ -37,6 +37,8 @@ set shiftwidth=2       " when indenting with '>', use 4 spaces width
 set expandtab          " On pressing tab, insert 4 spaces
 filetype plugin indent on
 set nowrap             " Don't wrap lines"
+" wrap lines when required with `:Wrap` command
+command! -nargs=* Wrap set wrap linebreak nolist
 " end-----------------------------
 
 " Search options------------------
