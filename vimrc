@@ -148,6 +148,9 @@ set background=dark
 "colorscheme solarized
 colorscheme pencil
 
+" Setting colorscheme based on the daytime
+:let &background = strftime("%H") < 17 ? "light" : "dark"
+
 " Setting icons and Gui Fonts
 set encoding=UTF-8
 
