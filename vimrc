@@ -10,7 +10,7 @@ syntax enable            " Enable syntax highlighting.
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
-" set spell                " Enable spellchecking
+set spell                " Enable spellchecking
 " General configuration ends------------------
 
 " User interface options---------------------
@@ -141,12 +141,12 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 set background=dark
-"colorscheme Gruvbox
+colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
 "colorscheme solarized
-colorscheme pencil
+"colorscheme pencil
 
 " Setting colorscheme based on the daytime
 :let &background = strftime("%H") < 17 ? "light" : "dark"

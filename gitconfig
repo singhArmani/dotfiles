@@ -17,12 +17,18 @@ trustExitCode = true
     rbc = rebase --continue
     fix = commit --amend --no-edit 
     exp = commit -v
-    log = log --oneline --graph
     logs = shortlog
-    bb = checkout -
     bb = checkout -
 	undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
 
+    # only show the word diff in color
+    wdiff = diff --word-diff --word-diff-regex='\\w+'
+
+    # show list of conflicted files 
+    lcf = diff --name-only --diff-filter=U
+
+    # open conflicted files in your editor
+    cfix = git diff --name-only | uniq | xargs $EDITOR 
 [core]
 	excludesfile = /Users/amandeepsingh/.gitignore_global
 	attributesfile = ~/.gitattributes

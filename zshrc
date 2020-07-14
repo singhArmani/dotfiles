@@ -65,8 +65,10 @@ alias dot="cd ~/dotfiles/"
 alias gs='git status '
 alias gss='git status --branch --short'
 alias ga='git add '
-alias gap='git add --patch '
+alias gap='git add --patch'
+alias gcp='git checkout --patch'
 alias gb='git branch '
+alias gbb='git bb'
 alias gc='git commit '
 alias gd='git diff '
 alias gco='git checkout '
@@ -74,6 +76,15 @@ alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
+
+# show list of conflicted files
+alias lcf='git diff --name-only --diff-filter=U'
+
+# open conflicted files in your editor
+alias cfix='git diff --name-only | uniq | xargs $EDITOR'
+
+# Sync with remote, overwrite local changes
+alias undo='git fetch origin/master && git reset --hard origin/master && git clean -f -d'
 
 # thefuck 
 eval $(thefuck --alias)
