@@ -6,7 +6,7 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
-syntax enable            " Enable syntax highlighting.
+syntax on            " Enable syntax highlighting.
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
@@ -77,6 +77,7 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
@@ -141,11 +142,11 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 set background=dark
-colorscheme Gruvbox
+"colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
-"colorscheme solarized
+colorscheme solarized
 "colorscheme pencil
 
 " Setting colorscheme based on the daytime
@@ -320,6 +321,8 @@ function! s:show_documentation()
   endif
 endfunction
 " ---------------------------------------
+"
+
 
 " UltiSnippets---------------------------
 " Trigger configuration

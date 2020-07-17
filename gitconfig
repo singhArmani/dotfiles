@@ -27,8 +27,6 @@ trustExitCode = true
     # show list of conflicted files 
     lcf = diff --name-only --diff-filter=U
 
-    # open conflicted files in your editor
-    cfix = git diff --name-only | uniq | xargs $EDITOR 
 [core]
 	excludesfile = /Users/amandeepsingh/.gitignore_global
 	attributesfile = ~/.gitattributes
@@ -40,8 +38,10 @@ trustExitCode = true
 [diff "image"]
 	textconv = imgcat
 [user]
-	name = Aman Singh
-	email = aman.singh@thinkmill.com.au
+	name = singhArmani
+	email = singh_aman@hotmail.com.au
 
 [rebase]
 	autosquash = true
+[help]
+	autocorrect = 1
