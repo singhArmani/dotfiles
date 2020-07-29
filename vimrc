@@ -77,14 +77,8 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-
 " Commenting
 Plug 'scrooloose/nerdcommenter'
-
-" Auto pair
-" Remove this if coc.vim auto pair doesn't work
-" Plug 'jiangmiao/auto-pairs'
-
 
 " Rainbow Parenthesis
 Plug 'luochen1990/rainbow'
@@ -131,6 +125,9 @@ Plug 'tpope/vim-fugitive'
 " Vim icons
 Plug 'ryanoasis/vim-devicons'
 
+" Search and Replace Project wise 
+Plug 'wincent/ferret'
+
 call plug#end()
 
 " Folding
@@ -139,14 +136,15 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 
+
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 set background=dark
-"colorscheme Gruvbox
+colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
-colorscheme solarized
+"colorscheme solarized
 "colorscheme pencil
 
 " Setting colorscheme based on the daytime
@@ -236,8 +234,9 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 " perform code action
 nmap <leader>do <Plug>(coc-codeaction)
 
-" workspace symbols
-nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" NOTE: <leader>s is used for searching word under cursor :Ack ferret
+" workspace symbols 
+" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 
 " renaming a symbol 
 nmap <leader>rn <Plug>(coc-rename)
@@ -414,20 +413,25 @@ let &t_EI = "\e[2 q"
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " Start a search query by pressing '
-map ' :Ag<space>
+" The following line was changed from 'Ag' --> 'Ack', for better search
+" command variations. We can search and replace in the whole project too
+map ' :Ag<space> 
 "search for word under cursor by pressing "
 nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
 
-" Passing args to :Ag
-" Ref: https://github.com/junegunn/fzf.vim/issues/92#issuecomment-191248596 
-function! s:ag_with_opts(arg, bang)
-  let tokens  = split(a:arg)
-  let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
-  let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
-  call fzf#vim#ag(query, ag_opts, a:bang ? {} : {'down': '40%'})
-endfunction
+map <Leader>b :Back<space>
 
-autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
+"TODO: remove the following ag command setup if :Ack works like charm 🚀🔥
+"" Passing args to :Ag
+"" Ref: https://github.com/junegunn/fzf.vim/issues/92#issuecomment-191248596 
+"function! s:ag_with_opts(arg, bang)
+  "let tokens  = split(a:arg)
+  "let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
+  "let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
+  "call fzf#vim#ag(query, ag_opts, a:bang ? {} : {'down': '40%'})
+"endfunction
+
+"autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
 " Ag ends------------------
 
 " Rainbow parenthesis
@@ -474,7 +478,7 @@ nnoremap <silent> <leader>q :QuitWindow<CR>
 noremap cp yap<S-}>p
 
 " Align current paragraph with Leader + a
-noremap <leader>a =ip
+" noremap <leader>a =ip
 
 " Apply Macros with Q
 nnoremap Q @q
