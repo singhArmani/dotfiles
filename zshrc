@@ -63,6 +63,7 @@ alias dot="cd ~/dotfiles/"
 
 # Command aliases
 alias gs='git status '
+alias gbc='git branch --sort=committerdate' # list all branches ordered by most recent commit
 alias gss='git status --branch --short'
 alias ga='git add '
 alias gap='git add --patch'
@@ -76,6 +77,7 @@ alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
+alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
 
 # show list of conflicted files
 alias lcf='git diff --name-only --diff-filter=U'

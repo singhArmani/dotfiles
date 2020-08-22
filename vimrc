@@ -20,6 +20,7 @@ set mouse=a                 " Enable mouse for scrolling and resizing"
 set title                   " Set the window's title, reflecting the file currently being edited"
 set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
+set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
 " Swap and backup file options - disable all of them"
@@ -178,7 +179,7 @@ let g:javascript_conceal_noarg_arrow_function = "☐"
 let g:javascript_conceal_underscore_arrow_function = "☐"
 
 " toggling
-map <leader>cu :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
+nmap <leader>cu :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 "--------------------
 
 " Autocompletion configuration settings
@@ -222,10 +223,10 @@ imap kj <esc>
 "Backspace fix 
 set backspace=indent,eol,start
 
-" Vim sessions
-let g:sessions_dir = '~/vim-sessions'
-exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
+"" Vim sessions: TODO: remove it. Not using sessions anymore
+"let g:sessions_dir = '~/vim-sessions'
+"exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+"exec 'nnoremap <Leader>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 " neoclide configuration--------------
 " ref: https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
@@ -263,6 +264,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd InsertEnter,InsertLeave * set cul!
 
 " Goyo & limelight Integration
+autocmd FileType markdown Goyo " Open Goyo by default for markdown file
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
@@ -288,6 +290,7 @@ map <leader>sh :sp<cr>
 " Tab navigation
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
+nmap <leader>ss :%s/
 
 " Buffer
 " Move to the previous buffer with "Shift+p"
