@@ -110,6 +110,9 @@ Plug '907th/vim-auto-save'
 " Indent Guide
 Plug 'nathanaelkane/vim-indent-guides'
 
+" Graphql vi
+Plug 'jparise/vim-graphql'
+
 " Git status flag NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -149,7 +152,7 @@ colorscheme Gruvbox
 "colorscheme pencil
 
 " Setting colorscheme based on the daytime
-:let &background = strftime("%H") < 17 ? "light" : "dark"
+:let &background = strftime("%H") < 12 ? "light" : "dark"
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
@@ -290,7 +293,7 @@ map <leader>sh :sp<cr>
 " Tab navigation
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
-nmap <leader>ss :%s/
+nmap <leader>ss :%s/\v
 
 " Buffer
 " Move to the previous buffer with "Shift+p"
