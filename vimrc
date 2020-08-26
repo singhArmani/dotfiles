@@ -96,6 +96,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'reedes/vim-colors-pencil'
+Plug 'rakr/vim-one'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -143,8 +144,9 @@ set foldlevel=2
 
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
-set background=dark
-colorscheme Gruvbox
+"set background=dark
+colorscheme one
+"colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
@@ -158,7 +160,8 @@ colorscheme Gruvbox
 set encoding=UTF-8
 
 " Airline theme
-let g:airline_theme='base16'
+let g:airline_theme='one'
+"let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -217,6 +220,24 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 "--------------------------------------------
+
+
+" True color support------------
+set t_8b=[48;2;%lu;%lu;%lum
+set t_8f=[38;2;%lu;%lu;%lum
+
+if (has("nvim"))
+"For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" True color support ends
 
 
 " Exiting to normal mode from insert mode
