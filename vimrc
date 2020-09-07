@@ -6,7 +6,7 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
-syntax on            " Enable syntax highlighting.
+syntax enable            " Enable syntax highlighting.
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
@@ -30,7 +30,6 @@ set noswapfile
 set nowb
 set autoread
 " end-----------------------------
-
 "Indentation options-------------
 set autoindent         " New lines inherit the indentation of previous line"
 set tabstop=4          " show existing tab with 4 spaces width
@@ -45,6 +44,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 " Search options------------------
 set ignorecase    " ignore case when searching
 set smartcase     " ignore case if search pattern is all lowercase,
+
                     "    case-sensitive otherwise
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
@@ -64,6 +64,7 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
+Plug 'terryma/vim-expand-region'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -108,11 +109,6 @@ let g:coc_global_extensions = [
 " Auto Save
 Plug '907th/vim-auto-save'
 
-" Indent Guide
-Plug 'nathanaelkane/vim-indent-guides'
-
-" Graphql vi
-Plug 'jparise/vim-graphql'
 
 " Git status flag NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -144,17 +140,20 @@ set foldlevel=2
 
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
-"set background=dark
-colorscheme one
+
+"let ayucolor="mirage"
+"colorscheme ayu
+
+"colorscheme one
 "colorscheme Gruvbox
 "colorscheme Molokai
-"colorscheme PaperColor
+colorscheme PaperColor
 "colorscheme Palenight
 "colorscheme solarized
 "colorscheme pencil
 
 " Setting colorscheme based on the daytime
-:let &background = strftime("%H") < 12 ? "light" : "dark"
+":let &background = strftime("%H") < 12 ? "light" : "dark"
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
@@ -169,20 +168,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 
-" Concealing
-set conceallevel=2
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_this                 = "@"
-let g:javascript_conceal_return               = "⇚"
-let g:javascript_conceal_undefined            = "¿"
-let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
-let g:javascript_conceal_super                = "Ω"
-let g:javascript_conceal_arrow_function       = "⇒"
-let g:javascript_conceal_noarg_arrow_function = "☐"
-let g:javascript_conceal_underscore_arrow_function = "☐"
 
 " toggling
 nmap <leader>cu :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
@@ -288,14 +273,10 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd InsertEnter,InsertLeave * set cul!
 
 " Goyo & limelight Integration
-autocmd FileType markdown Goyo " Open Goyo by default for markdown file
+" autocmd FileType markdown Goyo " Open Goyo by default for markdown file
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-" Indent guide enabled
-" NOTE: disabling it as prettier will fix it. Turn it on when you 
-" don't have prettier eslint auto fix
-let g:indent_guides_enable_on_vim_startup = 0
 
 " Navigation Split
 " Mapping leader key for navigation split windows
@@ -443,8 +424,10 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 " The following line was changed from 'Ag' --> 'Ack', for better search
 " command variations. We can search and replace in the whole project too
 map ' :Ag<space> 
-"search for word under cursor by pressing "
-nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
+"search for word under cursor by pressing 
+"NOTE: uncomment the following line when you need to use AG search, mapping "
+"for register naming atm.
+" nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
 
 map <Leader>b :Back<space>
 

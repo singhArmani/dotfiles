@@ -72,12 +72,14 @@ alias gb='git branch '
 alias gbb='git bb'
 alias gc='git commit '
 alias gd='git diff '
+alias gdw='git wdiff '   # wdiff is set in git configuration --word-diff
 alias gco='git checkout '
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
 alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
+alias gdsw='git wdiff --staged'
 
 # show list of conflicted files
 alias lcf='git diff --name-only --diff-filter=U'
