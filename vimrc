@@ -98,6 +98,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-one'
+Plug 'arcticicestudio/nord-vim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -147,10 +148,11 @@ set t_Co=256   " This is may or may not needed.
 "colorscheme one
 "colorscheme Gruvbox
 "colorscheme Molokai
-colorscheme PaperColor
+"colorscheme PaperColor
 "colorscheme Palenight
 "colorscheme solarized
 "colorscheme pencil
+colorscheme nord
 
 " Setting colorscheme based on the daytime
 ":let &background = strftime("%H") < 12 ? "light" : "dark"
@@ -159,7 +161,7 @@ colorscheme PaperColor
 set encoding=UTF-8
 
 " Airline theme
-let g:airline_theme='one'
+let g:airline_theme='nord'
 "let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
