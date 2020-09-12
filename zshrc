@@ -53,7 +53,7 @@ alias tc="vi ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias work="cd ~/workspace/ && tmuxinator start keystone"
 alias dot="cd ~/dotfiles/"
-
+alias vj="vi ~/journals/Vim.md"
 
 # nvm path---------------
 # Uncomment this if you need nvm ever
