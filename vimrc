@@ -53,6 +53,7 @@ set incsearch     " show search matches as you type
 " Leader Key 
 " change the mapleader from \ to <space>
 let mapleader = "\<Space>"
+nmap <leader>rn :set rnu!<cr>
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
@@ -226,10 +227,10 @@ endif
 
 " True color support ends
 
-
-" Exiting to normal mode from insert mode
-imap jk <esc>
-imap kj <esc>
+" Exiting to normal mode from insert mode :TODO: This is annoying, using caps
+" lock for the time being
+"imap jk <esc>
+"imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
@@ -251,7 +252,7 @@ nmap <leader>do <Plug>(coc-codeaction)
 " nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 
 " renaming a symbol 
-nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>rn <Plug>(coc-rename)
 
 " jumping to errors in a file 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
