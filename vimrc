@@ -131,6 +131,9 @@ Plug 'ryanoasis/vim-devicons'
 " Search and Replace Project wise 
 Plug 'wincent/ferret'
 
+" Adding more target object vim like feature
+Plug 'wellle/targets.vim'
+
 call plug#end()
 
 " Folding
@@ -147,13 +150,13 @@ set t_Co=256   " This is may or may not needed.
 "colorscheme ayu
 
 "colorscheme one
-"colorscheme Gruvbox
+colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
 "colorscheme solarized
 "colorscheme pencil
-colorscheme nord
+"colorscheme nord
 
 " Setting colorscheme based on the daytime
 ":let &background = strftime("%H") < 12 ? "light" : "dark"
@@ -162,8 +165,8 @@ colorscheme nord
 set encoding=UTF-8
 
 " Airline theme
-let g:airline_theme='nord'
-"let g:airline_theme='base16'
+"let g:airline_theme='nord'
+let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -197,16 +200,32 @@ set shortmess+=c
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+" NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
+" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 "--------------------------------------------
 
 
@@ -227,8 +246,7 @@ endif
 
 " True color support ends
 
-" Exiting to normal mode from insert mode :TODO: This is annoying, using caps
-" lock for the time being
+" Exiting to normal mode from insert mode 
 "imap jk <esc>
 "imap kj <esc>
 
@@ -357,6 +375,7 @@ nmap <silent> <leader>so :so $MYVIMRC<CR>
 
 " Auto Save
 let g:auto_save = 1  " enable AutoSave on Vim startup
+nnoremap <Leader>ts :AutoSaveToggle<CR>
 
 
 " Tab key mappings
