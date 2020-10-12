@@ -2,17 +2,19 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/amandeepsingh/.oh-my-zsh"
+# Change this when you move to a new laptop
+export ZSH="/Users/amandeep.singh/.oh-my-zsh"
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
+# to know which specific one was loaed, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 EDITOR=vim
 
 plugins=(git zsh-autosuggestions)
-
+ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -51,7 +53,7 @@ alias gitc="vi ~/.gitconfig"
 alias mux="tmuxinator"
 alias tc="vi ~/.tmux.conf"
 alias tkill="tmux kill-server"
-alias work="cd ~/workspace/ && tmuxinator start keystone"
+alias work="cd ~/workspace/ && tmuxinator start domain"
 alias dot="cd ~/dotfiles/"
 alias vj="vi ~/journals/Vim.md"
 
@@ -90,8 +92,6 @@ alias cfix='git diff --name-only | uniq | xargs $EDITOR'
 # Sync with remote, overwrite local changes
 alias undo='git fetch origin/master && git reset --hard origin/master && git clean -f -d'
 
-# thefuck 
-eval $(thefuck --alias)
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
