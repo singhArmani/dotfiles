@@ -59,15 +59,16 @@ alias vj="vi ~/journals/Vim.md"
 
 # nvm path---------------
 # Uncomment this if you need nvm ever
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Command aliases
 alias gs='git status '
 alias gbc='git branch --sort=committerdate' # list all branches ordered by most recent commit
 alias gss='git status --branch --short'
 alias ga='git add '
+alias gfo='git fetch origin master'
 alias gap='git add --patch'
 alias gcp='git checkout --patch'
 alias gb='git branch '

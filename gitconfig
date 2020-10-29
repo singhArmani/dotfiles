@@ -29,8 +29,9 @@ trustExitCode = true
     lcf = diff --name-only --diff-filter=U
 
 [core]
-	excludesfile = /Users/amandeepsingh/.gitignore_global
+	excludesfile = /Users/amandeep.singh/.gitignore_global
 	attributesfile = ~/.gitattributes
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -45,8 +46,8 @@ trustExitCode = true
 	autosquash = true
 [help]
 	autocorrect = 1
-[rerere]
-	enabled = 1
+;[interactive]
+  ;diffFilter = (echo && diff-so-fancy)
 [color]
 	ui = true
 [color "diff-highlight"]
