@@ -13,9 +13,11 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 EDITOR=vim
 
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
+
+bindkey '\t' autosuggest-accept
 
 # User configuration
 
@@ -44,7 +46,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias c="clear"
 alias dev="cd ~/Desktop/Dev/"
-alias lg="cd ~/Desktop/Dev/learning-git"
+
+# lazy git alias
+alias lg="lazygit"
 
 # vim, zshrc, gitconfig,
 alias vc="vi ~/.vimrc"
@@ -68,6 +72,7 @@ alias gs='git status '
 alias gbc='git branch --sort=committerdate' # list all branches ordered by most recent commit
 alias gss='git status --branch --short'
 alias ga='git add '
+alias gp='git pull'
 alias gfo='git fetch origin master'
 alias gap='git add --patch'
 alias gcp='git checkout --patch'
@@ -77,7 +82,7 @@ alias gc='git commit '
 alias gd='git diff '
 alias gdw='git wdiff '   # wdiff is set in git configuration --word-diff
 alias gco='git checkout '
-alias gcb='git checkout -b'
+alias gn='git checkout -b'
 alias gcm='git checkout master'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'

@@ -1,5 +1,6 @@
 set number
 set numberwidth=5
+set relativenumber
 
 " Vim history
 set history=1000         " remember more commands and search history
@@ -76,10 +77,6 @@ Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine
 Plug 'honza/vim-snippets'
 
-" Focus
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
@@ -100,6 +97,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
+"Plug 'zxqfl/tabnine-vim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -107,6 +105,12 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-snippets',
   \ ]
+
+" Js doc
+Plug 'heavenshell/vim-jsdoc', { 
+  \ 'for': ['javascript', 'javascript.jsx','typescript'], 
+  \ 'do': 'make install'
+\}
 
 " Auto Save
 Plug '907th/vim-auto-save'
@@ -166,6 +170,7 @@ set encoding=UTF-8
 
 " Airline theme
 "let g:airline_theme='nord'
+"let g:airline_theme='one'
 let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
@@ -201,29 +206,29 @@ set shortmess+=c
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 " NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
-" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
 "inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? coc#_select_confirm() :
-      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      "\ pumvisible() ? "\<C-n>" :
       "\ <SID>check_back_space() ? "\<TAB>" :
       "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 "function! s:check_back_space() abort
   "let col = col('.') - 1
   "return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
+
+" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
+" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 let g:coc_snippet_next = '<tab>'
 "--------------------------------------------
@@ -265,6 +270,8 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 " perform code action
 nmap <leader>do <Plug>(coc-codeaction)
 
+"nmap <leader> jd <Plug>(jsdoc)
+
 " NOTE: <leader>s is used for searching word under cursor :Ack ferret
 " workspace symbols 
 " nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
@@ -293,11 +300,10 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Cursor line
 autocmd InsertEnter,InsertLeave * set cul!
 
-" Goyo & limelight Integration
-" autocmd FileType markdown Goyo " Open Goyo by default for markdown file
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 
+" Open imnage in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
+" NOTE: May not work with tmux
+autocmd! BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 
 " Navigation Split
 " Mapping leader key for navigation split windows
@@ -320,13 +326,13 @@ nmap <leader>ss :%s/\v
 
 " Buffer
 " Move to the previous buffer with "Shift+p"
-nnoremap <S-p> :bp<CR>
+nnoremap <S-n> :bp<CR>
 
 " Move to the next buffer with "Shift+n"
-nnoremap <S-n> :bn<CR>
+nnoremap <S-m> :bn<CR>
 
 " List all possible buffers with "gl"
-nnoremap gl :ls<CR>
+nnoremap doc :JsDoc<CR>
 
 " List all possible buffers with "gb" and accept a new buffer argument [1]
 nnoremap gb :ls<CR>:b
@@ -372,6 +378,10 @@ nnoremap k gk
 " Quickly edit/reload the vimrc file, (can use :e $MYVIMRC too)
 nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
+
+" The following line is copied from coc-snippets docs
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 " Auto Save
 let g:auto_save = 1  " enable AutoSave on Vim startup
@@ -450,6 +460,9 @@ map ' :Ag<space>
 "NOTE: uncomment the following line when you need to use AG search, mapping "
 "for register naming atm.
 " nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
+
+" Ignore test files while searching with AG (customize it based on project you are working)
+map 't : Ack --ignore *.test.js<space>
 
 map <Leader>b :Back<space>
 
