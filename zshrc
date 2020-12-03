@@ -17,7 +17,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
-bindkey '\t' autosuggest-accept
+# TODO: Bring it back if you need tab completion
+#bindkey '\t' autosuggest-accept
 
 # User configuration
 
@@ -88,6 +89,7 @@ alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
 alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
 alias gdsw='git wdiff --staged'
+alias grs='git restore --source HEAD~1 '
 
 # show list of conflicted files
 alias lcf='git diff --name-only --diff-filter=U'

@@ -67,6 +67,8 @@ Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-expand-region'
+" Vim HardTime
+Plug 'takac/vim-hardtime'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -206,31 +208,35 @@ set shortmess+=c
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 " NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
-"inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? "\<C-n>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-
-" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
-" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
+" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
 let g:coc_snippet_next = '<tab>'
+
+" TODO: remove this if doesn't work; scrolling with j and k
+"inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+"inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 "--------------------------------------------
 
 
@@ -292,6 +298,8 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+let g:hardtime_default_on = 1
 
 " Format using prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
