@@ -17,6 +17,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
+bindkey '^ ' autosuggest-accept
+
 # TODO: Bring it back if you need tab completion
 #bindkey '\t' autosuggest-accept
 

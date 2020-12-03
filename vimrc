@@ -99,7 +99,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
-"Plug 'zxqfl/tabnine-vim'
+Plug 'goldfeld/vim-seek'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -107,6 +107,9 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-snippets',
   \ ]
+" vim seek motion (disable substitute vim command)
+let g:seek_subst_disable = 1
+let g:seek_enable_jumps = 1
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
@@ -402,6 +405,9 @@ map <leader>t<leader> :tabnext
 map <leader>tm :tabmove
 map <leader>tc :tabclose<cr>
 map <leader>to :tabonly<cr>
+
+" Syntax highlighting
+autocmd BufEnter * :syntax sync fromstart
 
 " NerdTree --------------------------------------------------------
 " Open NERDTree with CTrl-n
