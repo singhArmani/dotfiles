@@ -67,8 +67,6 @@ Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-expand-region'
-" Vim HardTime
-Plug 'takac/vim-hardtime'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -398,6 +396,8 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 let g:auto_save = 1  " enable AutoSave on Vim startup
 nnoremap <Leader>ts :AutoSaveToggle<CR>
 
+" Use <Leader>w for saving
+noremap <leader>w :update<CR>
 
 " Tab key mappings
 map <leader>tn :tabnew<cr>
@@ -416,7 +416,9 @@ nnoremap <Leader>f :NERDTreeToggle<Enter>
 " How can I open a NERDTree automatically when vim starts up if no files were
 " specified
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" NOTE: Uncomment the following line if you want to open nerdtree when vi into
+" the project directory
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " directly open NerdTree on the file you’re editing to quickly 
 " perform operations on it with NERDTreeFind

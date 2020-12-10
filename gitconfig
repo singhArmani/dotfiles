@@ -11,6 +11,7 @@ trustExitCode = true
 	unstage = reset HEAD --
 	last = log -1 HEAD
     hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(bold blue)[%an]' --abbrev-commit --date=relative
+    graph = log --oneline --decorate --graph --all
     pf = push --force-with-lease
     fom = fetch origin master
     rbi = rebase -i origin/master

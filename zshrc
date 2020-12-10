@@ -92,6 +92,8 @@ alias rbc='git rebase --continue'
 alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
 alias gdsw='git wdiff --staged'
 alias grs='git restore --source HEAD~1 '
+alias ggh='git hist'
+alias ggr='git graph'
 
 # show list of conflicted files
 alias lcf='git diff --name-only --diff-filter=U'
