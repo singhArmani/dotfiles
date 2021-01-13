@@ -21,7 +21,7 @@ set mouse=a                 " Enable mouse for scrolling and resizing"
 set title                   " Set the window's title, reflecting the file currently being edited"
 set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
-set cursorline              " Set a visual line to show the position of the cursor
+"set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
 " Swap and backup file options - disable all of them"
@@ -98,6 +98,10 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
 Plug 'goldfeld/vim-seek'
+Plug 'ap/vim-css-color'
+
+" Show line letters instead of number (for rnu)
+Plug 'skamsie/vim-lineletters'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -141,6 +145,12 @@ Plug 'wincent/ferret'
 " Adding more target object vim like feature
 Plug 'wellle/targets.vim'
 
+" Vim smooth scrolling
+Plug 'psliwka/vim-smoothie'
+
+" Automatically highlight word under the cursor
+Plug 'RRethy/vim-illuminate'
+
 call plug#end()
 
 " Folding
@@ -155,6 +165,7 @@ set t_Co=256   " This is may or may not needed.
 
 "let ayucolor="mirage"
 "colorscheme ayu
+"colorscheme xcodedark
 
 "colorscheme one
 colorscheme Gruvbox
@@ -347,6 +358,9 @@ nnoremap doc :JsDoc<CR>
 nnoremap gb :ls<CR>:b
 " buffer ends----------------
 
+" Relative letter numbers 
+map <silent>, <Plug>LineLetters
+
 " GoTo code navigation.----------------
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -418,7 +432,7 @@ nnoremap <Leader>f :NERDTreeToggle<Enter>
 autocmd StdinReadPre * let s:std_in=1
 " NOTE: Uncomment the following line if you want to open nerdtree when vi into
 " the project directory
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " directly open NerdTree on the file you’re editing to quickly 
 " perform operations on it with NERDTreeFind
@@ -601,6 +615,11 @@ call airline#parts#define_function('_diffmerge', 'AirlineDiffmergePart')
 call airline#parts#define_accent('_diffmerge', 'bold')
 
 let g:airline_section_z = airline#section#create(['_diffmerge'])
+
+" Vim tricks (open file under cursor in vertical split)
+map <leader>p <C-w>vgf
+
+
 
 " Merge tool configuration end------
 

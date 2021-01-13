@@ -94,6 +94,8 @@ alias gdsw='git wdiff --staged'
 alias grs='git restore --source HEAD~1 '
 alias ggh='git hist'
 alias ggr='git graph'
+alias wd='git wd'
+
 
 # show list of conflicted files
 alias lcf='git diff --name-only --diff-filter=U'

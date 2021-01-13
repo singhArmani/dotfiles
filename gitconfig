@@ -24,10 +24,13 @@ trustExitCode = true
 	undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
 
     # only show the word diff in color
-    wdiff = diff --word-diff --word-diff-regex='\\w+'
+    wd = diff --word-diff --word-diff-regex='\\w+'
 
     # show list of conflicted files 
     lcf = diff --name-only --diff-filter=U
+
+    # Remove the last resolved merge commit (remove merge commit)
+    rmc = reset --hard ORIG_HEAD
 
 [core]
 	excludesfile = /Users/amandeep.singh/.gitignore_global
@@ -48,7 +51,7 @@ trustExitCode = true
 [help]
 	autocorrect = 1
 ;[interactive]
-  ;diffFilter = (echo && diff-so-fancy)
+    ;diffFilter= diff-so-fancy
 [color]
 	ui = true
 [color "diff-highlight"]
