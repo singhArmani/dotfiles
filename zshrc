@@ -11,7 +11,7 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 # to know which specific one was loaed, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-EDITOR=vim
+EDITOR=nvim
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ZSH_DISABLE_COMPFIX=true
@@ -73,7 +73,7 @@ export NVM_DIR="$HOME/.nvm"
 # Command aliases
 alias gs='git status '
 alias gbc='git branch --sort=committerdate' # list all branches ordered by most recent commit
-alias gss='git status --branch --short'
+alias gs='git status --branch --short'
 alias ga='git add '
 alias gp='git pull'
 alias gfo='git fetch origin master'
@@ -105,6 +105,9 @@ alias cfix='git diff --name-only | uniq | xargs $EDITOR'
 
 # Sync with remote, overwrite local changes
 alias undo='git fetch origin/master && git reset --hard origin/master && git clean -f -d'
+
+alias vim="nvim"
+alias vi="nvim"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -164,3 +167,6 @@ alias undo='git fetch origin/master && git reset --hard origin/master && git cle
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

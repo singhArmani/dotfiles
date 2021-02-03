@@ -18,6 +18,9 @@ trustExitCode = true
     rbc = rebase --continue
     rba = rebase --abort
     fix = commit --amend --no-edit 
+    gds = git diff --cached
+    # rewording last commit (git commit --amend)
+    r = commit --amend 
     exp = commit -v
     logs = shortlog
     bb = checkout -
@@ -31,6 +34,7 @@ trustExitCode = true
 
     # Remove the last resolved merge commit (remove merge commit)
     rmc = reset --hard ORIG_HEAD
+	b = brunch
 
 [core]
 	excludesfile = /Users/amandeep.singh/.gitignore_global

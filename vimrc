@@ -1,6 +1,12 @@
 set number
 set numberwidth=5
-set relativenumber
+"set relativenumber
+
+" Italics comments
+" (https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic)
+set t_ZH=[3m
+set t_ZR=[23m
+highlight Comment cterm=italic
 
 " Vim history
 set history=1000         " remember more commands and search history
@@ -49,6 +55,7 @@ set smartcase     " ignore case if search pattern is all lowercase,
                     "    case-sensitive otherwise
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
+nmap <silent> ./ :nohlsearch<CR>
 " end-----------------------------
 
 " Leader Key 
@@ -86,22 +93,26 @@ Plug 'luochen1990/rainbow'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'skamsie/vim-lineletters'
 
-" Themes
+
+" Themes -----------------------
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
-Plug 'tomasr/molokai'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'arzg/vim-colors-xcode'
+
+" Vim helpers ----------------------------
 Plug 'goldfeld/vim-seek'
 Plug 'ap/vim-css-color'
-
-" Show line letters instead of number (for rnu)
-Plug 'skamsie/vim-lineletters'
+Plug 'machakann/vim-highlightedyank'
+Plug 'wellle/context.vim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -119,7 +130,10 @@ Plug 'heavenshell/vim-jsdoc', {
   \ 'do': 'make install'
 \}
 
-" Auto Save
+" Context vim (disabled by default), toggle it on or off with :ContextToggle
+let g:context_enabled = 1
+
+" Auto Sav
 Plug '907th/vim-auto-save'
 
 
@@ -166,9 +180,11 @@ set t_Co=256   " This is may or may not needed.
 "let ayucolor="mirage"
 "colorscheme ayu
 "colorscheme xcodedark
+"colorscheme onehalfdark
 
-"colorscheme one
-colorscheme Gruvbox
+
+colorscheme one
+"colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
 "colorscheme Palenight
@@ -184,8 +200,13 @@ set encoding=UTF-8
 
 " Airline theme
 "let g:airline_theme='nord'
-"let g:airline_theme='one'
-let g:airline_theme='base16'
+let g:airline_theme='one'
+
+" setting italic comments for 'one' theme
+let g:one_allow_italics = 1 
+
+"let g:airline_theme='onehalfdark'
+"let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -288,7 +309,11 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 " perform code action
 nmap <leader>do <Plug>(coc-codeaction)
 
-"nmap <leader> jd <Plug>(jsdoc)
+" Js documentation
+nmap <leader> jd <Plug>(jsdoc)
+
+" Open file under cursor in vertical split
+map <leader>p <C-w>vgf
 
 " NOTE: <leader>s is used for searching word under cursor :Ack ferret
 " workspace symbols 
