@@ -108,6 +108,9 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'arzg/vim-colors-xcode'
 
+
+Plug 'sainnhe/sonokai'
+
 " Vim helpers ----------------------------
 Plug 'goldfeld/vim-seek'
 Plug 'ap/vim-css-color'
@@ -177,13 +180,17 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+colorscheme sonokai
+
 "let ayucolor="mirage"
 "colorscheme ayu
 "colorscheme xcodedark
 "colorscheme onehalfdark
 
-
-colorscheme one
+"colorscheme one
 "colorscheme Gruvbox
 "colorscheme Molokai
 "colorscheme PaperColor
@@ -200,7 +207,8 @@ set encoding=UTF-8
 
 " Airline theme
 "let g:airline_theme='nord'
-let g:airline_theme='one'
+"let g:airline_theme='one'
+let g:airline_theme = 'sonokai'
 
 " setting italic comments for 'one' theme
 let g:one_allow_italics = 1 
