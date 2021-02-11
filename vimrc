@@ -180,7 +180,6 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 
-let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
