@@ -116,6 +116,7 @@ Plug 'goldfeld/vim-seek'
 Plug 'ap/vim-css-color'
 Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/context.vim'
+Plug 'Yggdroot/indentLine'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
