@@ -12,7 +12,7 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 EDITOR=vim
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
@@ -46,22 +46,38 @@ bindkey '^ ' autosuggest-accept
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+
 alias c="clear"
-alias dev="cd ~/Desktop/Dev/"
 
 # lazy git alias
 alias lg="lazygit"
+
+# tree colour output
+alias tree="tree -C"
+alias t="tree -C -L"
 
 # vim, zshrc, gitconfig,
 alias vc="vi ~/.vimrc"
 alias zc="vi ~/.zshrc"
 alias gitc="vi ~/.gitconfig"
+
+# Tmux configuration ------------
 alias mux="tmuxinator"
 alias tc="vi ~/.tmux.conf"
 alias tkill="tmux kill-server"
-alias work="cd ~/workspace/ && tmuxinator start domain"
+alias cap="cd ~/workspace/ && tmuxinator start domain"
+alias dart="cd ~/workspace/ && tmuxinator start dart"
+alias tn="tmux rename-window"
+
+#-------------
+
 alias dot="cd ~/dotfiles/"
 alias vj="vi ~/journals/Vim.md"
+
+# yarn alias ------------------
+alias test="yarn test:watch --coverage"
 
 # nvm path---------------
 # Uncomment this if you need nvm ever
@@ -71,14 +87,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # Command aliases
 alias gs='git status '
-alias gbc='git branch --sort=committerdate' # list all branches ordered by most recent commit
 alias gs='git status --branch --short'
 alias ga='git add '
 alias gp='git pull'
 alias gfo='git fetch origin master'
 alias gap='git add --patch'
 alias gcp='git checkout --patch'
-alias gb='git branch '
+alias gb='git brunch '
 alias gbb='git bb'
 alias gc='git commit '
 alias gd='git diff '
@@ -104,6 +119,9 @@ alias cfix='git diff --name-only | uniq | xargs $EDITOR'
 
 # Sync with remote, overwrite local changes
 alias undo='git fetch origin/master && git reset --hard origin/master && git clean -f -d'
+
+# auto-jump 
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 # Uncomment the following line if you want to change to nvim again
 #alias vim="nvim"

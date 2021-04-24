@@ -1,6 +1,6 @@
 [merge]
 tool = vim_mergetool
-conflictStyle = diff3
+;conflictStyle = diff3
 
 [mergetool "vim_mergetool"]
 cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
@@ -25,6 +25,7 @@ trustExitCode = true
     logs = shortlog
     bb = checkout -
 	undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
+    wip = commit -m "WIP" -n
 
     # only show the word diff in color
     wd = diff --word-diff --word-diff-regex='\\w+'

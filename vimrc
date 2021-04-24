@@ -1,6 +1,6 @@
 set number
 set numberwidth=5
-"set relativenumber
+set relativenumber
 
 " Italics comments
 " (https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic)
@@ -63,6 +63,7 @@ nmap <silent> ./ :nohlsearch<CR>
 let mapleader = "\<Space>"
 nmap <leader>rn :set rnu!<cr>
 
+" " Plugins---------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
@@ -74,6 +75,7 @@ Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-expand-region'
+Plug 'markonm/traces.vim'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -87,14 +89,11 @@ Plug 'honza/vim-snippets'
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
-" Rainbow Parenthesis
-Plug 'luochen1990/rainbow'
 " Language Syntax highlighting
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'skamsie/vim-lineletters'
-
 
 " Themes -----------------------
 Plug 'NLKNguyen/papercolor-theme'
@@ -134,9 +133,6 @@ Plug 'heavenshell/vim-jsdoc', {
   \ 'do': 'make install'
 \}
 
-" Context vim (disabled by default), toggle it on or off with :ContextToggle
-let g:context_enabled = 1
-
 " Auto Sav
 Plug '907th/vim-auto-save'
 
@@ -166,10 +162,16 @@ Plug 'wellle/targets.vim'
 " Vim smooth scrolling
 Plug 'psliwka/vim-smoothie'
 
-" Automatically highlight word under the cursor
-Plug 'RRethy/vim-illuminate'
+" Rainbow 
+Plug 'frazrepo/vim-rainbow'
+
 
 call plug#end()
+
+" Context vim (disabled by default), toggle it on or off with :ContextToggle
+let g:context_enabled = 1
+
+let g:rainbow_active = 1
 
 " Folding
 set foldmethod=indent   
@@ -181,12 +183,15 @@ set foldlevel=2
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
-colorscheme sonokai
 
-"let ayucolor="mirage"
-"colorscheme ayu
+"let g:sonokai_style = 'atlantis'
+"let g:sonokai_enable_italic = 1
+"let g:sonokai_disable_italc_comment = 1
+"colorscheme sonokai
+
+let ayucolor="mirage"
+colorscheme ayu
+
 "colorscheme xcodedark
 "colorscheme onehalfdark
 
@@ -222,10 +227,17 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 
+" test mapping using vim-test plugin
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
-" toggling
-nmap <leader>cu :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 "--------------------
+
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
 
 " Autocompletion configuration settings
 " TextEdit might fail if hidden is not set.
@@ -299,8 +311,8 @@ endif
 " True color support ends
 
 " Exiting to normal mode from insert mode 
-"imap jk <esc>
-"imap kj <esc>
+imap jk <esc>
+imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
@@ -318,7 +330,7 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nmap <leader>do <Plug>(coc-codeaction)
 
 " Js documentation
-nmap <leader> jd <Plug>(jsdoc)
+nmap <leader>jd <Plug>(jsdoc)
 
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
@@ -344,7 +356,6 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
 
-let g:hardtime_default_on = 1
 
 " Format using prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -436,11 +447,27 @@ nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
 
 " The following line is copied from coc-snippets docs
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
+" snippets ends-------------------
 
 " Auto Save
-let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save = 0  " enable AutoSave on Vim startup
 nnoremap <Leader>ts :AutoSaveToggle<CR>
 
 " Use <Leader>w for saving
@@ -542,8 +569,6 @@ map <Leader>b :Back<space>
 "autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
 " Ag ends------------------
 
-" Rainbow parenthesis
-let g:rainbow_active = 1
 
 " Move visual selection
 vnoremap J :m '>+1<cr>gv=gv
