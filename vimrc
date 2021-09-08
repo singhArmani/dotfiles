@@ -121,6 +121,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/context.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'AndrewRadev/sideways.vim'
+Plug 'szw/vim-maximizer' " maximize a single split, and bring back to split setting you had prior.
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -617,6 +618,10 @@ vnoremap K :m '<-2<cr>gv=gv
 " Shift + Direction to Change Tabs (disabling it, as it was conflicting with sideways mapping)
 " noremap <S-l> gt
 " noremap <S-h> gT
+
+" maximize current split or return to previous
+noremap <C-w>m :MaximizerToggle<CR>
+
 
 " Quit files with Leader + q(incooperating vim-merge context aware
 " QuitWindow() function) 
