@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# PF environment variable 
+export environment=local
+
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
 export ZSH="/Users/amandeep.singh/.oh-my-zsh"
@@ -10,9 +13,10 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 # to know which specific one was loaed, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+# ZSH_THEME="spaceship"
 EDITOR=vim
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
@@ -69,6 +73,7 @@ alias tc="vi ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias cap="cd ~/workspace/ && tmuxinator start domain"
 alias dart="cd ~/workspace/ && tmuxinator start dart"
+alias blog="cd ~/workspace/ && tmuxinator start blog"
 alias tn="tmux rename-window"
 
 #-------------
@@ -81,9 +86,12 @@ alias test="yarn test:watch --coverage"
 
 # nvm path---------------
 # Uncomment this if you need nvm ever
+# Downloded nvm via homebrew
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
+
 
 # Command aliases
 alias gs='git status '
@@ -100,6 +108,7 @@ alias gd='git diff '
 alias gdw='git wdiff '   # wdiff is set in git configuration --word-diff
 alias gco='git checkout '
 alias gn='git checkout -b'
+alias grn='git branch -m' # change branch name locally
 alias gcm='git checkout master'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
@@ -190,3 +199,5 @@ alias undo='git fetch origin/master && git reset --hard origin/master && git cle
 #if command -v pyenv 1>/dev/null 2>&1; then
   #eval "$(pyenv init -)"
 #fi
+#
+

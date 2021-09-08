@@ -54,7 +54,7 @@ trustExitCode = true
 [rebase]
 	autosquash = true
 [help]
-	autocorrect = 1
+	autoCorrect = 1
 ;[interactive]
     ;diffFilter= diff-so-fancy
 [color]

@@ -76,6 +76,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-expand-region'
 Plug 'markonm/traces.vim'
+Plug 'ojroques/vim-scrollstatus'
+" Live markdown
+Plug 'shime/vim-livedown'
 
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
@@ -106,6 +109,7 @@ Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'arzg/vim-colors-xcode'
+Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 
 
 Plug 'sainnhe/sonokai'
@@ -116,6 +120,7 @@ Plug 'ap/vim-css-color'
 Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/context.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'AndrewRadev/sideways.vim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -173,27 +178,42 @@ let g:context_enabled = 1
 
 let g:rainbow_active = 1
 
-" Folding
+" Folding ----------
 set foldmethod=indent   
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+"-----------
+" Folding by syntax
+"set foldmethod=syntax "syntax highlighting items specify folds  
+"set foldcolumn=1 "defines 1 col at window left, to indicate folding  
+"let javaScript_fold=1 "activate folding by JS syntax  
+"set foldlevelstart=99 "start file with all folds opened
+"-----------
 
 
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 
 
+" React Testing Template
+ autocmd BufNewFile  *.test.js	0r ~/vim/skeleton.js
+
 "let g:sonokai_style = 'atlantis'
 "let g:sonokai_enable_italic = 1
 "let g:sonokai_disable_italc_comment = 1
 "colorscheme sonokai
 
+" Mirage color scheme ---
 let ayucolor="mirage"
-colorscheme ayu
+" colorscheme ayu
+
+" tempus color scheme
+" colorscheme tempus_dusk
+let g:tempus_enforce_background_color=1
 
 "colorscheme xcodedark
-"colorscheme onehalfdark
+colorscheme onehalfdark
 
 "colorscheme one
 "colorscheme Gruvbox
@@ -205,7 +225,9 @@ colorscheme ayu
 "colorscheme nord
 
 " Setting colorscheme based on the daytime
-":let &background = strftime("%H") < 12 ? "light" : "dark"
+exe 'colo' ((strftime('%H') % 16) > 6 ? 'tempus_fugit' : 'ayu')
+exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
+"---------------------------
 
 " Setting icons and Gui Fonts
 set encoding=UTF-8
@@ -218,7 +240,7 @@ let g:airline_theme = 'sonokai'
 " setting italic comments for 'one' theme
 let g:one_allow_italics = 1 
 
-"let g:airline_theme='onehalfdark'
+"let g:airline_theme='onehalflight'
 "let g:airline_theme='base16'
 "let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
@@ -332,6 +354,13 @@ nmap <leader>do <Plug>(coc-codeaction)
 " Js documentation
 nmap <leader>jd <Plug>(jsdoc)
 
+" reselect pasted text
+nnoremap gp `[v`]
+
+" sideways vim mapping
+nnoremap <S-h> :SidewaysLeft<cr>
+nnoremap <S-l> :SidewaysRight<cr>
+
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
 
@@ -363,6 +392,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Cursor line
 autocmd InsertEnter,InsertLeave * set cul!
+
 
 
 " Open imnage in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
@@ -473,6 +503,12 @@ nnoremap <Leader>ts :AutoSaveToggle<CR>
 " Use <Leader>w for saving
 noremap <leader>w :update<CR>
 
+" Live markdown mapping --------------
+nmap gm :LivedownToggle<CR>
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+" ------------------------
+
 " Tab key mappings
 map <leader>tn :tabnew<cr>
 map <leader>t<leader> :tabnext
@@ -506,7 +542,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1
 
 " Show hidden files starting with .
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0 " Don't show hidden files/folder by default. Use `Shift + i` to toggle
 
 " Prettier NERD
 let NERDTreeMinimalUI = 1
@@ -553,6 +589,7 @@ map ' :Ag<space>
 
 " Ignore test files while searching with AG (customize it based on project you are working)
 map 't : Ack --ignore *.test.js<space>
+map 'e : Ack -G \.test\.js$<space>
 
 map <Leader>b :Back<space>
 
@@ -568,16 +605,18 @@ map <Leader>b :Back<space>
 
 "autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
 " Ag ends------------------
-
+"
+" Highlight syntax inside markdown
+let g:markdown_fenced_languages = ['html', 'javascript', 'css', 'vim']
 
 " Move visual selection
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
 " Mapping--------------------------------
-" Shift + Direction to Change Tabs
-noremap <S-l> gt
-noremap <S-h> gT
+" Shift + Direction to Change Tabs (disabling it, as it was conflicting with sideways mapping)
+" noremap <S-l> gt
+" noremap <S-h> gT
 
 " Quit files with Leader + q(incooperating vim-merge context aware
 " QuitWindow() function) 
@@ -673,6 +712,16 @@ call airline#parts#define_function('_diffmerge', 'AirlineDiffmergePart')
 call airline#parts#define_accent('_diffmerge', 'bold')
 
 let g:airline_section_z = airline#section#create(['_diffmerge'])
+
+" Vim scroll status -------------------
+let g:airline_section_x = '%{ScrollStatus()} '
+let g:airline_section_y = airline#section#create_right(['filetype'])
+let g:airline_section_z = airline#section#create([
+            \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
+            \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
+            \ ])
+
+"---------------
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
