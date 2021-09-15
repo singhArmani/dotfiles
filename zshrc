@@ -73,6 +73,7 @@ alias tc="vi ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias cap="cd ~/workspace/ && tmuxinator start domain"
 alias dart="cd ~/workspace/ && tmuxinator start dart"
+alias micro="cd ~/workspace/ && tmuxinator start micro"
 alias blog="cd ~/workspace/ && tmuxinator start blog"
 alias tn="tmux rename-window"
 
