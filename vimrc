@@ -186,7 +186,7 @@ Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 " Context vim (disabled by default), toggle it on or off with :ContextToggle
-let g:context_enabled = 1
+let g:context_enabled = 0
 
 let g:rainbow_active = 1
 
