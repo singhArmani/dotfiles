@@ -226,6 +226,7 @@ let g:tempus_enforce_background_color=1
 " Setting colorscheme based on the daytime
 exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'spaceduck')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
+exe 'AirlineTheme' ((strftime('%H') % 18) > 6 ? 'sonokai' : 'spaceduck')
 "---------------------------
 
 " Setting icons and Gui Fonts
