@@ -99,6 +99,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'skamsie/vim-lineletters'
+Plug 'rust-lang/rust.vim'  
 
 " Themes -----------------------
 Plug 'NLKNguyen/papercolor-theme'
