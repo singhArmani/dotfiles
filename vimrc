@@ -227,6 +227,7 @@ colorscheme onehalfdark
 
 " Setting colorscheme based on the daytime
 exe 'colo' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 "---------------------------
 
