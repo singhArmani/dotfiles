@@ -133,6 +133,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-snippets',
+  \ 'coc-stylelintplus',
   \ ]
 " vim seek motion (disable substitute vim command)
 let g:seek_subst_disable = 1
