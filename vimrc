@@ -82,6 +82,7 @@ Plug 'shime/vim-livedown'
 
 " Python Autocompletion
 Plug 'davidhalter/jedi-vim'
+
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
 
@@ -114,8 +115,6 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'arzg/vim-colors-xcode'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-
-
 Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/sonokai'
 
@@ -216,26 +215,14 @@ set t_Co=256   " This is may or may not needed.
 "let g:sonokai_disable_italc_comment = 1
 colorscheme spaceduck
 
+
 " Mirage color scheme ---
 " let ayucolor="mirage"
 
 " colorscheme ayu
 
-" tempus color scheme
-" colorscheme tempus_dusk
 let g:tempus_enforce_background_color=1
 
-"colorscheme xcodedark
-colorscheme onehalfdark
-
-"colorscheme one
-"colorscheme Gruvbox
-"colorscheme Molokai
-"colorscheme PaperColor
-"colorscheme Palenight
-"colorscheme solarized
-"colorscheme pencil
-"colorscheme nord
 " Setting colorscheme based on the daytime
 exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'spaceduck')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
