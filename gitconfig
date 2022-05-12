@@ -36,6 +36,7 @@ trustExitCode = true
     # Remove the last resolved merge commit (remove merge commit)
     rmc = reset --hard ORIG_HEAD
 	b = brunch
+	praise = blame
 
 [core]
 	excludesfile = /Users/amandeep.singh/.gitignore_global
