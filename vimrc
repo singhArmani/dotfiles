@@ -102,6 +102,7 @@ Plug 'skamsie/vim-lineletters'
 Plug 'rust-lang/rust.vim'  
 
 " Themes -----------------------
+Plug 'pineapplegiant/spaceduck'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -211,7 +212,7 @@ set t_Co=256   " This is may or may not needed.
 "let g:sonokai_style = 'atlantis'
 "let g:sonokai_enable_italic = 1
 "let g:sonokai_disable_italc_comment = 1
-"colorscheme sonokai
+colorscheme spaceduck
 
 " Mirage color scheme ---
 let ayucolor="mirage"
@@ -245,7 +246,7 @@ set encoding=UTF-8
 " Airline theme
 "let g:airline_theme='nord'
 "let g:airline_theme='one'
-let g:airline_theme = 'sonokai'
+let g:airline_theme = 'spaceduck'
 
 " setting italic comments for 'one' theme
 let g:one_allow_italics = 1 
