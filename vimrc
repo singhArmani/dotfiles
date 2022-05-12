@@ -737,6 +737,9 @@ map <leader>p <C-w>vgf
 
 " Merge tool configuration end------
 
+" Vim tricks close all hidden buffers
+command Bd :up | %bd | e#
+
 " Jovica tip: Git blame---------------
 command! -nargs=* Blame call s:GitBlame()
 
