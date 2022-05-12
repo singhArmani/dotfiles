@@ -116,6 +116,7 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 
 
+Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/sonokai'
 
 " Vim helpers ----------------------------
