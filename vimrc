@@ -80,6 +80,8 @@ Plug 'ojroques/vim-scrollstatus'
 " Live markdown
 Plug 'shime/vim-livedown'
 
+" Python Autocompletion
+Plug 'davidhalter/jedi-vim'
 " Merge tool(https://github.com/samoshkin/vim-mergetool)
 Plug 'samoshkin/vim-mergetool'
 
@@ -132,6 +134,11 @@ let g:coc_global_extensions = [
 " vim seek motion (disable substitute vim command)
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
+
+" Python Jedi vim disable auto initialization
+" Enable these/ or comment out when working with python code
+let g:jedi#auto_initialization = 0
+let g:jedi#auto_vim_configuration = 0
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
