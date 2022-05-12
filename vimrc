@@ -217,7 +217,8 @@ set t_Co=256   " This is may or may not needed.
 colorscheme spaceduck
 
 " Mirage color scheme ---
-let ayucolor="mirage"
+" let ayucolor="mirage"
+
 " colorscheme ayu
 
 " tempus color scheme
@@ -239,6 +240,7 @@ colorscheme onehalfdark
 " Setting colorscheme based on the daytime
 exe 'colo' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
 exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'spaceduck')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 "---------------------------
 
