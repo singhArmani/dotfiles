@@ -129,7 +129,7 @@ alias lcf='git diff --name-only --diff-filter=U'
 alias cfix='git diff --name-only | uniq | xargs $EDITOR'
 
 # Sync with remote, overwrite local changes
-alias undo='git fetch origin/master && git reset --hard origin/master && git clean -f -d'
+alias undo='git fetch origin && git reset --hard origin/master && git clean -f -d'
 
 # auto-jump 
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
