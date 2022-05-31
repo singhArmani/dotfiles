@@ -35,6 +35,9 @@ trustExitCode = true
 
     # Remove the last resolved merge commit (remove merge commit)
     rmc = reset --hard ORIG_HEAD
+
+    # Resets the local master to match the one on the remote
+    rogm = reset --hard origin/master
 	b = brunch
 	praise = blame
 
