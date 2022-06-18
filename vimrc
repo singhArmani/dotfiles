@@ -77,6 +77,7 @@ Plug 'moll/vim-bbye'
 Plug 'terryma/vim-expand-region'
 Plug 'markonm/traces.vim'
 Plug 'ojroques/vim-scrollstatus'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Live markdown
 Plug 'shime/vim-livedown'
 
@@ -213,20 +214,18 @@ set t_Co=256   " This is may or may not needed.
 "let g:sonokai_style = 'atlantis'
 "let g:sonokai_enable_italic = 1
 "let g:sonokai_disable_italc_comment = 1
-colorscheme spaceduck
 
 
 " Mirage color scheme ---
-" let ayucolor="mirage"
+let ayucolor="mirage"
 
-" colorscheme ayu
+colorscheme ayu
 
 let g:tempus_enforce_background_color=1
 
 " Setting colorscheme based on the daytime
-exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'spaceduck')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
-exe 'AirlineTheme' ((strftime('%H') % 18) > 6 ? 'sonokai' : 'spaceduck')
 "---------------------------
 
 " Setting icons and Gui Fonts
@@ -235,7 +234,7 @@ set encoding=UTF-8
 " Airline theme
 "let g:airline_theme='nord'
 "let g:airline_theme='one'
-let g:airline_theme = 'spaceduck'
+let g:airline_theme = 'sonokai'
 
 " setting italic comments for 'one' theme
 let g:one_allow_italics = 1 
@@ -363,6 +362,10 @@ nnoremap <S-l> :SidewaysRight<cr>
 
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
+
+" Vim tricks (https://vimtricks.com/p/get-the-current-file-path/?rating=5)
+" Get the current file path
+map <leader>c :let @*=fnamemodify(expand("%"), ":~:.") . ":" . line(".")<CR>
 
 " NOTE: <leader>s is used for searching word under cursor :Ack ferret
 " workspace symbols 
