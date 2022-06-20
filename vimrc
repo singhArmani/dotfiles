@@ -1,12 +1,8 @@
+
 set number
 set numberwidth=5
 set relativenumber
 
-" Italics comments
-" (https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic)
-set t_ZH=[3m
-set t_ZR=[23m
-highlight Comment cterm=italic
 
 " Vim history
 set history=1000         " remember more commands and search history
@@ -38,6 +34,7 @@ set nowb
 set autoread
 " end-----------------------------
 "Indentation options-------------
+
 set autoindent         " New lines inherit the indentation of previous line"
 set tabstop=4          " show existing tab with 4 spaces width
 set shiftwidth=2       " when indenting with '>', use 4 spaces width
@@ -66,67 +63,27 @@ nmap <leader>rn :set rnu!<cr>
 " " Plugins---------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-abolish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
-Plug 'easymotion/vim-easymotion'
-Plug 'moll/vim-bbye'
-Plug 'terryma/vim-expand-region'
-Plug 'markonm/traces.vim'
-Plug 'ojroques/vim-scrollstatus'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-" Live markdown
-Plug 'shime/vim-livedown'
-
-" Python Autocompletion
-Plug 'davidhalter/jedi-vim'
-
-" Merge tool(https://github.com/samoshkin/vim-mergetool)
-Plug 'samoshkin/vim-mergetool'
-
-" Track the engine.
-Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine
-Plug 'honza/vim-snippets'
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
-" Language Syntax highlighting
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'skamsie/vim-lineletters'
-Plug 'rust-lang/rust.vim'  
 
 " Themes -----------------------
-Plug 'pineapplegiant/spaceduck'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'morhetz/gruvbox'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'reedes/vim-colors-pencil'
-Plug 'rakr/vim-one'
-Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'arzg/vim-colors-xcode'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/sonokai'
 
 " Vim helpers ----------------------------
-Plug 'goldfeld/vim-seek'
-Plug 'ap/vim-css-color'
 Plug 'machakann/vim-highlightedyank'
-Plug 'wellle/context.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'AndrewRadev/sideways.vim'
-Plug 'szw/vim-maximizer' " maximize a single split, and bring back to split setting you had prior.
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -139,20 +96,11 @@ let g:coc_global_extensions = [
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
 
-" Python Jedi vim disable auto initialization
-" Enable these/ or comment out when working with python code
-let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
   \ 'for': ['javascript', 'javascript.jsx','typescript'], 
   \ 'do': 'make install'
 \}
-
-" Auto Sav
-Plug '907th/vim-auto-save'
-
 
 " Git status flag NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -176,17 +124,10 @@ Plug 'wincent/ferret'
 " Adding more target object vim like feature
 Plug 'wellle/targets.vim'
 
-" Vim smooth scrolling
-Plug 'psliwka/vim-smoothie'
-
 " Rainbow 
 Plug 'frazrepo/vim-rainbow'
 
-
 call plug#end()
-
-" Context vim (disabled by default), toggle it on or off with :ContextToggle
-let g:context_enabled = 0
 
 let g:rainbow_active = 1
 
@@ -196,25 +137,10 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 "-----------
-" Folding by syntax
-"set foldmethod=syntax "syntax highlighting items specify folds  
-"set foldcolumn=1 "defines 1 col at window left, to indicate folding  
-"let javaScript_fold=1 "activate folding by JS syntax  
-"set foldlevelstart=99 "start file with all folds opened
-"-----------
 
 
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
-
-
-" React Testing Template
- autocmd BufNewFile  *.test.js	0r ~/vim/skeleton.js
-
-"let g:sonokai_style = 'atlantis'
-"let g:sonokai_enable_italic = 1
-"let g:sonokai_disable_italc_comment = 1
-
 
 " Mirage color scheme ---
 let ayucolor="mirage"
@@ -228,37 +154,16 @@ exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 "---------------------------
 
-" Setting icons and Gui Fonts
+" Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
 
-" Airline theme
-"let g:airline_theme='nord'
-"let g:airline_theme='one'
 let g:airline_theme = 'sonokai'
-
-" setting italic comments for 'one' theme
-let g:one_allow_italics = 1 
-
-"let g:airline_theme='onehalflight'
-"let g:airline_theme='base16'
-"let g:airline_theme = "palenight"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
-
-" test mapping using vim-test plugin
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
-
 "--------------------
-
-" Disable quote concealing in JSON files
-let g:vim_json_conceal=0
 
 " Autocompletion configuration settings
 " TextEdit might fail if hidden is not set.
@@ -307,10 +212,6 @@ endfunction
 "endfunction
 
 let g:coc_snippet_next = '<tab>'
-
-" TODO: remove this if doesn't work; scrolling with j and k
-"inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-"inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 "--------------------------------------------
 
 
@@ -328,8 +229,7 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
-" True color support ends
+" True color support ends-----------
 
 " Exiting to normal mode from insert mode 
 imap jk <esc>
@@ -337,11 +237,6 @@ imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
-
-"" Vim sessions: TODO: remove it. Not using sessions anymore
-"let g:sessions_dir = '~/vim-sessions'
-"exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-"exec 'nnoremap <Leader>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 " neoclide configuration--------------
 " ref: https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
@@ -355,10 +250,6 @@ nmap <leader>jd <Plug>(jsdoc)
 
 " reselect pasted text
 nnoremap gp `[v`]
-
-" sideways vim mapping
-nnoremap <S-h> :SidewaysLeft<cr>
-nnoremap <S-l> :SidewaysRight<cr>
 
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
@@ -398,7 +289,7 @@ autocmd InsertEnter,InsertLeave * set cul!
 
 
 
-" Open imnage in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
+" Open image in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
 " NOTE: May not work with tmux
 autocmd! BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 
@@ -499,17 +390,8 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 xmap <leader>x  <Plug>(coc-convert-snippet)
 " snippets ends-------------------
 
-" Auto Save
-let g:auto_save = 0  " enable AutoSave on Vim startup
-nnoremap <Leader>ts :AutoSaveToggle<CR>
-
 " Use <Leader>w for saving
 noremap <leader>w :update<CR>
-
-" Live markdown mapping --------------
-nmap gm :LivedownToggle<CR>
-" should markdown preview get shown automatically upon opening markdown buffer
-let g:livedown_autorun = 0
 " ------------------------
 
 " Tab key mappings
@@ -562,13 +444,6 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " Git commit message auto spell checking and text wrapping 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" Git gutter key mapping
-nmap ]c <Plug>(GitGutterNextHunk)
-nmap [c <Plug>(GitGutterPrevHunk)
-nmap <Leader>hs <Plug>(GitGutterStageHunk)
-nmap <Leader>hu <Plug>(GitGutterUndoHunk)
-nnoremap <Leader>tg :GitGutterSignsToggle<CR>
-
 " Cursor shape (without tmux)
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -595,20 +470,9 @@ map 't : Ack --ignore *.test.js<space>
 map 'e : Ack -G \.test\.js$<space>
 
 map <Leader>b :Back<space>
-
-"TODO: remove the following ag command setup if :Ack works like charm 🚀🔥
-"" Passing args to :Ag
-"" Ref: https://github.com/junegunn/fzf.vim/issues/92#issuecomment-191248596 
-"function! s:ag_with_opts(arg, bang)
-  "let tokens  = split(a:arg)
-  "let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
-  "let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
-  "call fzf#vim#ag(query, ag_opts, a:bang ? {} : {'down': '40%'})
-"endfunction
-
-"autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
 " Ag ends------------------
-"
+
+
 " Highlight syntax inside markdown
 let g:markdown_fenced_languages = ['html', 'javascript', 'css', 'vim']
 
@@ -617,9 +481,6 @@ vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
 " Mapping--------------------------------
-" Shift + Direction to Change Tabs (disabling it, as it was conflicting with sideways mapping)
-" noremap <S-l> gt
-" noremap <S-h> gT
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
@@ -646,37 +507,13 @@ endfunction
 command QuitWindow call s:QuitWindow()
 nnoremap <silent> <leader>q :QuitWindow<CR>
 
-" If there's any issue with above QuitWindow function then just remove it
-" and uncomment the line below
-"nnoremap <silent> <leader>q :q<CR>
-
-" delete buffers without closing your windows
-:nnoremap <Leader>bb :Bdelete<CR>
-
 " Clone Paragraph with cp
 noremap cp yap<S-}>p
 
-" Align current paragraph with Leader + a
-" noremap <leader>a =ip
-
-" Apply Macros with Q
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
-
-" fugitive git bindings
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gA :Git add . %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gt :Gcommit -v -q %:p<CR>
-
-" skip the staging area
-nnoremap <leader>gh :Gcommit -a -v -q<CR>
+" fugitive git bindings----------
 
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gw :Gwrite<CR><CR>
 nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
 " Show commit history of the current branch we are in
 nnoremap <leader>gg :silent! Glog --oneline --decorate --graph<CR>
@@ -694,51 +531,8 @@ nnoremap <leader>gB :Blame<CR>
 map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 "Mapping ends-----------------------------
 
-" Merge tool (vim-mergetool) configuration-----
-" merge mode toggle
-nmap <leader>mt <plug>(MergetoolToggle)
-
-" toggle to other common layout (mbr) (merged, base, and remote)
-nnoremap <silent> <leader>mb :call mergetool#toggle_layout('mr,b')<CR>
-nmap <expr> <S-Left> &diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'
-nmap <expr> <S-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
-nmap <expr> <S-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
-nmap <expr> <S-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
-
-" vim-airline merge mode detection(https://github.com/samoshkin/vim-mergetool#merge-mode-detection)
-function! AirlineDiffmergePart()
-  if get(g:, 'mergetool_in_merge_mode', 0)
-    return '↸'
-  endif
-
-  if &diff
-    return '↹'
-  endif
-
-  return ''
-endfunction
-
-call airline#parts#define_function('_diffmerge', 'AirlineDiffmergePart')
-call airline#parts#define_accent('_diffmerge', 'bold')
-
-let g:airline_section_z = airline#section#create(['_diffmerge'])
-
-" Vim scroll status -------------------
-let g:airline_section_x = '%{ScrollStatus()} '
-let g:airline_section_y = airline#section#create_right(['filetype'])
-let g:airline_section_z = airline#section#create([
-            \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
-            \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
-            \ ])
-
-"---------------
-
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
-
-
-
-" Merge tool configuration end------
 
 " Vim tricks close all hidden buffers
 command Bd :up | %bd | e#
@@ -754,6 +548,5 @@ function! s:GitBlame()
     execute "normal " . nline . "gg"
     execute "set filetype=perl" 
 endfunction
-
 
 " ---------end-------------
