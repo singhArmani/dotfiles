@@ -70,8 +70,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'nvim-treesitter/nvim-treesitter'
+" buffer management
+Plug 'moll/vim-bbye'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
@@ -540,6 +544,8 @@ map <leader>p <C-w>vgf
 
 " Vim tricks close all hidden buffers
 command Bd :up | %bd | e#
+" Delete buffers without closing your windows
+:noremap <Leader>bb :Bdelete<CR>
 
 " Jovica tip: Git blame---------------
 command! -nargs=* Blame call s:GitBlame()
