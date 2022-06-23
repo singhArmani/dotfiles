@@ -26,7 +26,6 @@ trustExitCode = true
     bb = checkout -
 	undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
     wip = commit -m "WIP" -n
-
     # only show the word diff in color
     wd = diff --word-diff --word-diff-regex='\\w+'
 

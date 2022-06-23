@@ -1,4 +1,3 @@
-
 set number
 set numberwidth=5
 set relativenumber
@@ -23,6 +22,9 @@ set mouse=a                 " Enable mouse for scrolling and resizing"
 set title                   " Set the window's title, reflecting the file currently being edited"
 set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
+
+" italics fonts : https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
+highlight Comment cterm=italic gui=italic
 "set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
@@ -68,6 +70,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
