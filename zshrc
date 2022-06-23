@@ -14,7 +14,7 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
-EDITOR=vim
+EDITOR=nvim
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
@@ -66,6 +66,7 @@ alias t="tree -C -L"
 alias vc="vi ~/.vimrc"
 alias zc="vi ~/.zshrc"
 alias gitc="vi ~/.gitconfig"
+alias ac="nvim ~/.config/alacritty/alacritty.yml"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"
@@ -135,8 +136,8 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 # Uncomment the following line if you want to change to nvim again
-#alias vim="nvim"
-#alias vi="nvim"
+alias vim="nvim"
+alias vi="nvim"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
