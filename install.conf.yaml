@@ -5,9 +5,10 @@
 - clean: ['~']
 
 - link:
-    ~/.bashrc: bashrc
     ~/.zshrc: zshrc
     ~/.vimrc: vimrc
+    ~/.gitconfig: gitconfig
+    ~/.config/alacritty/alacritty.yml: alacritty.yml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
