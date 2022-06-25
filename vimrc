@@ -84,14 +84,15 @@ Plug 'skamsie/vim-lineletters'
 
 " Themes -----------------------
 Plug 'ayu-theme/ayu-vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'arzg/vim-colors-xcode'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 Plug 'sainnhe/sonokai'
 
 " Vim helpers ----------------------------
 Plug 'machakann/vim-highlightedyank'
+Plug 'Yggdroot/indentLine'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -151,14 +152,27 @@ set foldlevel=2
 set t_Co=256   " This is may or may not needed.
 
 " Mirage color scheme ---
-let ayucolor="mirage"
+" let ayucolor="mirage"
 
-colorscheme ayu
+" Vim Script
+" Example config in VimScript
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+
+" Change the "hint" color to the "orange" color, and make the "error" color bright red
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000'
+\ }
+
+" Load the colorscheme
+colorscheme tokyonight
 
 let g:tempus_enforce_background_color=1
 
 " Setting colorscheme based on the daytime
-exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'tokyonight')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 "---------------------------
 
