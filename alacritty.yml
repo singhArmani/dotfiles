@@ -27,12 +27,12 @@ font:
     # Font name
     family: OperatorMono Nerd Font
     # Font face
-    style: Book
+    style: Light
 
   # Bold font face
   bold:
     family: Fira Code
-    style: Bold
+    style: Retina
 
   # Italic font face
   italic:
@@ -99,32 +99,32 @@ selection:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# Colors (Dracula)
+# Colors (ayu)
 colors:
-  # Default colors
-  primary:
-    background: '0x282a36'
-    foreground: '0xf8f8f2'
- 
-  # Normal colors
-  normal:
-    black:   '0x000000'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xbd93f9'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xbbbbbb'
- 
-  # Bright colors
   bright:
-    black:   '0x555555'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xcaa9fa'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xffffff'
-
+    black: '#323232'
+    blue: '#68d5ff'
+    cyan: '#c7fffd'
+    green: '#eafe84'
+    magenta: '#ffa3aa'
+    red: '#ff6565'
+    white: '#ffffff'
+    yellow: '#fff779'
+  cursor:
+    cursor: '#f29718'
+    text: '#e6e1cf'
+  normal:
+    black: '#000000'
+    blue: '#36a3d9'
+    cyan: '#95e6cb'
+    green: '#b8cc52'
+    magenta: '#f07178'
+    red: '#ff3333'
+    white: '#ffffff'
+    yellow: '#e7c547'
+  primary:
+    background: '#0f1419'
+    foreground: '#e6e1cf'
+  selection:
+    background: '#253340'
+    text: '#e6e1cf'
