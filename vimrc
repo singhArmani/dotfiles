@@ -73,26 +73,22 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-treesitter/nvim-treesitter'
 " buffer management
 Plug 'moll/vim-bbye'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'skamsie/vim-lineletters'
 
 " Themes -----------------------
 Plug 'ayu-theme/ayu-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 Plug 'sainnhe/sonokai'
 
 " Vim helpers ----------------------------
 Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
+Plug 'skamsie/vim-lineletters'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -101,6 +97,7 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-stylelintplus',
   \ ]
+
 " vim seek motion (disable substitute vim command)
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
@@ -169,10 +166,8 @@ let g:tokyonight_colors = {
 " Load the colorscheme
 colorscheme tokyonight
 
-let g:tempus_enforce_background_color=1
-
 " Setting colorscheme based on the daytime
-exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'tokyonight')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'nord' : 'tokyonight')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 "---------------------------
 
@@ -572,5 +567,5 @@ function! s:GitBlame()
     execute "normal " . nline . "gg"
     execute "set filetype=perl" 
 endfunction
-
 " ---------end-------------
+
