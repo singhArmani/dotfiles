@@ -136,8 +136,8 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 # Uncomment the following line if you want to change to nvim again
-alias vim="nvim"
-alias vi="nvim"
+alias ni="nvim"
+alias vi="vim"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
