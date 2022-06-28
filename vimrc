@@ -80,8 +80,8 @@ Plug 'scrooloose/nerdcommenter'
 
 " Themes -----------------------
 Plug 'ayu-theme/ayu-vim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'arcticicestudio/nord-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'sainnhe/sonokai'
 
@@ -89,6 +89,7 @@ Plug 'sainnhe/sonokai'
 Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
 Plug 'skamsie/vim-lineletters'
+Plug 'szw/vim-maximizer'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -450,6 +451,9 @@ let NERDTreeShowHidden=0 " Don't show hidden files/folder by default. Use `Shift
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
+" maximize current split, vim tricks: https://vimtricks.com/p/maximize-the-current-split/
+noremap <C-w>m :MaximizerToggle<CR>
+
 " NerdTree Ends -------------------------------------------------------
 
 " Fzy key mapping
@@ -531,17 +535,6 @@ noremap cp yap<S-}>p
 
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-" Show commit history of the current branch we are in
-nnoremap <leader>gg :silent! Glog --oneline --decorate --graph<CR>
-" Show commit history for all branches 
-nnoremap <leader>gG :silent! Glog --oneline --decorate --graph --all<CR>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Gpush<CR>
-nnoremap <leader>gpl :Gpull<CR>
 nnoremap <leader>gB :Blame<CR> 
 
 " Show related commit in a popup (Jovica)
