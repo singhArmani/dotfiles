@@ -1,11 +1,3 @@
-[merge]
-tool = vim_mergetool
-;conflictStyle = diff3
-
-[mergetool "vim_mergetool"]
-cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-trustExitCode = true
-
 [alias]
     cb = checkout -b
 	unstage = reset HEAD --
