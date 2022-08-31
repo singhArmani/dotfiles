@@ -16,6 +16,9 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
 EDITOR=nvim
 
+alias ni="nvim"
+alias vi="vim"
+
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
@@ -63,14 +66,14 @@ alias tree="tree -C"
 alias t="tree -C -L"
 
 # vim, zshrc, gitconfig,
-alias vc="vi ~/.vimrc"
-alias zc="vi ~/.zshrc"
-alias gitc="vi ~/.gitconfig"
+alias vc="nvim ~/.vimrc"
+alias zc="nvim ~/.zshrc"
+alias gitc="nvim ~/.gitconfig"
 alias ac="nvim ~/.config/alacritty/alacritty.yml"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"
-alias tc="vi ~/.tmux.conf"
+alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias cap="cd ~/workspace/ && tmuxinator start domain"
 alias dart="cd ~/workspace/ && tmuxinator start dart"
@@ -82,7 +85,7 @@ alias tn="tmux rename-window"
 #-------------
 
 alias dot="cd ~/dotfiles/"
-alias vj="vi ~/journals/Vim.md"
+alias vj="nvim ~/journals/Vim.md"
 
 # yarn alias ------------------
 alias test="yarn test:watch --coverage"
@@ -135,9 +138,6 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 # auto-jump 
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
-# Uncomment the following line if you want to change to nvim again
-alias ni="nvim"
-alias vi="vim"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

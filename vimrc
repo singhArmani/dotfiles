@@ -183,6 +183,7 @@ colorscheme tokyonight
 
 " Setting colorscheme based on the daytime
 exe 'color' ((strftime('%H') % 18) > 6 ? 'nord' : 'tokyonight')
+exe 'color' ((strftime('%H') % 18) > 6 ? 'typewriter' : 'bogster')
 exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 
 " To clear the sign column for git gutter (see docs)
