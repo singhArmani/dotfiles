@@ -93,6 +93,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
 Plug 'skamsie/vim-lineletters'
 Plug 'szw/vim-maximizer'
+Plug 'takac/vim-hardtime'
+Plug 'goldfeld/vim-seek'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
