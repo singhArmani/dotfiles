@@ -143,11 +143,20 @@ call plug#end()
 
 let g:rainbow_active = 1
 
-" Folding ----------
+"Folding ----------
 set foldmethod=indent   
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+" fold toggle (removing this to bring :Ack mapping)
+nmap <leader>a za 
+
+" close all open folds
+nmap <leader>m zm
+
+" open all closed folds
+nmap <leader>n zn
+
 "-----------
 
 
