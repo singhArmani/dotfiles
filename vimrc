@@ -477,6 +477,9 @@ noremap <C-w>m :MaximizerToggle<CR>
 " NerdTree Ends -------------------------------------------------------
 
 
+" Toggle Hard time vim mode (don't use h, j, k, l key)
+nnoremap <leader>t <Esc>:call HardTimeToggle()<CR>
+
 " Fzy key mapping
 map ; :Files<CR>
 
@@ -526,6 +529,10 @@ vnoremap K :m '<-2<cr>gv=gv
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
+
+" Hard mode vim 
+let g:hardtime_default_on = 1
+
 
 
 " Quit files with Leader + q(incooperating vim-merge context aware
@@ -582,4 +589,3 @@ function! s:GitBlame()
     execute "set filetype=perl" 
 endfunction
 " ---------end-------------
-
