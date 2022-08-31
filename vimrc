@@ -79,11 +79,14 @@ Plug 'scrooloose/nerdcommenter'
 
 
 " Themes -----------------------
+Plug 'morhetz/gruvbox'
 Plug 'ayu-theme/ayu-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'sainnhe/sonokai'
+Plug 'vv9k/bogster'
+Plug 'logico/typewriter-vim'
 
 " Vim helpers ----------------------------
 Plug 'machakann/vim-highlightedyank'
