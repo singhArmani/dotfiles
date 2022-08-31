@@ -345,7 +345,10 @@ map <leader>sh :sp<cr>
 " Tab navigation
 nnoremap <C-h> :tabprevious<CR>                                                                            
 nnoremap <C-l> :tabnext<CR>
+
+" Substitute (replace command)
 nmap <leader>ss :%s/\v
+nmap <leader>ee :/\<\><c-b><right><right><right>
 
 " Buffer
 " Move to the previous buffer with "Shift+p"
@@ -472,6 +475,7 @@ let NERDTreeDirArrows = 1
 noremap <C-w>m :MaximizerToggle<CR>
 
 " NerdTree Ends -------------------------------------------------------
+
 
 " Fzy key mapping
 map ; :Files<CR>
