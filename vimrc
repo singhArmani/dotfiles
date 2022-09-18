@@ -71,6 +71,7 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'voldikss/vim-floaterm'
 " buffer management
 Plug 'moll/vim-bbye'
 
@@ -179,12 +180,12 @@ let g:tokyonight_colors = {
 \ }
 
 " Load the colorscheme
-colorscheme tokyonight
+colorscheme bogster
+set background=dark
 
 " Setting colorscheme based on the daytime
-exe 'color' ((strftime('%H') % 18) > 6 ? 'nord' : 'tokyonight')
-exe 'color' ((strftime('%H') % 18) > 6 ? 'typewriter' : 'bogster')
-exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
+"exe 'color' ((strftime('%H') % 18) > 6 ? 'typewriter' : 'bogster')
+"exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
 
 " To clear the sign column for git gutter (see docs)
 highlight clear SignColumn
@@ -565,6 +566,10 @@ noremap cp yap<S-}>p
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gB :Blame<CR> 
+
+" floaterm: open layzgit  Ref: https://kkalamarski.me/essential-neovim-plugins
+nnoremap <leader>gg :FloatermNew --height=0.9 --width=0.9 --wintype=float --name=lazygit --autoclose=2 lazygit <CR>
+
 
 " Show related commit in a popup (Jovica)
 map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
