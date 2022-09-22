@@ -72,6 +72,7 @@ Plug 'preservim/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'voldikss/vim-floaterm'
+Plug 'phaazon/hop.nvim'
 " buffer management
 Plug 'moll/vim-bbye'
 
@@ -105,9 +106,6 @@ let g:coc_global_extensions = [
   \ 'coc-stylelintplus',
   \ ]
 
-" vim seek motion (disable substitute vim command)
-let g:seek_subst_disable = 1
-let g:seek_enable_jumps = 1
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
@@ -141,6 +139,23 @@ Plug 'wellle/targets.vim'
 Plug 'frazrepo/vim-rainbow'
 
 call plug#end()
+
+" vim seek motion (disable substitute vim command)
+let g:seek_subst_disable = 1
+let g:seek_enable_jumps = 1
+
+" neovim hop------------------------------
+call v:lua.require'hop'.setup()
+
+" normal mode --->
+" nnoremap <Leader><leader>b, :HopWordBC<CR>
+" nnoremap <Leader><leader>w :HopWordAC<CR>
+nnoremap <leader>, :HopWordBC<CR>
+nnoremap <leader>. :HopWordAC<CR>
+
+" guide on the keybinding : Ref: https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
+" hop ends ------------------------
+"
 
 let g:rainbow_active = 1
 
@@ -234,6 +249,7 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 
 " Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
 " Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
@@ -366,8 +382,8 @@ nnoremap doc :JsDoc<CR>
 nnoremap gb :ls<CR>:b
 " buffer ends----------------
 
-" Relative letter numbers 
-map <silent>, <Plug>LineLetters
+" Relative letter numbers (using hop for time being)
+" map <silent>, <Plug>LineLetters
 
 " GoTo code navigation.----------------
 nmap <silent> gd <Plug>(coc-definition)
@@ -567,9 +583,11 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gB :Blame<CR> 
 
+
+
 " floaterm: open layzgit  Ref: https://kkalamarski.me/essential-neovim-plugins
 nnoremap <leader>gg :FloatermNew --height=0.9 --width=0.9 --wintype=float --name=lazygit --autoclose=2 lazygit <CR>
-
+" floaterm ends----------------
 
 " Show related commit in a popup (Jovica)
 map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
