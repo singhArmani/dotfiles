@@ -93,10 +93,12 @@ Plug 'logico/typewriter-vim'
 " Vim helpers ----------------------------
 Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
-Plug 'skamsie/vim-lineletters'
+Plug 'mattn/emmet-vim'
+" Plug 'skamsie/vim-lineletters'
 Plug 'szw/vim-maximizer'
 Plug 'takac/vim-hardtime'
 Plug 'goldfeld/vim-seek'
+Plug 'karb94/neoscroll.nvim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -104,6 +106,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-snippets',
   \ 'coc-stylelintplus',
+  \ 'coc-eslint',
   \ ]
 
 
@@ -145,13 +148,16 @@ let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
 
 " neovim hop------------------------------
-call v:lua.require'hop'.setup()
+" call v:lua.require'hop'.setup()
+
+" neovim smooth scrolling
+" call v:lua.require('neoscroll').setup()
 
 " normal mode --->
 " nnoremap <Leader><leader>b, :HopWordBC<CR>
 " nnoremap <Leader><leader>w :HopWordAC<CR>
-nnoremap <leader>, :HopWordBC<CR>
-nnoremap <leader>. :HopWordAC<CR>
+nnoremap ,, :HopWordBC<CR>
+nnoremap .. :HopWordAC<CR>
 
 " guide on the keybinding : Ref: https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
 " hop ends ------------------------
@@ -613,3 +619,5 @@ function! s:GitBlame()
     execute "set filetype=perl" 
 endfunction
 " ---------end-------------
+"
+lua require('config')
