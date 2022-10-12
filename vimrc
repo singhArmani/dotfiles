@@ -109,6 +109,9 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
+" Snippets
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
@@ -241,20 +244,34 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-" Use tab for trigger completion with characters ahead and navigate.
+" Use tab for trigger completion with characters ahead and navigate. (this is what I was using for latest)
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 " NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"  inoremap <silent><expr> <TAB>
+        "\ pumvisible() ? "\<C-n>" :
+        "\ <SID>check_back_space() ? "\<TAB>" :
+        "\ coc#refresh()
+"  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
+"  function! s:check_back_space() abort
+    "let col = col('.') - 1
+    "return !col || getline('.')[col - 1]  =~# '\s'
+"  endfunction
+
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackSpace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 
 " Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
@@ -413,9 +430,9 @@ endfunction
 
 " UltiSnippets---------------------------
 " Trigger configuration
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+" let g:UltiSnipsExpandTrigger="<C-y>"
+" let g:UltiSnipsJumpForwardTrigger="<C-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
