@@ -166,20 +166,23 @@ nnoremap .. :HopWordAC<CR>
 let g:rainbow_active = 1
 
 "Folding ----------
-set foldmethod=indent   
-set foldnestmax=10
+" Ref: https://essais.co/better-folding-in-neovim/
 set nofoldenable
-set foldlevel=2
+set foldlevel=99
+set fillchars=fold:\
+set foldtext=CustomFoldText()
+setlocal foldmethod=expr
+setlocal foldexpr=GetPotionFold(v:lnum)
+
 " fold toggle (removing this to bring :Ack mapping)
 nmap <leader>a za 
 
 " close all open folds
-nmap <leader>m zm
+nmap <leader>m zM
 
 " open all closed folds
-nmap <leader>n zn
-
-"-----------
+nmap <leader>n zR
+"Folding ends -----------
 
 
 " Setting theme color
@@ -621,3 +624,50 @@ endfunction
 " ---------end-------------
 "
 lua require('config')
+"Folding function ----------------------
+function! GetPotionFold(lnum)
+  if getline(a:lnum) =~? '\v^\s*$'
+    return '-1'
+  endif
+  let this_indent = IndentLevel(a:lnum)
+  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+  if next_indent == this_indent
+    return this_indent
+  elseif next_indent < this_indent
+    return this_indent
+  elseif next_indent > this_indent
+    return '>' . next_indent
+  endif
+endfunction
+function! IndentLevel(lnum)
+    return indent(a:lnum) / &shiftwidth
+endfunction
+function! NextNonBlankLine(lnum)
+  let numlines = line('$')
+  let current = a:lnum + 1
+  while current <= numlines
+      if getline(current) =~? '\v\S'
+          return current
+      endif
+      let current += 1
+  endwhile
+  return -2
+endfunction
+function! CustomFoldText()
+  " get first non-blank line
+  let fs = v:foldstart
+  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  endwhile
+  if fs > v:foldend
+      let line = getline(v:foldstart)
+  else
+      let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let foldSize = 1 + v:foldend - v:foldstart
+  let foldSizeStr = " " . foldSize . " lines "
+  let foldLevelStr = repeat("+--", v:foldlevel)
+  let expansionString = repeat(" ", w - strwidth(foldSizeStr.line.foldLevelStr))
+  return line . expansionString . foldSizeStr . foldLevelStr
+endfunction
+" Folding function ends ---------------------------
