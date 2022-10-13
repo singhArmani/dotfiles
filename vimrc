@@ -94,7 +94,7 @@ Plug 'logico/typewriter-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
-" Plug 'skamsie/vim-lineletters'
+"Plug 'skamsie/vim-lineletters'
 Plug 'szw/vim-maximizer'
 Plug 'takac/vim-hardtime'
 Plug 'goldfeld/vim-seek'
@@ -109,6 +109,10 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
@@ -156,8 +160,6 @@ let g:seek_enable_jumps = 1
 " normal mode --->
 " nnoremap <Leader><leader>b, :HopWordBC<CR>
 " nnoremap <Leader><leader>w :HopWordAC<CR>
-nnoremap ,, :HopWordBC<CR>
-nnoremap .. :HopWordAC<CR>
 
 " guide on the keybinding : Ref: https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
 " hop ends ------------------------
@@ -248,30 +250,29 @@ set shortmess+=c
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 " NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-
-" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
-" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
 "inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? coc#_select_confirm() :
-      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      "\ pumvisible() ? "\<C-n>" :
       "\ <SID>check_back_space() ? "\<TAB>" :
       "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 "function! s:check_back_space() abort
   "let col = col('.') - 1
   "return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
+
+" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
+" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 let g:coc_snippet_next = '<tab>'
 "--------------------------------------------
