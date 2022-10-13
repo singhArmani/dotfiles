@@ -152,15 +152,8 @@ let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
 
 " neovim hop------------------------------
-" call v:lua.require'hop'.setup()
-
-" neovim smooth scrolling
-" call v:lua.require('neoscroll').setup()
-
-" normal mode --->
-" nnoremap <Leader><leader>b, :HopWordBC<CR>
-" nnoremap <Leader><leader>w :HopWordAC<CR>
-
+ nnoremap ,, :HopWordBC<CR>
+ nnoremap .. :HopWordAC<CR>
 " guide on the keybinding : Ref: https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
 " hop ends ------------------------
 "
@@ -624,7 +617,6 @@ function! s:GitBlame()
 endfunction
 " ---------end-------------
 "
-lua require('config')
 "Folding function ----------------------
 function! GetPotionFold(lnum)
   if getline(a:lnum) =~? '\v^\s*$'
@@ -672,3 +664,6 @@ function! CustomFoldText()
   return line . expansionString . foldSizeStr . foldLevelStr
 endfunction
 " Folding function ends ---------------------------
+"
+ lua require('config')
+
