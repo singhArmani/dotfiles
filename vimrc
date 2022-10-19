@@ -1,6 +1,7 @@
 set number
 set numberwidth=5
 set relativenumber
+set cursorline
 
 
 " Vim history
@@ -60,7 +61,6 @@ nmap <silent> ./ :nohlsearch<CR>
 " Leader Key 
 " change the mapleader from \ to <space>
 let mapleader = "\<Space>"
-nmap <leader>rn :set rnu!<cr>
 
 " " Plugins---------------------------
 call plug#begin('~/.vim/plugged')
@@ -319,7 +319,7 @@ map <leader>c :let @*=fnamemodify(expand("%"), ":~:.") . ":" . line(".")<CR>
 " nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 
 " renaming a symbol 
-"nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " jumping to errors in a file 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
