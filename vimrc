@@ -91,6 +91,7 @@ Plug 'vv9k/bogster'
 Plug 'logico/typewriter-vim'
 
 " Vim helpers ----------------------------
+Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
@@ -370,6 +371,8 @@ nnoremap <C-l> :tabnext<CR>
 " Substitute (replace command)
 nmap <leader>ss :%s/\v
 nmap <leader>ee :/\<\><c-b><right><right><right>
+" Abolish vim key mapping
+nmap <leader>tt :%S/
 
 " Buffer
 " Move to the previous buffer with "Shift+p"
