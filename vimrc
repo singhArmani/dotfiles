@@ -184,21 +184,6 @@ nmap <leader>n zR
 " Setting theme color
 set t_Co=256   " This is may or may not needed.
 
-" Mirage color scheme ---
-" let ayucolor="mirage"
-
-" Vim Script
-" Example config in VimScript
-let g:tokyonight_style = "night"
-let g:tokyonight_italic_functions = 1
-let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-
-" Change the "hint" color to the "orange" color, and make the "error" color bright red
-let g:tokyonight_colors = {
-  \ 'hint': 'orange',
-  \ 'error': '#ff0000'
-\ }
-
 " Load the colorscheme
 colorscheme bogster
 set background=dark
@@ -214,7 +199,7 @@ highlight clear SignColumn
 " Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
 
-let g:airline_theme = 'sonokai'
+let g:airline_theme = 'bogster'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
