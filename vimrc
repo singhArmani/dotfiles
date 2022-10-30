@@ -29,6 +29,7 @@ set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
 
 " italics fonts : https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
+" highlight Comment cterm=italic gui=italic
 "set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
@@ -181,23 +182,7 @@ nmap <leader>m zM
 " open all closed folds
 nmap <leader>n zR
 "Folding ends -----------
-
-
-" Setting theme color
 set t_Co=256   " This is may or may not needed.
-
-" Load the colorscheme
-colorscheme bogster
-set background=dark
-
-" Setting colorscheme based on the daytime
-"exe 'color' ((strftime('%H') % 18) > 6 ? 'typewriter' : 'bogster')
-"exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
-
-" To clear the sign column for git gutter (see docs)
-highlight clear SignColumn
-"---------------------------
-
 " Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
 
@@ -259,9 +244,9 @@ let g:coc_snippet_next = '<tab>'
 "--------------------------------------------
 
 
-" True color support------------
-set t_8b=[48;2;%lu;%lu;%lum
-set t_8f=[38;2;%lu;%lu;%lum
+" True color support------------ (bring it back if any problem with colours)
+" set t_8b=[48;2;%lu;%lu;%lum
+" set t_8f=[38;2;%lu;%lu;%lum
 
 if (has("nvim"))
 "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -274,10 +259,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 " True color support ends-----------
-
-" Exiting to normal mode from insert mode 
-imap jk <esc>
-imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
@@ -297,10 +278,6 @@ nnoremap gp `[v`]
 
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
-
-" Vim tricks (https://vimtricks.com/p/get-the-current-file-path/?rating=5)
-" Get the current file path
-map <leader>c :let @*=fnamemodify(expand("%"), ":~:.") . ":" . line(".")<CR>
 
 " NOTE: <leader>s is used for searching word under cursor :Ack ferret
 " workspace symbols 
@@ -324,18 +301,13 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 endif
 
 
-" Format using prettier
+" Format using prettier (use the same approach to set the command for renmae sybmols coc)
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " coc config ends-------------------------
 
 " Cursor line
-autocmd InsertEnter,InsertLeave * set cul!
+" autocmd InsertEnter,InsertLeave * set cul!
 
-
-
-" Open image in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
-" NOTE: May not work with tmux
-autocmd! BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 
 " Navigation Split
 " Mapping leader key for navigation split windows
@@ -351,10 +323,6 @@ map <leader>sv :vsp<cr>
 map <leader>sv :vsp<cr>
 map <leader>sh :sp<cr>
 
-" Tab navigation
-nnoremap <C-h> :tabprevious<CR>                                                                            
-nnoremap <C-l> :tabnext<CR>
-
 " Substitute (replace command)
 nmap <leader>ss :%s/\v
 nmap <leader>ee :/\<\><c-b><right><right><right>
@@ -362,21 +330,12 @@ nmap <leader>ee :/\<\><c-b><right><right><right>
 nmap <leader>tt :%S/
 
 " Buffer
-" Move to the previous buffer with "Shift+p"
+" Move to the previous buffer with "Shift+n"
 nnoremap <S-n> :bp<CR>
 
-" Move to the next buffer with "Shift+n"
+" Move to the next buffer with "Shift+m"
 nnoremap <S-m> :bn<CR>
-
-" List all possible buffers with "gl"
-nnoremap doc :JsDoc<CR>
-
-" List all possible buffers with "gb" and accept a new buffer argument [1]
-nnoremap gb :ls<CR>:b
 " buffer ends----------------
-
-" Relative letter numbers (using hop for time being)
-" map <silent>, <Plug>LineLetters
 
 " GoTo code navigation.----------------
 nmap <silent> gd <Plug>(coc-definition)
@@ -411,7 +370,7 @@ let g:UltiSnipsEditSplit="vertical"
 nnoremap <leader>es :UltiSnipsEdit<cr>
 
 
-"Moving between wrapped text in a single line fix
+"Moving between wrapped text in a single line fix (bring it back if problem occurs)
 nnoremap j gj
 nnoremap k gk
 
@@ -444,18 +403,14 @@ noremap <leader>w :update<CR>
 " ------------------------
 
 " Tab key mappings
-map <leader>tn :tabnew<cr>
-map <leader>t<leader> :tabnext
-map <leader>tm :tabmove
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
+" map <leader>tn :tabnew<cr>
+" map <leader>t<leader> :tabnext
+" map <leader>tm :tabmove
+" map <leader>tc :tabclose<cr>
+" map <leader>to :tabonly<cr>
 
 " Syntax highlighting
-autocmd BufEnter * :syntax sync fromstart
-
-" NerdTree --------------------------------------------------------
-" Open NERDTree with CTrl-n
-nnoremap <Leader>f :NERDTreeToggle<Enter>
+" autocmd BufEnter * :syntax sync fromstart
 
 " How can I open a NERDTree automatically when vim starts up if no files were
 " specified
@@ -486,10 +441,6 @@ let NERDTreeDirArrows = 1
 noremap <C-w>m :MaximizerToggle<CR>
 
 " NerdTree Ends -------------------------------------------------------
-
-
-" Toggle Hard time vim mode (don't use h, j, k, l key)
-nnoremap <leader>t <Esc>:call HardTimeToggle()<CR>
 
 " Fzy key mapping
 map ; :Files<CR>
@@ -524,15 +475,9 @@ map ' :Ag<space>
 " Ignore test files while searching with AG (customize it based on project you are working)
 map 't : Ack --ignore *.test.js<space>
 map 'e : Ack -G \.test\.js$<space>
-
-map <Leader>b :Back<space>
 " Ag ends------------------
 
-
-" Highlight syntax inside markdown
-let g:markdown_fenced_languages = ['html', 'javascript', 'css', 'vim']
-
-" Move visual selection
+" Move visual selection (move lines up or down after selection )
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
@@ -540,11 +485,6 @@ vnoremap K :m '<-2<cr>gv=gv
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
-
-" Hard mode vim 
-let g:hardtime_default_on = 1
-
-
 
 " Quit files with Leader + q(incooperating vim-merge context aware
 " QuitWindow() function) 
