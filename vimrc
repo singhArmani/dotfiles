@@ -72,7 +72,10 @@ Plug 'tpope/vim-surround'
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'tpope/vim-repeat'
-Plug 'preservim/nerdtree'
+" file explorer -----------
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
+
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'voldikss/vim-floaterm'
@@ -408,35 +411,12 @@ noremap <leader>w :update<CR>
 " Syntax highlighting
 " autocmd BufEnter * :syntax sync fromstart
 
-" How can I open a NERDTree automatically when vim starts up if no files were
-" specified
-autocmd StdinReadPre * let s:std_in=1
-" NOTE: Uncomment the following line if you want to open nerdtree when vi into
-" the project directory
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" directly open NerdTree on the file you’re editing to quickly 
-" perform operations on it with NERDTreeFind
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-
-" Automatically closes NERDTree when open a file
-let NERDTreeQuitOnOpen = 1
-
-
-" Automatically delete the buffer of the file you just deleted with NerdTree
-let NERDTreeAutoDeleteBuffer = 1
-
-" Show hidden files starting with .
-let NERDTreeShowHidden=0 " Don't show hidden files/folder by default. Use `Shift + i` to toggle
-
-" Prettier NERD
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+" File explorer Nvim-tree 
+nnoremap <silent> <Leader>v :NvimTreeFindFile<CR>
 
 " maximize current split, vim tricks: https://vimtricks.com/p/maximize-the-current-split/
 noremap <C-w>m :MaximizerToggle<CR>
 
-" NerdTree Ends -------------------------------------------------------
 
 " Fzy key mapping
 map ; :Files<CR>
