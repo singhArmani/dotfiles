@@ -1,8 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# PF environment variable 
-export environment=local
+# Setting up JAVA_HOME environment variable. 
+# Ref: https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
+export JAVA_HOME=$(/usr/libexec/java_home -v17)
+
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
@@ -70,6 +72,7 @@ alias vc="nvim ~/.vimrc"
 alias zc="nvim ~/.zshrc"
 alias gitc="nvim ~/.gitconfig"
 alias ac="nvim ~/.config/alacritty/alacritty.yml"
+alias lc="nvim ~/.config/nvim/lua/config.lua"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"

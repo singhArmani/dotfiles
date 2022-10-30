@@ -1,7 +1,11 @@
-set number
 set numberwidth=5
 set relativenumber
-set cursorline
+
+" Remove this if scrolling is still a problem
+set lazyredraw " see if it improves scrolling performance
+set synmaxcol=128
+syntax sync minlines=256
+" ------------------ 
 
 
 " Vim history
@@ -9,7 +13,7 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
-syntax enable            " Enable syntax highlighting.
+" syntax enable            " Enable syntax highlighting. (Check if treesitter syntax is fine)
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
@@ -25,7 +29,6 @@ set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
 
 " italics fonts : https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
-highlight Comment cterm=italic gui=italic
 "set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
@@ -50,7 +53,6 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " Search options------------------
 set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
 
                     "    case-sensitive otherwise
 set hlsearch      " highlight search terms
