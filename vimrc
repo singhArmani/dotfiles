@@ -78,7 +78,10 @@ Plug 'nvim-tree/nvim-tree.lua'
 
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'voldikss/vim-floaterm'
+
+" floating terminal
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
 Plug 'phaazon/hop.nvim'
 " buffer management
 Plug 'moll/vim-bbye'
@@ -492,11 +495,6 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gB :Blame<CR> 
 
-
-
-" floaterm: open layzgit  Ref: https://kkalamarski.me/essential-neovim-plugins
-nnoremap <leader>gg :FloatermNew --height=0.9 --width=0.9 --wintype=float --name=lazygit --autoclose=2 lazygit <CR>
-" floaterm ends----------------
 
 " Show related commit in a popup (Jovica)
 map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
