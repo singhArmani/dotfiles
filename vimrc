@@ -104,7 +104,7 @@ Plug 'logico/typewriter-vim'
 " Vim helpers ----------------------------
 Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mattn/emmet-vim'
 "Plug 'skamsie/vim-lineletters'
 Plug 'szw/vim-maximizer'

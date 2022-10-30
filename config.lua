@@ -136,3 +136,13 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {no
 -- neovim commenter
 require('Comment').setup()
 
+
+-- indent line for neovim --------------------->
+-- Ref: https://github.com/lukas-reineke/indent-blankline.nvim/tree/ 
+vim.g.indent_blankline_char = '¦'
+
+require("indent_blankline").setup {
+  show_end_of_line = true,
+}
+-- indent line ends here-----------------
+
