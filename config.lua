@@ -138,6 +138,13 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {no
 -- floating terminal ends ----
 
 
+-- neovim colorizer ---> 
+require'colorizer'.setup()
+
+
+-- gitgutter 
+require('gitsigns').setup()
+
 -- neovim commenter
 require('Comment').setup()
 

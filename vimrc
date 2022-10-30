@@ -107,6 +107,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mattn/emmet-vim'
 "Plug 'skamsie/vim-lineletters'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
 Plug 'takac/vim-hardtime'
 Plug 'goldfeld/vim-seek'
@@ -140,7 +141,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git gutter (for showing the git diff as in VS code)
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Fugitive (Git wrapper)
 Plug 'tpope/vim-fugitive'
