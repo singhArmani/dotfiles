@@ -1,5 +1,7 @@
 -- to hop to any character 
 require'hop'.setup()
+-- Improve startup time
+require('impatient')
 
 -- smooth scroll
 require('neoscroll').setup()
