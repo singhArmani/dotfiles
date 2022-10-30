@@ -67,8 +67,10 @@ let mapleader = "\<Space>"
 " " Plugins---------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" Neovim statusline Ref: https://github.com/nvim-lualine/lualine.nvim ------------
+Plug 'nvim-lualine/lualine.nvim'
+
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -77,6 +79,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'phaazon/hop.nvim'
 " buffer management
 Plug 'moll/vim-bbye'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
@@ -185,12 +188,6 @@ set t_Co=256   " This is may or may not needed.
 " Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
 
-let g:airline_theme = 'bogster'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'jsformatter'
 "--------------------
 
 " Autocompletion configuration settings
