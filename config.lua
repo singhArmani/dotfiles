@@ -131,3 +131,6 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {no
 -- floating terminal ends ----
 
 
+-- neovim commenter
+require('Comment').setup()
+

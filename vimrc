@@ -88,7 +88,7 @@ Plug 'moll/vim-bbye'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 " Commenting
-Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 
 
 " Themes -----------------------
