@@ -1,10 +1,8 @@
--- to hop to any character 
-require'hop'.setup()
 -- Improve startup time
 require('impatient')
 
--- smooth scroll
-require('neoscroll').setup()
+-- Tokyonight theme needs to be set prior to the config
+vim.cmd[[colorscheme tokyonight-night]]
 
 -- Nvim treesitter config ------------------------------>
 require'nvim-treesitter.configs'.setup {
@@ -26,6 +24,9 @@ require'nvim-treesitter.configs'.setup {
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 -- Nvim treesitter config ends here--------------------->
+-- to hop to any character 
+require'hop'.setup()
+
 -- bufferline tab line for neovim
 require("bufferline").setup {
   options = {
@@ -43,6 +44,10 @@ require('lualine').setup {
 	component_separators = "",
   }
 }
+
+-- smooth scroll
+require('neoscroll').setup()
+
 
 
 -- Nvim tree (file explorer) -------->
