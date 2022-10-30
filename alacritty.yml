@@ -10,8 +10,13 @@ shell:
   program: /bin/zsh
 
 window:
-  # Spread additional padding evenly around the terminal content.
-  dynamic_padding: true
+
+  padding:
+    x: 2
+    y: 2
+
+  dynamic_padding: false
+  decorations: buttonless
 
   # Startup Mode (changes require restart)
   startup_mode: Fullscreen
@@ -31,12 +36,12 @@ font:
 
   # Bold font face
   bold:
-    family: Fira Code
-    style: Retina
+    family: OperatorMono Nerd Font
+    style: bold
 
   # Italic font face
   italic:
-    family: Fira Code
+    family: Dank Mono
     style: Italic
 
   # Bold italic font face
@@ -44,9 +49,9 @@ font:
   # italic & it just works. You may specifiy the bold italic version if it exists
   # for your font
   bold_italic:
-    family: Fira Code
-    style: Italic
-
+    family: OperatorMono Nerd Font
+    style: Bold Italic
+  #
   # Font size
   size: 20.0
 
@@ -68,7 +73,9 @@ font:
     y: 0
 
   # When true, bold text is drawn using the bright variant of colors.
-  draw_bold_text_with_bright_colors: false
+    # Point size of the font
+  scale_with_dpi: true
+  draw_bold_text_with_bright_colors: true
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
@@ -83,32 +90,35 @@ selection:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# Colors (ayu)
+# TokyoNight night
 colors:
-  bright:
-    black: '#323232'
-    blue: '#68d5ff'
-    cyan: '#c7fffd'
-    green: '#eafe84'
-    magenta: '#ffa3aa'
-    red: '#ff6565'
-    white: '#ffffff'
-    yellow: '#fff779'
-  cursor:
-    cursor: '#f29718'
-    text: '#e6e1cf'
-  normal:
-    black: '#000000'
-    blue: '#36a3d9'
-    cyan: '#95e6cb'
-    green: '#b8cc52'
-    magenta: '#f07178'
-    red: '#ff3333'
-    white: '#ffffff'
-    yellow: '#e7c547'
+  # Default colors
   primary:
-    background: '#0f1419'
-    foreground: '#e6e1cf'
-  selection:
-    background: '#253340'
-    text: '#e6e1cf'
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
+
+  # Normal colors
+  normal:
+    black:   '0x15161e'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
+
+  # Bright colors
+  bright:
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
