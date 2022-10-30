@@ -54,8 +54,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " Search options------------------
 set ignorecase    " ignore case when searching
-
-                    "    case-sensitive otherwise
+set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 nmap <silent> ./ :nohlsearch<CR>
