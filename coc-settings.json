@@ -3,14 +3,11 @@
     "css",
     "json",
     "javascript",
-    "typescript",
-    "graphql",
     "java"
   ],
   "typescript.suggestionActions.enabled": true,
   "typescript.suggest.enabled": true,
   "javascript.suggestionActions.enabled": false,
   "javascript.suggest.enabled": false,
-  "eslint.autoFixOnSave": true,
-  "suggest.noselect": true
+  "eslint.autoFixOnSave": true
 }
