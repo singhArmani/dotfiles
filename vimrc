@@ -262,17 +262,11 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 " coc completion ends------------------ 
 
-"--------------------------------------------
-
-
-" True color support------------ (bring it back if any problem with colours)
-" set t_8b=[48;2;%lu;%lu;%lum
-" set t_8f=[38;2;%lu;%lu;%lum
-
 if (has("nvim"))
 "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
   " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
@@ -300,9 +294,6 @@ nnoremap gp `[v`]
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
 
-" NOTE: <leader>s is used for searching word under cursor :Ack ferret
-" workspace symbols 
-" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 
 " renaming a symbol 
 nmap <leader>rn <Plug>(coc-rename)
@@ -377,17 +368,6 @@ endfunction
 " ---------------------------------------
 "
 
-
-" UltiSnippets---------------------------
-" Trigger configuration
-" let g:UltiSnipsExpandTrigger="<C-j>"
-" let g:UltiSnipsJumpForwardTrigger="<C-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<C-z>"
-" let g:UltiSnipsExpandTrigger = "<NUL>" "Ref: 
-
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
 " Open snippets for UltiSnips
 " nnoremap <leader>es :UltiSnipsEdit<cr>
 
@@ -400,22 +380,6 @@ nnoremap k gk
 nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
 
-" The following line is copied from coc-snippets docs
-" Use <C-l> for trigger snippet expand.
-" imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-" vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-" let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-" let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-" imap <C-j> <Plug>(coc-snippets-expand-jump)
-
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 " snippets ends-------------------
@@ -423,16 +387,6 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 " Use <Leader>w for saving
 noremap <leader>w :update<CR>
 " ------------------------
-
-" Tab key mappings
-" map <leader>tn :tabnew<cr>
-" map <leader>t<leader> :tabnext
-" map <leader>tm :tabmove
-" map <leader>tc :tabclose<cr>
-" map <leader>to :tabonly<cr>
-
-" Syntax highlighting
-" autocmd BufEnter * :syntax sync fromstart
 
 " File explorer Nvim-tree 
 nnoremap <silent> <Leader>v :NvimTreeFindFile<CR>
@@ -450,10 +404,6 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " Git commit message auto spell checking and text wrapping 
 " autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" Cursor shape (without tmux)
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Cursor shape (with tmux)
 let &t_SI = "\e[6 q"
