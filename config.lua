@@ -160,6 +160,14 @@ require("indent_blankline").setup {
 }
 -- indent line ends here-----------------
 
+-- Live server using browser sync
+-- Remove browser-sync and other global package once removing this
+require'web-tools'.setup({
+  keymaps = {
+    rename = nil,  -- by default use same setup of lspconfig
+    repeat_rename = '.', -- . to repeat
+  },
+})
 
 -- nvim dashboard
 require'alpha'.setup(require'alpha.themes.startify'.config)
