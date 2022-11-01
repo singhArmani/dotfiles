@@ -112,6 +112,9 @@ Plug 'szw/vim-maximizer'
 Plug 'takac/vim-hardtime'
 Plug 'goldfeld/vim-seek'
 Plug 'karb94/neoscroll.nvim'
+" Nvim Dashboard
+Plug 'goolord/alpha-nvim',
+
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

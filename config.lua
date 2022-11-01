@@ -15,7 +15,6 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   ensure_installed = {
-    "tsx",
     "json",
     "yaml",
     "html",
@@ -24,6 +23,9 @@ require'nvim-treesitter.configs'.setup {
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 -- Nvim treesitter config ends here--------------------->
+
+-- TODO: put all these individual plugin config into their own files
+-- Ref: https://github.com/tcmmichaelb139/.dotfiles/tree/main/nvim/.config/nvim/lua/config
 -- to hop to any character 
 require'hop'.setup()
 
@@ -157,4 +159,8 @@ require("indent_blankline").setup {
   show_end_of_line = true,
 }
 -- indent line ends here-----------------
+
+
+-- nvim dashboard
+require'alpha'.setup(require'alpha.themes.startify'.config)
 
