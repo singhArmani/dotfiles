@@ -16,7 +16,7 @@ window:
     y: 2
 
   dynamic_padding: false
-  decorations: buttonless
+    # decorations: buttonless
 
   # Startup Mode (changes require restart)
   startup_mode: Fullscreen

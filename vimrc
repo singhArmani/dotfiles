@@ -105,11 +105,8 @@ Plug 'logico/typewriter-vim'
 Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'mattn/emmet-vim'
-"Plug 'skamsie/vim-lineletters'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
-Plug 'takac/vim-hardtime'
 Plug 'goldfeld/vim-seek'
 Plug 'karb94/neoscroll.nvim'
 " Nvim Dashboard
@@ -129,7 +126,7 @@ let g:coc_global_extensions = [
 
 
 " Snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets'
 
 " Js doc
@@ -137,9 +134,6 @@ Plug 'heavenshell/vim-jsdoc', {
   \ 'for': ['javascript', 'javascript.jsx','typescript'], 
   \ 'do': 'make install'
 \}
-
-" Git status flag NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Fzf finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -151,19 +145,14 @@ Plug 'lewis6991/gitsigns.nvim'
 " Fugitive (Git wrapper)
 Plug 'tpope/vim-fugitive'
 
-" Vim icons
-Plug 'ryanoasis/vim-devicons'
-
 " Search and Replace Project wise 
 Plug 'wincent/ferret'
 
 " Adding more target object vim like feature
 Plug 'wellle/targets.vim'
 
-" Rainbow 
-Plug 'frazrepo/vim-rainbow'
-
 call plug#end()
+
 
 " vim seek motion (disable substitute vim command)
 let g:seek_subst_disable = 1
@@ -500,11 +489,6 @@ noremap cp yap<S-}>p
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gB :Blame<CR> 
-
-
-" Show related commit in a popup (Jovica)
-map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
-"Mapping ends-----------------------------
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
