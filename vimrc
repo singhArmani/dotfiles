@@ -90,6 +90,9 @@ Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 " Commenting
 Plug 'numToStr/Comment.nvim'
 
+" Startup time and performance measurement
+Plug 'tweekmonster/startuptime.vim'
+
 
 " Themes -----------------------
 Plug 'morhetz/gruvbox'
