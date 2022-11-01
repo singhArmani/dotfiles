@@ -112,6 +112,10 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
 Plug 'goldfeld/vim-seek'
 Plug 'karb94/neoscroll.nvim'
+Plug 'lewis6991/impatient.nvim'
+Plug 'ray-x/web-tools.nvim'
+Plug 'mattn/emmet-vim'
+
 " Nvim Dashboard
 Plug 'goolord/alpha-nvim',
 
