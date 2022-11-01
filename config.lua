@@ -164,3 +164,6 @@ require("indent_blankline").setup {
 -- nvim dashboard
 require'alpha'.setup(require'alpha.themes.startify'.config)
 
+-- nvim diagnostic list at your status line
+require('trouble').setup {
+}

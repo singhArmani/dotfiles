@@ -115,6 +115,8 @@ Plug 'karb94/neoscroll.nvim'
 " Nvim Dashboard
 Plug 'goolord/alpha-nvim',
 
+" Diagnostic list at your status line
+Plug 'folke/trouble.nvim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -573,5 +575,10 @@ function! CustomFoldText()
 endfunction
 " Folding function ends ---------------------------
 "
+" Even thought trouble nvim plu doens't work with coc nvim diagnostic, 
+" The following trick does the work.
+" Ref: https://github.com/folke/trouble.nvim/issues/12#issuecomment-1012478522
+nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
+
  lua require('config')
 
