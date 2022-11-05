@@ -3,11 +3,15 @@
     "css",
     "json",
     "javascript",
-    "java"
+    "typescript",
+    "java",
+    "html"
   ],
   "typescript.suggestionActions.enabled": true,
   "typescript.suggest.enabled": true,
   "javascript.suggestionActions.enabled": false,
   "javascript.suggest.enabled": false,
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all"
 }

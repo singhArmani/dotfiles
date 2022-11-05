@@ -5,6 +5,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Ref: https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
 export JAVA_HOME=$(/usr/libexec/java_home -v17)
 
+# Remove it once stopped working on AI project
+export DEV_NAME=aman-singh
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
