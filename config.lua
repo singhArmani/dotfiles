@@ -24,11 +24,6 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 -- Nvim treesitter config ends here--------------------->
 
--- TODO: put all these individual plugin config into their own files
--- Ref: https://github.com/tcmmichaelb139/.dotfiles/tree/main/nvim/.config/nvim/lua/config
--- to hop to any character 
-require'hop'.setup()
-
 -- bufferline tab line for neovim
 require("bufferline").setup {
   options = {
@@ -139,13 +134,14 @@ end
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 -- floating terminal ends ----
 
-
 -- neovim colorizer ---> 
 require'colorizer'.setup()
 
 
 -- gitgutter 
-require('gitsigns').setup()
+require('gitsigns').setup {
+ current_line_blame = true,
+}
 
 -- neovim commenter
 require('Comment').setup()
