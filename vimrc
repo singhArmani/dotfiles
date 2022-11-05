@@ -17,7 +17,7 @@ set scrolloff=4          " Keep at least 4 lines below cursor
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
-set spell                " Enable spellchecking
+" set spell                " Enable spellchecking
 " General configuration ends------------------
 
 " User interface options---------------------
