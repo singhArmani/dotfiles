@@ -81,7 +81,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " floating terminal
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
-Plug 'phaazon/hop.nvim'
 " buffer management
 Plug 'moll/vim-bbye'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
