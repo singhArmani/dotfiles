@@ -465,18 +465,6 @@ map <leader>p <C-w>vgf
 command Bd :up | %bd | e#
 " Delete buffers without closing your windows
 :noremap <Leader>bb :Bdelete<CR>
-
-" Jovica tip: Git blame---------------
-command! -nargs=* Blame call s:GitBlame()
-
-function! s:GitBlame()
-    let cmd = "git blame -w " . bufname("%")
-    let nline = line(".") + 1
-    botright new
-    execute "$read !" . cmd
-    execute "normal " . nline . "gg"
-    execute "set filetype=perl" 
-endfunction
 " ---------end-------------
 "
 "Folding function ----------------------
