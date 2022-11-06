@@ -157,12 +157,6 @@ call plug#end()
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
 
-" neovim hop------------------------------
- nnoremap ,, :HopWordBC<CR>
- nnoremap .. :HopWordAC<CR>
-" guide on the keybinding : Ref: https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
-" hop ends ------------------------
-"
 
 let g:rainbow_active = 1
 
@@ -460,6 +454,16 @@ nnoremap <leader>gB :Blame<CR>
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
+
+
+" Paste the yanked content from register "0
+" Mapping it Ctrl-p  
+:map <C-p> "0p
+
+" Use _ (black hole register) for deleting (this would keep your "0 untouched,)
+" you can safely use p or P to paste from this 
+" Ref: https://unix.stackexchange.com/questions/26654/how-can-i-paste-overwriting-with-vim
+noremap <Leader>d "_d
 
 " Vim tricks close all hidden buffers
 command Bd :up | %bd | e#
