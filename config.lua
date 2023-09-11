@@ -2,7 +2,11 @@
 require('impatient')
 
 -- Tokyonight theme needs to be set prior to the config
-vim.cmd[[colorscheme tokyonight-night]]
+-- vim.cmd[[colorscheme tokyonight-night]]
+-- vim.cmd[[colorscheme oxocarbon]]
+-- vim.cmd.colorscheme "catppuccin"
+vim.cmd('colorscheme github_light_high_contrast')
+
 
 -- Nvim treesitter config ------------------------------>
 require'nvim-treesitter.configs'.setup {
@@ -39,12 +43,11 @@ require('lualine').setup {
     theme = "tokyonight",
 	section_separators = "",
 	component_separators = "",
-  }
+  },
 }
 
 -- smooth scroll
 require('neoscroll').setup()
-
 
 
 -- Nvim tree (file explorer) -------->
@@ -58,11 +61,6 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
     adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
   },
   renderer = {
     group_empty = true,
@@ -140,8 +138,9 @@ require'colorizer'.setup()
 
 -- gitgutter 
 require('gitsigns').setup {
- current_line_blame = true,
+-- current_line_blame = true,
 }
+
 
 -- neovim commenter
 require('Comment').setup()
