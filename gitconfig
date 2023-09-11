@@ -44,8 +44,8 @@
 [diff "image"]
 	textconv = imgcat
 [user]
-	name = singhArmani
-	email = singh_aman@hotmail.com.au
+	name = Amandeep Singh
+	email = amandeep.singh@domain.com.au
 [rebase]
 	autosquash = true
 [help]
