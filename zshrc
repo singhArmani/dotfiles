@@ -1,3 +1,7 @@
+# maven (mvn) java build tool 
+export M2_HOME="/Users/amandeep.singh/workspace/apache-maven-3.9.4"
+export PATH="${M2_HOME}/bin:${PATH}"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -7,6 +11,9 @@ export JAVA_HOME=$(/usr/libexec/java_home -v17)
 
 # Remove it once stopped working on AI project
 export DEV_NAME=aman-singh
+
+# Remove this later, only to run MySql locally
+export PATH=${PATH}:/usr/local/mysql/bin/
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop

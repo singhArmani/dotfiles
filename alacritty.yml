@@ -10,12 +10,12 @@ shell:
   program: /bin/zsh
 
 window:
-
   padding:
     x: 2
     y: 2
 
-  dynamic_padding: false
+  dynamic_padding:
+    false
     # decorations: buttonless
 
   # Startup Mode (changes require restart)
@@ -73,7 +73,7 @@ font:
     y: 0
 
   # When true, bold text is drawn using the bright variant of colors.
-    # Point size of the font
+  # Point size of the font
   scale_with_dpi: true
   draw_bold_text_with_bright_colors: true
 
@@ -99,26 +99,55 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x15161e'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
+    black: '0x15161e'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
     magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xa9b1d6'
+    cyan: '0x7dcfff'
+    white: '0xa9b1d6'
 
   # Bright colors
   bright:
-    black:   '0x414868'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
+    black: '0x414868'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
     magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xc0caf5'
+    cyan: '0x7dcfff'
+    white: '0xc0caf5'
 
   indexed_colors:
     - { index: 16, color: '0xff9e64' }
     - { index: 17, color: '0xdb4b4b' }
+# Colors (Github)
+# colors:
+#   bright:
+#     black: '#666666'
+#     blue: '#2e6cba'
+#     cyan: '#1cfafe'
+#     green: '#87d5a2'
+#     magenta: '#ffa29f'
+#     red: '#de0000'
+#     white: '#ffffff'
+#     yellow: '#f1d007'
+#   cursor:
+#     cursor: '#3f3f3f'
+#     text: '#f4f4f4'
+#   normal:
+#     black: '#3e3e3e'
+#     blue: '#003e8a'
+#     cyan: '#89d1ec'
+#     green: '#07962a'
+#     magenta: '#e94691'
+#     red: '#970b16'
+#     white: '#ffffff'
+#     yellow: '#f8eec7'
+#   primary:
+#     background: '#f4f4f4'
+#     foreground: '#3e3e3e'
+#   selection:
+#     background: '#a9c1e2'
+#     text: '#535353'

@@ -165,7 +165,7 @@ require'web-tools'.setup({
   },
 })
 
--- nvim dashboard
+-- nvim dashboard (nvim tree open on cd not working with this plugin)
 require'alpha'.setup(require'alpha.themes.startify'.config)
 
 -- nvim diagnostic list at your status line
