@@ -18,6 +18,11 @@ set scrolloff=4          " Keep at least 4 lines below cursor
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
 " set spell                " Enable spellchecking
+" Spell-check Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal spell
+autocmd BufRead,BufNewFile *.mdx setlocal spell
+autocmd FileType gitcommit setlocal spell
+
 " General configuration ends------------------
 
 " User interface options---------------------
@@ -95,6 +100,8 @@ Plug 'tweekmonster/startuptime.vim'
 " Themes -----------------------
 Plug 'arcticicestudio/nord-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'projekt0n/github-nvim-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Vim helpers ----------------------------
 Plug 'tpope/vim-abolish'
@@ -107,6 +114,10 @@ Plug 'karb94/neoscroll.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'ray-x/web-tools.nvim'
 Plug 'mattn/emmet-vim'
+Plug 'nyoom-engineering/oxocarbon.nvim'
+
+" vim astro syntax highlighting
+Plug 'wuelnerdotexe/vim-astro'
 
 " Nvim Dashboard
 Plug 'goolord/alpha-nvim',
@@ -141,6 +152,9 @@ Plug 'junegunn/fzf.vim'
 " Git gutter (for showing the git diff as in VS code)
 Plug 'lewis6991/gitsigns.nvim'
 
+" For useful Git blame commands
+Plug 'f-person/git-blame.nvim'
+
 " Fugitive (Git wrapper)
 Plug 'tpope/vim-fugitive'
 
@@ -156,6 +170,9 @@ call plug#end()
 " vim seek motion (disable substitute vim command)
 let g:seek_subst_disable = 1
 let g:seek_enable_jumps = 1
+
+" delay git blame info
+let g:gitblame_delay = 1000 " 1 second
 
 
 let g:rainbow_active = 1
@@ -377,6 +394,7 @@ noremap <leader>w :update<CR>
 
 " File explorer Nvim-tree 
 nnoremap <silent> <Leader>v :NvimTreeFindFile<CR>
+nnoremap <silent> <Leader>u :NvimTreeToggle<CR>
 
 " maximize current split, vim tricks: https://vimtricks.com/p/maximize-the-current-split/
 noremap <C-w>m :MaximizerToggle<CR>
@@ -524,5 +542,6 @@ endfunction
 " Ref: https://github.com/folke/trouble.nvim/issues/12#issuecomment-1012478522
 nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
 
- lua require('config')
+lua require('config')
+
 
