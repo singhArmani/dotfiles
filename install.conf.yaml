@@ -9,6 +9,7 @@
     ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
     ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.tmux.conf: tmux.conf
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

@@ -17,7 +17,7 @@ export PATH=${PATH}:/usr/local/mysql/bin/
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
-export ZSH="/Users/amandeep.singh/.oh-my-zsh"
+export ZSH="/Users/aman/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -87,19 +87,12 @@ alias lc="nvim ~/.config/nvim/lua/config.lua"
 alias mux="tmuxinator"
 alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
-alias cap="cd ~/workspace/client-agent-portal && tmuxinator start domain"
-alias dart="cd ~/workspace/dart && tmuxinator start dart"
-alias auth="cd ~/workspace/oauth-in-action-code && tmuxinator start auth"
-alias ai="cd ~/workspace/asp-connect && tmuxinator start ai"
-alias portal="cd ~/workspace/server-agent-portal && tmuxinator start agent-portal"
-alias micro="cd ~/workspace/ && tmuxinator start micro"
-alias blog="cd ~/workspace && tmuxinator start blog"
+alias blog="cd ~/workspace/ && tmuxinator start blog"
 alias tn="tmux rename-window"
 
 #-------------
 
 alias dot="cd ~/dotfiles/"
-alias vj="nvim ~/journals/Vim.md"
 
 # yarn alias ------------------
 alias test="yarn test:watch --coverage"
