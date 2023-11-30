@@ -1,0 +1,153 @@
+# This file is copied from : https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
+# Download more color theme from : https://github.com/eendroroy/alacritty-theme
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Setup term for programs to be able to use it
+env:
+  TERM: xterm-256color
+
+shell:
+  program: /bin/zsh
+
+window:
+  padding:
+    x: 2
+    y: 2
+
+  dynamic_padding:
+    false
+    # decorations: buttonless
+
+  # Startup Mode (changes require restart)
+  startup_mode: Fullscreen
+
+# Sample Font configuration for font: Fira Code.
+# Feel free to use different font configuration family & face for each sections
+font:
+  # Normal font face - Also used to draw glyphs on tmux & VIM
+  # NOTE: You may use any font you'd like but make sure the normal fonts
+  # support ligatures/glyphs. That's used by tmux & VIM to provide a better
+  # UI for powerline & tmux bottom bar.
+  normal:
+    # Font name
+    family: OperatorMono Nerd Font
+    # Font face
+    style: Light
+
+  # Bold font face
+  bold:
+    family: OperatorMono Nerd Font
+    style: bold
+
+  # Italic font face
+  italic:
+    family: Dank Mono
+    style: Italic
+
+  # Bold italic font face
+  # Note: Since i don't have a font italic version of this font, I just specified
+  # italic & it just works. You may specifiy the bold italic version if it exists
+  # for your font
+  bold_italic:
+    family: OperatorMono Nerd Font
+    style: Bold Italic
+  #
+  # Font size
+  size: 20.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing
+  # I've given in 14 spacing which fits really well with my fonts, you may change it
+  # to your convenience but make sure to adjust 'glyph_offset' appropriately post that
+  offset:
+    x: 0
+    y: 0
+
+  # Note: This requires RESTART
+  # By default when you change the offset above you'll see an issue, where the texts are bottom
+  # aligned with the cursor, this is to make sure they center align.
+  # This offset should usually be 1/2 of the above offset-y being set.
+  glyph_offset:
+    x: 0
+    # Keeping this as half of offset to vertically align the text in cursor
+    y: 0
+
+  # When true, bold text is drawn using the bright variant of colors.
+  # Point size of the font
+  scale_with_dpi: true
+  draw_bold_text_with_bright_colors: true
+
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: true
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+# TokyoNight night
+colors:
+  # Default colors
+  primary:
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
+
+  # Normal colors
+  normal:
+    black: '0x15161e'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xa9b1d6'
+
+  # Bright colors
+  bright:
+    black: '0x414868'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+# Colors (Github)
+# colors:
+#   bright:
+#     black: '#666666'
+#     blue: '#2e6cba'
+#     cyan: '#1cfafe'
+#     green: '#87d5a2'
+#     magenta: '#ffa29f'
+#     red: '#de0000'
+#     white: '#ffffff'
+#     yellow: '#f1d007'
+#   cursor:
+#     cursor: '#3f3f3f'
+#     text: '#f4f4f4'
+#   normal:
+#     black: '#3e3e3e'
+#     blue: '#003e8a'
+#     cyan: '#89d1ec'
+#     green: '#07962a'
+#     magenta: '#e94691'
+#     red: '#970b16'
+#     white: '#ffffff'
+#     yellow: '#f8eec7'
+#   primary:
+#     background: '#f4f4f4'
+#     foreground: '#3e3e3e'
+#   selection:
+#     background: '#a9c1e2'
+#     text: '#535353'

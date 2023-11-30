@@ -1,7 +1,11 @@
-
-set number
 set numberwidth=5
 set relativenumber
+
+" Remove this if scrolling is still a problem
+set lazyredraw " see if it improves scrolling performance
+set synmaxcol=128
+syntax sync minlines=256
+" ------------------ 
 
 
 " Vim history
@@ -9,11 +13,16 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
-syntax enable            " Enable syntax highlighting.
+" syntax enable            " Enable syntax highlighting. (Check if treesitter syntax is fine)
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
-set spell                " Enable spellchecking
+" set spell                " Enable spellchecking
+" Spell-check Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal spell
+autocmd BufRead,BufNewFile *.mdx setlocal spell
+autocmd FileType gitcommit setlocal spell
+
 " General configuration ends------------------
 
 " User interface options---------------------
@@ -23,6 +32,9 @@ set mouse=a                 " Enable mouse for scrolling and resizing"
 set title                   " Set the window's title, reflecting the file currently being edited"
 set splitbelow              " Split panes to bottom
 set splitright              " Split pane to right
+
+" italics fonts : https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
+" highlight Comment cterm=italic gui=italic
 "set cursorline              " Set a visual line to show the position of the cursor
 " User interface ends------------------------
 
@@ -47,9 +59,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " Search options------------------
 set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-
-                    "    case-sensitive otherwise
+set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 nmap <silent> ./ :nohlsearch<CR>
@@ -58,32 +68,62 @@ nmap <silent> ./ :nohlsearch<CR>
 " Leader Key 
 " change the mapleader from \ to <space>
 let mapleader = "\<Space>"
-nmap <leader>rn :set rnu!<cr>
 
 " " Plugins---------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" Neovim statusline Ref: https://github.com/nvim-lualine/lualine.nvim ------------
+Plug 'nvim-lualine/lualine.nvim'
+
 Plug 'tpope/vim-repeat'
-Plug 'preservim/nerdtree'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" file explorer -----------
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" floating terminal
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
+" buffer management
+Plug 'moll/vim-bbye'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 " Commenting
-Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 
-Plug 'skamsie/vim-lineletters'
+" Startup time and performance measurement
+Plug 'tweekmonster/startuptime.vim'
+
 
 " Themes -----------------------
-Plug 'ayu-theme/ayu-vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'arzg/vim-colors-xcode'
-Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-Plug 'sainnhe/sonokai'
+Plug 'arcticicestudio/nord-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'projekt0n/github-nvim-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Vim helpers ----------------------------
+Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'szw/vim-maximizer'
+Plug 'goldfeld/vim-seek'
+Plug 'karb94/neoscroll.nvim'
+Plug 'lewis6991/impatient.nvim'
+Plug 'ray-x/web-tools.nvim'
+Plug 'mattn/emmet-vim'
+Plug 'nyoom-engineering/oxocarbon.nvim'
+
+" vim astro syntax highlighting
+Plug 'wuelnerdotexe/vim-astro'
+
+" Nvim Dashboard
+Plug 'goolord/alpha-nvim',
+
+" Diagnostic list at your status line
+Plug 'folke/trouble.nvim'
 
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -91,10 +131,13 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-snippets',
   \ 'coc-stylelintplus',
+  \ 'coc-eslint',
   \ ]
-" vim seek motion (disable substitute vim command)
-let g:seek_subst_disable = 1
-let g:seek_enable_jumps = 1
+
+
+" Snippets
+" Plug 'SirVer/ultisnips' 
+Plug 'honza/vim-snippets'
 
 " Js doc
 Plug 'heavenshell/vim-jsdoc', { 
@@ -102,21 +145,18 @@ Plug 'heavenshell/vim-jsdoc', {
   \ 'do': 'make install'
 \}
 
-" Git status flag NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " Fzf finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git gutter (for showing the git diff as in VS code)
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
+
+" For useful Git blame commands
+Plug 'f-person/git-blame.nvim'
 
 " Fugitive (Git wrapper)
 Plug 'tpope/vim-fugitive'
-
-" Vim icons
-Plug 'ryanoasis/vim-devicons'
 
 " Search and Replace Project wise 
 Plug 'wincent/ferret'
@@ -124,45 +164,41 @@ Plug 'wincent/ferret'
 " Adding more target object vim like feature
 Plug 'wellle/targets.vim'
 
-" Rainbow 
-Plug 'frazrepo/vim-rainbow'
-
 call plug#end()
+
+
+" vim seek motion (disable substitute vim command)
+let g:seek_subst_disable = 1
+let g:seek_enable_jumps = 1
+
+" delay git blame info
+let g:gitblame_delay = 1000 " 1 second
+
 
 let g:rainbow_active = 1
 
-" Folding ----------
-set foldmethod=indent   
-set foldnestmax=10
+"Folding ----------
+" Ref: https://essais.co/better-folding-in-neovim/
 set nofoldenable
-set foldlevel=2
-"-----------
+set foldlevel=99
+set fillchars=fold:\
+set foldtext=CustomFoldText()
+setlocal foldmethod=expr
+setlocal foldexpr=GetPotionFold(v:lnum)
 
+" fold toggle (removing this to bring :Ack mapping)
+nmap <leader>a za 
 
-" Setting theme color
+" close all open folds
+nmap <leader>m zM
+
+" open all closed folds
+nmap <leader>n zR
+"Folding ends -----------
 set t_Co=256   " This is may or may not needed.
-
-" Mirage color scheme ---
-let ayucolor="mirage"
-
-colorscheme ayu
-
-let g:tempus_enforce_background_color=1
-
-" Setting colorscheme based on the daytime
-exe 'color' ((strftime('%H') % 18) > 6 ? 'tempus_fugit' : 'ayu')
-exe 'set background='. ((strftime('%H') % 18) > 6 ? 'light' : 'dark')
-"---------------------------
-
 " Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
 
-let g:airline_theme = 'sonokai'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'jsformatter'
 "--------------------
 
 " Autocompletion configuration settings
@@ -183,46 +219,58 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+
+" Coc.nvim completion ---------------------------
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 " NOTE: Uncomment the following mapping if you want to bring back the tab scrolling and auto intellisense expand features
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
-" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
 "inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? coc#_select_confirm() :
-      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
+"      "\ pumvisible() ? "\<C-n>" :
+"      "\ <SID>check_back_space() ? "\<TAB>" :
+"      "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 "function! s:check_back_space() abort
   "let col = col('.') - 1
   "return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
 
-let g:coc_snippet_next = '<tab>'
-"--------------------------------------------
+" Use the following mapping if your want to disable the tab intellisense and  use <C-n> and <C-p> to scroll through the list.
+" Also, the following mapping let's you expand the snippet when you hit tab over the selection. 
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
+" let g:coc_snippet_next = '<tab>'
 
-" True color support------------
-set t_8b=[48;2;%lu;%lu;%lum
-set t_8f=[38;2;%lu;%lu;%lum
+" use <tab> for trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+" use <c-space>for trigger completion
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" coc completion ends------------------ 
 
 if (has("nvim"))
 "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
   " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
@@ -230,10 +278,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 " True color support ends-----------
-
-" Exiting to normal mode from insert mode 
-imap jk <esc>
-imap kj <esc>
 
 "Backspace fix 
 set backspace=indent,eol,start
@@ -254,16 +298,9 @@ nnoremap gp `[v`]
 " Open file under cursor in vertical split
 map <leader>p <C-w>vgf
 
-" Vim tricks (https://vimtricks.com/p/get-the-current-file-path/?rating=5)
-" Get the current file path
-map <leader>c :let @*=fnamemodify(expand("%"), ":~:.") . ":" . line(".")<CR>
-
-" NOTE: <leader>s is used for searching word under cursor :Ack ferret
-" workspace symbols 
-" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 
 " renaming a symbol 
-"nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " jumping to errors in a file 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -280,18 +317,13 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 endif
 
 
-" Format using prettier
+" Format using prettier (use the same approach to set the command for renmae sybmols coc)
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " coc config ends-------------------------
 
 " Cursor line
-autocmd InsertEnter,InsertLeave * set cul!
+" autocmd InsertEnter,InsertLeave * set cul!
 
-
-
-" Open image in vim (Ref: https://til.hashrocket.com/posts/39f85bac84-open-images-in-vim-with-iterm-)
-" NOTE: May not work with tmux
-autocmd! BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 
 " Navigation Split
 " Mapping leader key for navigation split windows
@@ -307,27 +339,19 @@ map <leader>sv :vsp<cr>
 map <leader>sv :vsp<cr>
 map <leader>sh :sp<cr>
 
-" Tab navigation
-nnoremap <C-h> :tabprevious<CR>                                                                            
-nnoremap <C-l> :tabnext<CR>
+" Substitute (replace command)
 nmap <leader>ss :%s/\v
+nmap <leader>ee :/\<\><c-b><right><right><right>
+" Abolish vim key mapping
+nmap <leader>tt :%S/
 
 " Buffer
-" Move to the previous buffer with "Shift+p"
+" Move to the previous buffer with "Shift+n"
 nnoremap <S-n> :bp<CR>
 
-" Move to the next buffer with "Shift+n"
+" Move to the next buffer with "Shift+m"
 nnoremap <S-m> :bn<CR>
-
-" List all possible buffers with "gl"
-nnoremap doc :JsDoc<CR>
-
-" List all possible buffers with "gb" and accept a new buffer argument [1]
-nnoremap gb :ls<CR>:b
 " buffer ends----------------
-
-" Relative letter numbers 
-map <silent>, <Plug>LineLetters
 
 " GoTo code navigation.----------------
 nmap <silent> gd <Plug>(coc-definition)
@@ -348,43 +372,17 @@ endfunction
 " ---------------------------------------
 "
 
-
-" UltiSnippets---------------------------
-" Trigger configuration
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " Open snippets for UltiSnips
-nnoremap <leader>es :UltiSnipsEdit<cr>
+" nnoremap <leader>es :UltiSnipsEdit<cr>
 
 
-"Moving between wrapped text in a single line fix
+"Moving between wrapped text in a single line fix (bring it back if problem occurs)
 nnoremap j gj
 nnoremap k gk
 
 " Quickly edit/reload the vimrc file, (can use :e $MYVIMRC too)
 nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
-
-" The following line is copied from coc-snippets docs
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
@@ -394,46 +392,13 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 noremap <leader>w :update<CR>
 " ------------------------
 
-" Tab key mappings
-map <leader>tn :tabnew<cr>
-map <leader>t<leader> :tabnext
-map <leader>tm :tabmove
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
+" File explorer Nvim-tree 
+nnoremap <silent> <Leader>v :NvimTreeFindFile<CR>
+nnoremap <silent> <Leader>u :NvimTreeToggle<CR>
 
-" Syntax highlighting
-autocmd BufEnter * :syntax sync fromstart
+" maximize current split, vim tricks: https://vimtricks.com/p/maximize-the-current-split/
+noremap <C-w>m :MaximizerToggle<CR>
 
-" NerdTree --------------------------------------------------------
-" Open NERDTree with CTrl-n
-nnoremap <Leader>f :NERDTreeToggle<Enter>
-
-" How can I open a NERDTree automatically when vim starts up if no files were
-" specified
-autocmd StdinReadPre * let s:std_in=1
-" NOTE: Uncomment the following line if you want to open nerdtree when vi into
-" the project directory
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" directly open NerdTree on the file you’re editing to quickly 
-" perform operations on it with NERDTreeFind
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-
-" Automatically closes NERDTree when open a file
-let NERDTreeQuitOnOpen = 1
-
-
-" Automatically delete the buffer of the file you just deleted with NerdTree
-let NERDTreeAutoDeleteBuffer = 1
-
-" Show hidden files starting with .
-let NERDTreeShowHidden=0 " Don't show hidden files/folder by default. Use `Shift + i` to toggle
-
-" Prettier NERD
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-" NerdTree Ends -------------------------------------------------------
 
 " Fzy key mapping
 map ; :Files<CR>
@@ -442,12 +407,8 @@ map ; :Files<CR>
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Git commit message auto spell checking and text wrapping 
-autocmd Filetype gitcommit setlocal spell textwidth=72
+" autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" Cursor shape (without tmux)
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Cursor shape (with tmux)
 let &t_SI = "\e[6 q"
@@ -468,15 +429,9 @@ map ' :Ag<space>
 " Ignore test files while searching with AG (customize it based on project you are working)
 map 't : Ack --ignore *.test.js<space>
 map 'e : Ack -G \.test\.js$<space>
-
-map <Leader>b :Back<space>
 " Ag ends------------------
 
-
-" Highlight syntax inside markdown
-let g:markdown_fenced_languages = ['html', 'javascript', 'css', 'vim']
-
-" Move visual selection
+" Move visual selection (move lines up or down after selection )
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
@@ -484,7 +439,6 @@ vnoremap K :m '<-2<cr>gv=gv
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
-
 
 " Quit files with Leader + q(incooperating vim-merge context aware
 " QuitWindow() function) 
@@ -514,39 +468,80 @@ noremap cp yap<S-}>p
 
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-" Show commit history of the current branch we are in
-nnoremap <leader>gg :silent! Glog --oneline --decorate --graph<CR>
-" Show commit history for all branches 
-nnoremap <leader>gG :silent! Glog --oneline --decorate --graph --all<CR>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Gpush<CR>
-nnoremap <leader>gpl :Gpull<CR>
 nnoremap <leader>gB :Blame<CR> 
-
-" Show related commit in a popup (Jovica)
-map <silent><Leader>g :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
-"Mapping ends-----------------------------
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
 
+
+" Paste the yanked content from register "0
+" Mapping it Ctrl-p  
+:map <C-p> "0p
+
+" Use _ (black hole register) for deleting (this would keep your "0 untouched,)
+" you can safely use p or P to paste from this 
+" Ref: https://unix.stackexchange.com/questions/26654/how-can-i-paste-overwriting-with-vim
+noremap <Leader>d "_d
+
 " Vim tricks close all hidden buffers
 command Bd :up | %bd | e#
-
-" Jovica tip: Git blame---------------
-command! -nargs=* Blame call s:GitBlame()
-
-function! s:GitBlame()
-    let cmd = "git blame -w " . bufname("%")
-    let nline = line(".") + 1
-    botright new
-    execute "$read !" . cmd
-    execute "normal " . nline . "gg"
-    execute "set filetype=perl" 
-endfunction
-
+" Delete buffers without closing your windows
+:noremap <Leader>bb :Bdelete<CR>
 " ---------end-------------
+"
+"Folding function ----------------------
+function! GetPotionFold(lnum)
+  if getline(a:lnum) =~? '\v^\s*$'
+    return '-1'
+  endif
+  let this_indent = IndentLevel(a:lnum)
+  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+  if next_indent == this_indent
+    return this_indent
+  elseif next_indent < this_indent
+    return this_indent
+  elseif next_indent > this_indent
+    return '>' . next_indent
+  endif
+endfunction
+function! IndentLevel(lnum)
+    return indent(a:lnum) / &shiftwidth
+endfunction
+function! NextNonBlankLine(lnum)
+  let numlines = line('$')
+  let current = a:lnum + 1
+  while current <= numlines
+      if getline(current) =~? '\v\S'
+          return current
+      endif
+      let current += 1
+  endwhile
+  return -2
+endfunction
+function! CustomFoldText()
+  " get first non-blank line
+  let fs = v:foldstart
+  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  endwhile
+  if fs > v:foldend
+      let line = getline(v:foldstart)
+  else
+      let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let foldSize = 1 + v:foldend - v:foldstart
+  let foldSizeStr = " " . foldSize . " lines "
+  let foldLevelStr = repeat("+--", v:foldlevel)
+  let expansionString = repeat(" ", w - strwidth(foldSizeStr.line.foldLevelStr))
+  return line . expansionString . foldSizeStr . foldLevelStr
+endfunction
+" Folding function ends ---------------------------
+"
+" Even thought trouble nvim plu doens't work with coc nvim diagnostic, 
+" The following trick does the work.
+" Ref: https://github.com/folke/trouble.nvim/issues/12#issuecomment-1012478522
+nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
+
+lua require('config')
+
+

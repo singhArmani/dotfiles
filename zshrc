@@ -1,8 +1,19 @@
+# maven (mvn) java build tool 
+export M2_HOME="/Users/amandeep.singh/workspace/apache-maven-3.9.4"
+export PATH="${M2_HOME}/bin:${PATH}"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# PF environment variable 
-export environment=local
+# Setting up JAVA_HOME environment variable. 
+# Ref: https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
+export JAVA_HOME=$(/usr/libexec/java_home -v17)
+
+# Remove it once stopped working on AI project
+export DEV_NAME=aman-singh
+
+# Remove this later, only to run MySql locally
+export PATH=${PATH}:/usr/local/mysql/bin/
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
@@ -14,7 +25,10 @@ export ZSH="/Users/amandeep.singh/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
-EDITOR=vim
+EDITOR=nvim
+
+alias ni="nvim"
+alias vi="vim"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
@@ -63,25 +77,29 @@ alias tree="tree -C"
 alias t="tree -C -L"
 
 # vim, zshrc, gitconfig,
-alias vc="vi ~/.vimrc"
-alias zc="vi ~/.zshrc"
-alias gitc="vi ~/.gitconfig"
+alias vc="nvim ~/.vimrc"
+alias zc="nvim ~/.zshrc"
+alias gitc="nvim ~/.gitconfig"
+alias ac="nvim ~/.config/alacritty/alacritty.yml"
+alias lc="nvim ~/.config/nvim/lua/config.lua"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"
-alias tc="vi ~/.tmux.conf"
+alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
-alias cap="cd ~/workspace/ && tmuxinator start domain"
-alias dart="cd ~/workspace/ && tmuxinator start dart"
-alias portal="cd ~/workspace/ && tmuxinator start agent-portal"
+alias cap="cd ~/workspace/client-agent-portal && tmuxinator start domain"
+alias dart="cd ~/workspace/dart && tmuxinator start dart"
+alias auth="cd ~/workspace/oauth-in-action-code && tmuxinator start auth"
+alias ai="cd ~/workspace/asp-connect && tmuxinator start ai"
+alias portal="cd ~/workspace/server-agent-portal && tmuxinator start agent-portal"
 alias micro="cd ~/workspace/ && tmuxinator start micro"
-alias blog="cd ~/workspace/ && tmuxinator start blog"
+alias blog="cd ~/workspace && tmuxinator start blog"
 alias tn="tmux rename-window"
 
 #-------------
 
 alias dot="cd ~/dotfiles/"
-alias vj="vi ~/journals/Vim.md"
+alias vj="nvim ~/journals/Vim.md"
 
 # yarn alias ------------------
 alias test="yarn test:watch --coverage"
@@ -134,9 +152,6 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 # auto-jump 
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
-# Uncomment the following line if you want to change to nvim again
-#alias vim="nvim"
-#alias vi="nvim"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
