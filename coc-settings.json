@@ -4,9 +4,6 @@
   "typescript.suggest.enabled": true,
   "javascript.suggestionActions.enabled": false,
   "javascript.suggest.enabled": false,
-  "eslint.autoFixOnSave": true,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
   "suggest.completionItemKindLabels": {
     "function": "\uf794",
     "method": "\uf6a6",
@@ -43,5 +40,6 @@
         "storagePath": "/tmp/intelephense"
       }
     }
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

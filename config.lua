@@ -22,6 +22,8 @@ require'nvim-treesitter.configs'.setup {
     "json",
     "yaml",
     "html",
+    "typescript",
+    "lua",
   },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
@@ -148,10 +150,9 @@ require('Comment').setup()
 
 -- indent line for neovim --------------------->
 -- Ref: https://github.com/lukas-reineke/indent-blankline.nvim/tree/ 
-vim.g.indent_blankline_char = '¦'
-
-require("indent_blankline").setup {
-  show_end_of_line = true,
+require("ibl").setup {
+    indent = { highlight = highlight, char = "¦" },
+    scope = { enabled = false },
 }
 -- indent line ends here-----------------
 
