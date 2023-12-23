@@ -5,7 +5,7 @@ require('impatient')
 -- vim.cmd[[colorscheme tokyonight-night]]
 -- vim.cmd[[colorscheme oxocarbon]]
 -- vim.cmd.colorscheme "catppuccin"
-vim.cmd('colorscheme github_light_high_contrast')
+vim.cmd('colorscheme catppuccin-mocha')
 
 
 -- Nvim treesitter config ------------------------------>

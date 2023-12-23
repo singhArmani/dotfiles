@@ -29,19 +29,19 @@ font:
   # support ligatures/glyphs. That's used by tmux & VIM to provide a better
   # UI for powerline & tmux bottom bar.
   normal:
-    # Font name
-    family: OperatorMono Nerd Font
+    # Font name (note: you can try CaskaydiaCove Nerd Font as well if you like)
+    family: JetBrainsMono Nerd Font
     # Font face
-    style: Light
+    style: Thin
 
   # Bold font face
   bold:
-    family: OperatorMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: bold
 
   # Italic font face
   italic:
-    family: Dank Mono
+    family: JetBrainsMono Nerd Font
     style: Italic
 
   # Bold italic font face
@@ -49,11 +49,11 @@ font:
   # italic & it just works. You may specifiy the bold italic version if it exists
   # for your font
   bold_italic:
-    family: OperatorMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
   #
   # Font size
-  size: 20.0
+  size: 16.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing
@@ -90,64 +90,83 @@ selection:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# TokyoNight night
+# Ref this link  for more alacritty themes:  https://github.com/catppuccin/alacritty/blob/main/catppuccin-mocha.yml
+# Colors (catppuccin-mocha)
 colors:
-  # Default colors
   primary:
-    background: '0x1a1b26'
-    foreground: '0xc0caf5'
+    background: "#1E1E2E" # base
+    foreground: "#CDD6F4" # text
+    # Bright and dim foreground colors
+    dim_foreground: "#CDD6F4" # text
+    bright_foreground: "#CDD6F4" # text
+
+  # Cursor colors
+  cursor:
+    text: "#1E1E2E" # base
+    cursor: "#F5E0DC" # rosewater
+  vi_mode_cursor:
+    text: "#1E1E2E" # base
+    cursor: "#B4BEFE" # lavender
+
+  # Search colors
+  search:
+    matches:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+    focused_match:
+      foreground: "#1E1E2E" # base
+      background: "#A6E3A1" # green
+    footer_bar:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+
+  # Keyboard regex hints
+  hints:
+    start:
+      foreground: "#1E1E2E" # base
+      background: "#F9E2AF" # yellow
+    end:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+
+  # Selection colors
+  selection:
+    text: "#1E1E2E" # base
+    background: "#F5E0DC" # rosewater
 
   # Normal colors
   normal:
-    black: '0x15161e'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan: '0x7dcfff'
-    white: '0xa9b1d6'
+    black: "#45475A" # surface1
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#BAC2DE" # subtext1
 
   # Bright colors
   bright:
-    black: '0x414868'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan: '0x7dcfff'
-    white: '0xc0caf5'
+    black: "#585B70" # surface2
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#A6ADC8" # subtext0
+
+  # Dim colors
+  dim:
+    black: "#45475A" # surface1
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#BAC2DE" # subtext1
 
   indexed_colors:
-    - { index: 16, color: '0xff9e64' }
-    - { index: 17, color: '0xdb4b4b' }
-# Colors (Github)
-# colors:
-#   bright:
-#     black: '#666666'
-#     blue: '#2e6cba'
-#     cyan: '#1cfafe'
-#     green: '#87d5a2'
-#     magenta: '#ffa29f'
-#     red: '#de0000'
-#     white: '#ffffff'
-#     yellow: '#f1d007'
-#   cursor:
-#     cursor: '#3f3f3f'
-#     text: '#f4f4f4'
-#   normal:
-#     black: '#3e3e3e'
-#     blue: '#003e8a'
-#     cyan: '#89d1ec'
-#     green: '#07962a'
-#     magenta: '#e94691'
-#     red: '#970b16'
-#     white: '#ffffff'
-#     yellow: '#f8eec7'
-#   primary:
-#     background: '#f4f4f4'
-#     foreground: '#3e3e3e'
-#   selection:
-#     background: '#a9c1e2'
-#     text: '#535353'
+    - { index: 16, color: "#FAB387" }
+    - { index: 17, color: "#F5E0DC" }
