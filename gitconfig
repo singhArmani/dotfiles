@@ -33,7 +33,7 @@
 	praise = blame
 
 [core]
-	excludesfile = /Users/amandeep.singh/.gitignore_global
+	excludesfile = /Users/aman/.gitignore_global
 	attributesfile = ~/.gitattributes
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [filter "lfs"]
@@ -45,7 +45,7 @@
 	textconv = imgcat
 [user]
 	name = Amandeep Singh
-	email = amandeep.singh@domain.com.au
+	email = amandeep.singh@avarni.co
 [rebase]
 	autosquash = true
 [help]
@@ -66,3 +66,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[init]
+	defaultBranch = main
