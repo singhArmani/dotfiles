@@ -1,19 +1,8 @@
-# maven (mvn) java build tool 
-export M2_HOME="/Users/amandeep.singh/workspace/apache-maven-3.9.4"
-export PATH="${M2_HOME}/bin:${PATH}"
+# Homebrew path
+export PATH="/opt/homebrew/bin:$PATH"
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Setting up JAVA_HOME environment variable. 
-# Ref: https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
-export JAVA_HOME=$(/usr/libexec/java_home -v17)
-
-# Remove it once stopped working on AI project
-export DEV_NAME=aman-singh
-
-# Remove this later, only to run MySql locally
-export PATH=${PATH}:/usr/local/mysql/bin/
 
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
@@ -82,17 +71,19 @@ alias zc="nvim ~/.zshrc"
 alias gitc="nvim ~/.gitconfig"
 alias ac="nvim ~/.config/alacritty/alacritty.yml"
 alias lc="nvim ~/.config/nvim/lua/config.lua"
+alias coc="nvim ~/.config/nvim/coc-settings.json"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"
 alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias blog="cd ~/workspace/ && tmuxinator start blog"
+alias avarni="cd ~/workspace/ && tmuxinator start avarni"
 alias tn="tmux rename-window"
 
 #-------------
 
-alias dot="cd ~/dotfiles/"
+alias dot="cd ~/workspace/dotfiles/"
 
 # yarn alias ------------------
 alias test="yarn test:watch --coverage"
@@ -123,6 +114,7 @@ alias gco='git checkout '
 alias gn='git checkout -b'
 alias grn='git branch -m' # change branch name locally
 alias gcm='git checkout master'
+alias gcd='git checkout dev'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'
 alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
@@ -211,3 +203,5 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 #fi
 #
 
+# export PATH=/opt/homebrew/bin:/Users/aman/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"

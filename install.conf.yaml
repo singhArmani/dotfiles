@@ -9,6 +9,8 @@
     ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
     ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.config/nvim/lua/config.lua: config.lua
+    ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.tmux.conf: tmux.conf
 
 - shell:

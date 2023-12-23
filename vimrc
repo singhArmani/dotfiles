@@ -13,11 +13,11 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
-" syntax enable            " Enable syntax highlighting. (Check if treesitter syntax is fine)
 
 "Disable entering comment automatically by vim upon entering a new line
 set formatoptions-=cro
-" set spell                " Enable spellchecking
+" syntax enable            " Enable syntax highlighting. (Check if treesitter syntax is fine).
+" set spell                " Enable spellchecking. TODO: not working properly, fix it later
 " Spell-check Markdown files and Git Commit Messages
 autocmd FileType markdown setlocal spell
 autocmd BufRead,BufNewFile *.mdx setlocal spell
@@ -77,6 +77,10 @@ Plug 'tpope/vim-surround'
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'tpope/vim-repeat'
+
+" Vim motion plugin 
+Plug 'ggandor/leap.nvim'
+
 " file explorer -----------
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
@@ -109,12 +113,21 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
-Plug 'goldfeld/vim-seek'
+" Plug 'goldfeld/vim-seek'
 Plug 'karb94/neoscroll.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'ray-x/web-tools.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'nyoom-engineering/oxocarbon.nvim'
+Plug 'nvim-lua/plenary.nvim'  " required by telescope and chatgpt plugin
+Plug 'nvim-telescope/telescope.nvim',
+Plug 'MunifTanjim/nui.nvim'
+
+" AI pair programming ---
+Plug 'github/copilot.vim'
+Plug 'jackMort/ChatGPT.nvim'
+Plug 'Exafunction/codeium.vim'
+
 
 " vim astro syntax highlighting
 Plug 'wuelnerdotexe/vim-astro'
@@ -125,6 +138,8 @@ Plug 'goolord/alpha-nvim',
 " Diagnostic list at your status line
 Plug 'folke/trouble.nvim'
 
+" complementary linter plugin for Neovim
+
 " Auto completion 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
@@ -134,6 +149,8 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ ]
 
+" Lang syntax
+Plug 'prisma/vim-prisma'
 
 " Snippets
 " Plug 'SirVer/ultisnips' 
@@ -341,7 +358,14 @@ map <leader>sh :sp<cr>
 
 " Substitute (replace command)
 nmap <leader>ss :%s/\v
-nmap <leader>ee :/\<\><c-b><right><right><right>
+
+" Search and replace word boundary (exact match)
+nmap <leader>ee :%s/\<\><c-b><right><right><right><right><right>
+" Search quickly for word boundry case-insenstive
+nmap <leader>ff :/\<\><c-b><right><right><right>
+" Search quickly for word boundry case-sensitive
+nmap <leader>cc :/\<\>\C<c-b><right><right><right>
+
 " Abolish vim key mapping
 nmap <leader>tt :%S/
 
@@ -407,8 +431,7 @@ map ; :Files<CR>
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Git commit message auto spell checking and text wrapping 
-" autocmd Filetype gitcommit setlocal spell textwidth=72
-
+autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " Cursor shape (with tmux)
 let &t_SI = "\e[6 q"
@@ -427,7 +450,7 @@ map ' :Ag<space>
 " nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
 
 " Ignore test files while searching with AG (customize it based on project you are working)
-map 't : Ack --ignore *.test.js<space>
+map 't : Ack --ignore *.test.js -w -s<space>
 map 'e : Ack -G \.test\.js$<space>
 " Ag ends------------------
 
@@ -436,6 +459,12 @@ vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
 " Mapping--------------------------------
+" ChatGPT key mapping (Probably use whichKey plugin to manage your key mappings)
+nnoremap <leader>ai :ChatGPT<CR>
+nmap <leader>ar :ChatGPTRun<space>
+
+" Disable Codeium till I am using github copilot
+let g:codeium_enabled = v:false
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
@@ -468,7 +497,6 @@ noremap cp yap<S-}>p
 
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gB :Blame<CR> 
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
@@ -489,7 +517,7 @@ command Bd :up | %bd | e#
 :noremap <Leader>bb :Bdelete<CR>
 " ---------end-------------
 "
-"Folding function ----------------------
+"Folding function ---------------------- TODO: remove this foldig shit.. not working
 function! GetPotionFold(lnum)
   if getline(a:lnum) =~? '\v^\s*$'
     return '-1'
@@ -543,5 +571,3 @@ endfunction
 nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
 
 lua require('config')
-
-

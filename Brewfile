@@ -36,3 +36,6 @@ brew "yarn"
 brew "mongodb/brew/mongodb-community"
 brew "versent/taps/saml2aws"
 cask "font-fira-code-nerd-font"
+repo = "lencx/chatgpt"
+tap repo, "https://github.com/#{repo}.git"
+cask "chatgpt", args: { "no-quarantine": true }

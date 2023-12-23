@@ -73,7 +73,6 @@ require("nvim-tree").setup({
 })
 -- Nvim tree (File explorer) ends here-----------------
 
-
 -- floating terminals --------->
 -- Default setup
 require("toggleterm").setup{
@@ -171,3 +170,8 @@ require'alpha'.setup(require'alpha.themes.startify'.config)
 -- nvim diagnostic list at your status line
 require('trouble').setup {
 }
+
+-- List of all modular plugins goes here-----------
+-- AI code completion plugins
+require('ai');
+
