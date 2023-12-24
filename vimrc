@@ -464,7 +464,7 @@ nnoremap <leader>ai :ChatGPT<CR>
 nmap <leader>ar :ChatGPTRun<space>
 
 " Disable Codeium till I am using github copilot
-let g:codeium_enabled = v:false
+" let g:codeium_enabled = v:false
 
 " maximize current split or return to previous
 noremap <C-w>m :MaximizerToggle<CR>
