@@ -50,5 +50,7 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextLineSeparator": "  ",
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
-  "diagnostic.virtualTextCurrentLineOnly": false
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextAlign": "right",
+  "diagnostic.virtualTextLimitInOneLine": 2
 }

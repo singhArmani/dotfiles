@@ -126,7 +126,7 @@ Plug 'MunifTanjim/nui.nvim'
 " AI pair programming ---
 Plug 'github/copilot.vim'
 Plug 'jackMort/ChatGPT.nvim'
-Plug 'Exafunction/codeium.vim'
+" Plug 'Exafunction/codeium.vim'
 
 
 " vim astro syntax highlighting

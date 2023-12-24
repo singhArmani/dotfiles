@@ -72,6 +72,7 @@ alias gitc="nvim ~/.gitconfig"
 alias ac="nvim ~/.config/alacritty/alacritty.yml"
 alias lc="nvim ~/.config/nvim/lua/config.lua"
 alias coc="nvim ~/.config/nvim/coc-settings.json"
+alias lu="cd ~/.config/nvim/lua && nvim"
 
 # Tmux configuration ------------
 alias mux="tmuxinator"
