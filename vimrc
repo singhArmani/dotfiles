@@ -5,6 +5,9 @@ set relativenumber
 set lazyredraw " see if it improves scrolling performance
 set synmaxcol=128
 syntax sync minlines=256
+"Disable entering comment automatically by vim upon entering a new line
+set formatoptions-=o
+set formatoptions-=r
 " ------------------ 
 
 
@@ -14,8 +17,6 @@ set undolevels=1000      " use many levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class 
 set scrolloff=4          " Keep at least 4 lines below cursor
 
-"Disable entering comment automatically by vim upon entering a new line
-set formatoptions-=cro
 " syntax enable            " Enable syntax highlighting. (Check if treesitter syntax is fine).
 " set spell                " Enable spellchecking. TODO: not working properly, fix it later
 " Spell-check Markdown files and Git Commit Messages
@@ -78,9 +79,6 @@ Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'tpope/vim-repeat'
 
-" Vim motion plugin 
-Plug 'ggandor/leap.nvim'
-
 " file explorer -----------
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
@@ -113,24 +111,17 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
-" Plug 'goldfeld/vim-seek'
 Plug 'karb94/neoscroll.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'ray-x/web-tools.nvim'
 Plug 'mattn/emmet-vim'
-Plug 'nyoom-engineering/oxocarbon.nvim'
 Plug 'nvim-lua/plenary.nvim'  " required by telescope and chatgpt plugin
 Plug 'nvim-telescope/telescope.nvim',
 Plug 'MunifTanjim/nui.nvim'
 
 " AI pair programming ---
-Plug 'github/copilot.vim'
 Plug 'jackMort/ChatGPT.nvim'
-" Plug 'Exafunction/codeium.vim'
-
-
-" vim astro syntax highlighting
-Plug 'wuelnerdotexe/vim-astro'
+Plug 'Exafunction/codeium.vim'
 
 " Nvim Dashboard
 Plug 'goolord/alpha-nvim',
@@ -183,16 +174,13 @@ Plug 'wellle/targets.vim'
 
 call plug#end()
 
-
-" vim seek motion (disable substitute vim command)
-let g:seek_subst_disable = 1
-let g:seek_enable_jumps = 1
-
 " delay git blame info
 let g:gitblame_delay = 1000 " 1 second
+let g:gitblame_enabled = 0 " disabling git blame by default
 
-
-let g:rainbow_active = 1
+" toggle git blame
+nnoremap <silent> <Leader>gb :GitBlameToggle<CR> 
+" let g:rainbow_active = 1
 
 "Folding ----------
 " Ref: https://essais.co/better-folding-in-neovim/
@@ -351,13 +339,12 @@ nnoremap <leader>h <C-W><C-H>
 
 " Vertical split using leader key
 map <leader>sv :vsp<cr>
-
 " Horizontal split using leader key
-map <leader>sv :vsp<cr>
 map <leader>sh :sp<cr>
 
 " Substitute (replace command)
 nmap <leader>ss :%s/\v
+nmap <leader>sw :%s/\v<C-r><C-w>
 
 " Search and replace word boundary (exact match)
 nmap <leader>ee :%s/\<\><c-b><right><right><right><right><right>
@@ -423,10 +410,6 @@ nnoremap <silent> <Leader>u :NvimTreeToggle<CR>
 " maximize current split, vim tricks: https://vimtricks.com/p/maximize-the-current-split/
 noremap <C-w>m :MaximizerToggle<CR>
 
-
-" Fzy key mapping
-map ; :Files<CR>
-
 " Ignore node_modules
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
@@ -438,6 +421,9 @@ let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
 " Fzf with ag search and ignoring files/directories---------------------------
+" Fzy key mapping
+map ; :Files<CR>
+map , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " Start a search query by pressing '
@@ -459,15 +445,19 @@ vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
 " Mapping--------------------------------
-" ChatGPT key mapping (Probably use whichKey plugin to manage your key mappings)
+" ChatGPT and codeium key mapping (Probably use whichKey plugin to manage your key mappings)
 nnoremap <leader>ai :ChatGPT<CR>
 nmap <leader>ar :ChatGPTRun<space>
+vnoremap <leader>ad :ChatGPTRun<space>docstring<CR>
+vnoremap <leader>ae :ChatGPTEditWithInstructions<CR>
 
-" Disable Codeium till I am using github copilot
-" let g:codeium_enabled = v:false
-
-" maximize current split or return to previous
-noremap <C-w>m :MaximizerToggle<CR>
+" Codeium key mapping------
+let g:codeium_disable_bindings = 1
+" Ref: https://github.com/Exafunction/codeium.vim?tab=readme-ov-file#%EF%B8%8F-keybindings
+imap <script><silent><nowait><expr> <C-k> codeium#Accept()
+imap <C-n>   <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-p>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <C-x>   <Cmd>call codeium#Clear()<CR>
 
 " Quit files with Leader + q(incooperating vim-merge context aware
 " QuitWindow() function) 

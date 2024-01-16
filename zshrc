@@ -4,6 +4,8 @@ export PATH="/opt/homebrew/bin:$PATH"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# export PATH="/usr/local/share/dotnet:$PATH"
+
 # Path to your oh-my-zsh installation.
 # Change this when you move to a new laptop
 export ZSH="/Users/aman/.oh-my-zsh"
@@ -114,7 +116,7 @@ alias gdw='git wdiff '   # wdiff is set in git configuration --word-diff
 alias gco='git checkout '
 alias gn='git checkout -b'
 alias grn='git branch -m' # change branch name locally
-alias gcm='git checkout master'
+alias gcm='git checkout main'
 alias gcd='git checkout dev'
 alias rbi='git rebase -i origin/master'
 alias rbc='git rebase --continue'

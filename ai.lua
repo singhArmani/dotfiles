@@ -4,7 +4,7 @@ local defaults = {
    api_key_cmd = "pass show api/tokens/openai",
    yank_register = "+", 
    edit_with_instructions = { 
-     diff = false, 
+     diff = true, 
      keymaps = { 
        close = "<C-c>", 
        accept = "<C-y>", 
@@ -40,14 +40,14 @@ local defaults = {
      keymaps = { 
        close = "<C-c>", 
        yank_last = "<C-y>", 
-       yank_last_code = "<C-k>", 
+       yank_last_code = "<C-;>", 
        scroll_up = "<C-u>", 
        scroll_down = "<C-d>", 
        new_session = "<C-n>", 
        cycle_windows = "<Tab>",
        cycle_modes = "<C-f>", 
-       next_message = "<Shift-j>", 
-       prev_message = "<C-k>", 
+       next_message = "<C-]>", 
+       prev_message = "<C-[>", 
        select_session = "<Space>", 
        rename_session = "r", 
        delete_session = "d", 
@@ -175,9 +175,10 @@ local defaults = {
  } 
 require("chatgpt").setup(defaults)
 
--- Copilot key mappings
--- Ref: https://github.com/orgs/community/discussions/8105#discussioncomment-3070311
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+-- -- Copilot key mappings
+-- -- Ref: https://github.com/orgs/community/discussions/8105#discussioncomment-3070311
+-- vim.g.copilot_no_tab_map = true
+-- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 -- AI plugin ends here-----------------
 
