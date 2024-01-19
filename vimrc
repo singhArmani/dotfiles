@@ -454,9 +454,9 @@ vnoremap <leader>ae :ChatGPTEditWithInstructions<CR>
 " Codeium key mapping------
 let g:codeium_disable_bindings = 1
 " Ref: https://github.com/Exafunction/codeium.vim?tab=readme-ov-file#%EF%B8%8F-keybindings
-imap <script><silent><nowait><expr> <C-k> codeium#Accept()
-imap <C-n>   <Cmd>call codeium#CycleCompletions(1)<CR>
-imap <C-p>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <script><silent><nowait><expr> <C-Space> codeium#Accept()
+imap <C-k>   <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-j>   <Cmd>call codeium#CycleCompletions(-1)<CR>
 imap <C-x>   <Cmd>call codeium#Clear()<CR>
 
 " Quit files with Leader + q(incooperating vim-merge context aware
