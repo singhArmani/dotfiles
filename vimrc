@@ -116,8 +116,12 @@ Plug 'lewis6991/impatient.nvim'
 Plug 'ray-x/web-tools.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'nvim-lua/plenary.nvim'  " required by telescope and chatgpt plugin
-Plug 'nvim-telescope/telescope.nvim',
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'MunifTanjim/nui.nvim'
+Plug 'ggandor/leap.nvim'  " vim motion plugin
+
+" Markdown Preview If you have nodejs
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " AI pair programming ---
 Plug 'jackMort/ChatGPT.nvim'
@@ -182,24 +186,6 @@ let g:gitblame_enabled = 0 " disabling git blame by default
 nnoremap <silent> <Leader>gb :GitBlameToggle<CR> 
 " let g:rainbow_active = 1
 
-"Folding ----------
-" Ref: https://essais.co/better-folding-in-neovim/
-set nofoldenable
-set foldlevel=99
-set fillchars=fold:\
-set foldtext=CustomFoldText()
-setlocal foldmethod=expr
-setlocal foldexpr=GetPotionFold(v:lnum)
-
-" fold toggle (removing this to bring :Ack mapping)
-nmap <leader>a za 
-
-" close all open folds
-nmap <leader>m zM
-
-" open all closed folds
-nmap <leader>n zR
-"Folding ends -----------
 set t_Co=256   " This is may or may not needed.
 " Setting icons and Gui Fonts, Airline ------
 set encoding=UTF-8
@@ -370,6 +356,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" GoTo definition and open in vertical split
+nmap <silent> go <Plug>(coc-definition)<C-W>vgf
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -396,7 +385,7 @@ nmap <silent> <leader>ev :vnew $MYVIMRC<CR>
 nmap <silent> <leader>so :so $MYVIMRC<CR>
 
 " Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
+xmap <leader>x <Plug>(coc-convert-snippet)
 " snippets ends-------------------
 
 " Use <Leader>w for saving
@@ -436,9 +425,13 @@ map ' :Ag<space>
 " nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
 
 " Ignore test files while searching with AG (customize it based on project you are working)
-map 't : Ack --ignore *.test.js -w -s<space>
-map 'e : Ack -G \.test\.js$<space>
-" Ag ends------------------
+map 't :Ack --ignore *.test.js -w -s<space>
+
+" Search for word under curser using Ack
+nnoremap 'w :Ack -w -s <C-R><C-W><cr> 
+nnoremap 'e :Ack -G \.test\.js$<space>
+
+" Acks ends------------------
 
 " Move visual selection (move lines up or down after selection )
 vnoremap J :m '>+1<cr>gv=gv
@@ -480,16 +473,22 @@ endfunction
 command QuitWindow call s:QuitWindow()
 nnoremap <silent> <leader>q :QuitWindow<CR>
 
-" Clone Paragraph with cp
-noremap cp yap<S-}>p
 
 " fugitive git bindings----------
-
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gr :Gread<CR>
 
+" Temporarily open fugitive in vertical split for current file in dev-v2
+" branch
+nnoremap <leader>ll :Gvsplit origin/dev-v2:%<CR>
+nnoremap <leader>dd :Gvdiff origin/dev-v2:%<CR> 
+nnoremap <leader>mm :Gvsplit origin/dev:%<CR>
+nnoremap <leader>nn :Gvdiff origin/dev:%<CR>
+
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
+" Clone Paragraph with cp
+noremap cp yap<S-}>p
 
 
 " Paste the yanked content from register "0
@@ -507,7 +506,19 @@ command Bd :up | %bd | e#
 :noremap <Leader>bb :Bdelete<CR>
 " ---------end-------------
 "
-"Folding function ---------------------- TODO: remove this foldig shit.. not working
+" Even thought trouble nvim plu doens't work with coc nvim diagnostic, 
+" The following trick does the work.
+" Ref: https://github.com/folke/trouble.nvim/issues/12#issuecomment-1012478522
+nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
+
+" Folding ... 
+" Ref: https://essais.co/better-folding-in-neovim/ 
+set nofoldenable
+set foldlevel=99
+set fillchars=fold:\
+set foldtext=CustomFoldText()
+setlocal foldmethod=expr
+setlocal foldexpr=GetPotionFold(v:lnum)
 function! GetPotionFold(lnum)
   if getline(a:lnum) =~? '\v^\s*$'
     return '-1'
@@ -553,11 +564,16 @@ function! CustomFoldText()
   let expansionString = repeat(" ", w - strwidth(foldSizeStr.line.foldLevelStr))
   return line . expansionString . foldSizeStr . foldLevelStr
 endfunction
-" Folding function ends ---------------------------
-"
-" Even thought trouble nvim plu doens't work with coc nvim diagnostic, 
-" The following trick does the work.
-" Ref: https://github.com/folke/trouble.nvim/issues/12#issuecomment-1012478522
-nmap <silent> gL <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>
+
+" key mapping 
+nnoremap <silent> <Space><Space> za
+
+" Folding ends -----------------
+
+" Leap motion. It doesn't work if I put the script in the config.lua file. 
+" So keep it here.
+lua require('leap').create_default_mappings() 
 
 lua require('config')
+
+

@@ -1,7 +1,7 @@
 -- AI plugin----------->
 -- ChatGPT 
 local defaults = { 
-   api_key_cmd = "pass show api/tokens/openai",
+   --api_key_cmd = "pass show api/tokens/openai",
    yank_register = "+", 
    edit_with_instructions = { 
      diff = true, 
@@ -65,8 +65,8 @@ local defaults = {
    popup_layout = { 
      default = "center", 
      center = { 
-       width = "80%", 
-       height = "80%", 
+       width = "95%", 
+       height = "95%", 
      }, 
      right = { 
        width = "30%", 

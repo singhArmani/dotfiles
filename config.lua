@@ -171,7 +171,8 @@ require'alpha'.setup(require'alpha.themes.startify'.config)
 require('trouble').setup {
 }
 
+
+
 -- List of all modular plugins goes here-----------
 -- AI code completion plugins
 require('ai');
-
