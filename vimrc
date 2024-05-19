@@ -108,7 +108,7 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 " Vim helpers ----------------------------
 Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'tag': 'v3.5.4' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
 Plug 'karb94/neoscroll.nvim'
@@ -118,10 +118,21 @@ Plug 'mattn/emmet-vim'
 Plug 'nvim-lua/plenary.nvim'  " required by telescope and chatgpt plugin
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'ggandor/leap.nvim'  " vim motion plugin
+" Plug 'ggandor/leap.nvim'  " vim motion plugin
 
 " Markdown Preview If you have nodejs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
+" C# setup (note that we are using coc.nvim c# settings)
+" The following are not requried but keeping them for debugging exp.
+Plug 'mfussenegger/nvim-dap'
+Plug 'Tastyep/structlog.nvim'
+
+" Ruuning tests in nvim
+Plug 'nvim-neotest/nvim-nio'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-jest'
+Plug 'thenbe/neotest-playwright'
 
 " AI pair programming ---
 Plug 'jackMort/ChatGPT.nvim'
@@ -572,7 +583,7 @@ nnoremap <silent> <Space><Space> za
 
 " Leap motion. It doesn't work if I put the script in the config.lua file. 
 " So keep it here.
-lua require('leap').create_default_mappings() 
+" lua require('leap').create_default_mappings() 
 
 lua require('config')
 

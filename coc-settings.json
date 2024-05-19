@@ -12,6 +12,11 @@
       "initializationOptions": {
         "storagePath": "/tmp/intelephense"
       }
+    },
+    "csharp-ls": {
+      "command": "csharp-ls",
+      "filetypes": ["cs"],
+      "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
     }
   },
   "snippets.ultisnips.pythonPrompt": false,

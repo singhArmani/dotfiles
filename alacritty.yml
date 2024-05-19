@@ -30,18 +30,18 @@ font:
   # UI for powerline & tmux bottom bar.
   normal:
     # Font name (note: you can try CaskaydiaCove Nerd Font as well if you like)
-    family: JetBrainsMono Nerd Font
+    family: CaskaydiaCove Nerd Font
     # Font face
-    style: Thin
+    style: Light
 
   # Bold font face
   bold:
-    family: JetBrainsMono Nerd Font
+    family: CaskaydiaCove Nerd Font
     style: bold
 
   # Italic font face
   italic:
-    family: JetBrainsMono Nerd Font
+    family: CaskaydiaCove Nerd Font
     style: Italic
 
   # Bold italic font face
@@ -49,7 +49,7 @@ font:
   # italic & it just works. You may specifiy the bold italic version if it exists
   # for your font
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: CaskaydiaCove Nerd Font
     style: Bold Italic
   #
   # Font size
