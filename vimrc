@@ -128,11 +128,17 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 Plug 'mfussenegger/nvim-dap'
 Plug 'Tastyep/structlog.nvim'
 
+" Interact with DB UI 
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-completion'
+
 " Ruuning tests in nvim
 Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-jest'
 Plug 'thenbe/neotest-playwright'
+Plug 'Issafalcon/neotest-dotnet'
 
 " AI pair programming ---
 Plug 'jackMort/ChatGPT.nvim'

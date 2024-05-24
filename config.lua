@@ -15,19 +15,23 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   indent = {
-    enable = false,
+    enable = true,
     disable = {},
   },
   ensure_installed = {
+    "c_sharp",
     "json",
     "yaml",
     "html",
     "typescript",
+    "javascript",
+    "markdown",
     "lua",
   },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+vim.treesitter.language.register('c_sharp', 'cs')
 -- Nvim treesitter config ends here--------------------->
 
 -- bufferline tab line for neovim
@@ -176,3 +180,8 @@ require('trouble').setup {
 require('ai');
 
 require('neo-test');
+
+-- database ui plugin
+require('db-nvim').setup()
+-- Keybinding to toggle DBUI
+vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<CR>', { noremap = true, silent = true })

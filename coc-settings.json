@@ -20,7 +20,7 @@
     }
   },
   "snippets.ultisnips.pythonPrompt": false,
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "diagnostic.errorSign": "󰅘",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "",
