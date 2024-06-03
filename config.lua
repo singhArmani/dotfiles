@@ -67,6 +67,7 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
     adaptive_size = true,
+    side = "right",
   },
   renderer = {
     group_empty = true,
@@ -159,14 +160,6 @@ require("ibl").setup {
 }
 -- indent line ends here-----------------
 
--- Live server using browser sync
--- Remove browser-sync and other global package once removing this
-require'web-tools'.setup({
-  keymaps = {
-    rename = nil,  -- by default use same setup of lspconfig
-    repeat_rename = '.', -- . to repeat
-  },
-})
 
 -- nvim dashboard (nvim tree open on cd not working with this plugin)
 require'alpha'.setup(require'alpha.themes.startify'.config)
@@ -185,3 +178,7 @@ require('neo-test');
 require('db-nvim').setup()
 -- Keybinding to toggle DBUI
 vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<CR>', { noremap = true, silent = true })
+
+
+-- Debugging plugin--------
+require('debugging');

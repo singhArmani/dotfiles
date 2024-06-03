@@ -15,6 +15,7 @@ function M.setup()
 
   -- Set the location to save the connection details
   vim.g.db_ui_save_location = "~/.config/nvim/db_ui"
+  vim.g.db_ui_save_location = '~/workspace/db_ui_queries' 
 end
 
 return M

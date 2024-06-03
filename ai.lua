@@ -22,7 +22,7 @@ local defaults = {
      answer_sign = "🤖", --  
      border_left_sign = "", 
      border_right_sign = "", 
-     max_line_length = 120, 
+     max_line_length = 80, 
      sessions_window = { 
        active_sign = "  ", 
        inactive_sign = "  ", 
@@ -56,20 +56,20 @@ local defaults = {
        delete_message = "d", 
        toggle_settings = "<C-o>", 
        toggle_sessions = "<C-p>", 
-       toggle_help = "<C-?>", 
+       toggle_help = "<C-h>", 
        toggle_message_role = "<C-r>", 
        toggle_system_role_open = "<C-s>", 
        stop_generating = "<C-x>", 
      }, 
    }, 
    popup_layout = { 
-     default = "center", 
+     default = "right", 
      center = { 
        width = "95%", 
        height = "95%", 
      }, 
      right = { 
-       width = "30%", 
+       width = "25%", -- default was 30% --
        width_settings_open = "50%", 
      }, 
    }, 
@@ -151,7 +151,7 @@ local defaults = {
      model = "gpt-3.5-turbo", 
      frequency_penalty = 0, 
      presence_penalty = 0, 
-     max_tokens = 300, 
+     max_tokens = 500, 
      temperature = 0, 
      top_p = 1, 
      n = 1, 
@@ -181,4 +181,3 @@ require("chatgpt").setup(defaults)
 -- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 -- AI plugin ends here-----------------
-

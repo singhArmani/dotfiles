@@ -63,7 +63,7 @@ set ignorecase    " ignore case when searching
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
-nmap <silent> ./ :nohlsearch<CR>
+" nmap <silent> ./ :nohlsearch<CR>
 " end-----------------------------
 
 " Leader Key 
@@ -113,7 +113,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'szw/vim-maximizer'
 Plug 'karb94/neoscroll.nvim'
 Plug 'lewis6991/impatient.nvim'
-Plug 'ray-x/web-tools.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'nvim-lua/plenary.nvim'  " required by telescope and chatgpt plugin
 Plug 'nvim-telescope/telescope.nvim'
@@ -126,6 +125,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 " C# setup (note that we are using coc.nvim c# settings)
 " The following are not requried but keeping them for debugging exp.
 Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'Cliffback/netcoredbg-macOS-arm64.nvim'
 Plug 'Tastyep/structlog.nvim'
 
 " Interact with DB UI 
@@ -294,6 +295,18 @@ set backspace=indent,eol,start
 " ref: https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 
+" Search and replace quicly using dot and cgn command
+nnoremap c*  *Ncgn
+nnoremap c#  #NcgN
+
+" Adjusting window width (vertical split)
+" Increase the width of the current window by 50%
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+" Decrease the width of the current window to 67%
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+
+
 " perform code action
 nmap <leader>do <Plug>(coc-codeaction)
 
@@ -304,7 +317,7 @@ nmap <leader>jd <Plug>(jsdoc)
 nnoremap gp `[v`]
 
 " Open file under cursor in vertical split
-map <leader>p <C-w>vgf
+" map <leader>p <C-w>vgf
 
 
 " renaming a symbol 
@@ -339,6 +352,10 @@ nnoremap <leader>j <C-W><C-J>
 nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>l <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
+
+" Quickly switching between for e.g., chat popup window (right) and back to normal file
+nnoremap <C-k> <C-W><C-W>
+
 
 " Vertical split using leader key
 map <leader>sv :vsp<cr>
@@ -457,7 +474,8 @@ vnoremap K :m '<-2<cr>gv=gv
 " Mapping--------------------------------
 " ChatGPT and codeium key mapping (Probably use whichKey plugin to manage your key mappings)
 nnoremap <leader>ai :ChatGPT<CR>
-nmap <leader>ar :ChatGPTRun<space>
+nnoremap <leader>as :ChatGPTActAs<CR>
+vnoremap <leader>ar :ChatGPTRun<space>explain_code<CR>
 vnoremap <leader>ad :ChatGPTRun<space>docstring<CR>
 vnoremap <leader>ae :ChatGPTEditWithInstructions<CR>
 
@@ -499,8 +517,6 @@ nnoremap <leader>gr :Gread<CR>
 " branch
 nnoremap <leader>ll :Gvsplit origin/dev-v2:%<CR>
 nnoremap <leader>dd :Gvdiff origin/dev-v2:%<CR> 
-nnoremap <leader>mm :Gvsplit origin/dev:%<CR>
-nnoremap <leader>nn :Gvdiff origin/dev:%<CR>
 
 " Vim tricks (open file under cursor in vertical split)
 map <leader>p <C-w>vgf
@@ -510,7 +526,7 @@ noremap cp yap<S-}>p
 
 " Paste the yanked content from register "0
 " Mapping it Ctrl-p  
-:map <C-p> "0p
+:map <leader>p "0p
 
 " Use _ (black hole register) for deleting (this would keep your "0 untouched,)
 " you can safely use p or P to paste from this 
@@ -592,5 +608,4 @@ nnoremap <silent> <Space><Space> za
 " lua require('leap').create_default_mappings() 
 
 lua require('config')
-
 
