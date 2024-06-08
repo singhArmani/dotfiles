@@ -182,3 +182,6 @@ vim.api.nvim_set_keymap('n', '<leader>du', ':DBUIToggle<CR>', { noremap = true, 
 
 -- Debugging plugin--------
 require('debugging');
+
+-- Searching & replacing ----
+require('search-grug');

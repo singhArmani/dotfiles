@@ -191,6 +191,9 @@ Plug 'tpope/vim-fugitive'
 " Search and Replace Project wise 
 Plug 'wincent/ferret'
 
+" Ripgrep search (magic duck) remove if not used
+Plug 'MagicDuck/grug-far.nvim'
+
 " Adding more target object vim like feature
 Plug 'wellle/targets.vim'
 
@@ -369,7 +372,7 @@ nmap <leader>sw :%s/\v<C-r><C-w>
 " Search and replace word boundary (exact match)
 nmap <leader>ee :%s/\<\><c-b><right><right><right><right><right>
 " Search quickly for word boundry case-insenstive
-nmap <leader>ff :/\<\><c-b><right><right><right>
+nmap <leader>ci :/\<\><c-b><right><right><right>
 " Search quickly for word boundry case-sensitive
 nmap <leader>cc :/\<\>\C<c-b><right><right><right>
 
