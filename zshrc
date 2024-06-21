@@ -26,6 +26,7 @@ EDITOR=nvim
 
 alias ni="nvim"
 alias vi="vim"
+alias pn='pnpm'
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
@@ -214,3 +215,10 @@ alias undo='git fetch origin && git reset --hard origin/master && git clean -f -
 
 # export PATH=/opt/homebrew/bin:/Users/aman/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# pnpm
+# export PNPM_HOME="/Users/aman/Library/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
