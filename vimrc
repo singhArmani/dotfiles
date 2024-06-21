@@ -462,7 +462,8 @@ map ' :Ag<space>
 " nnoremap " :Ag <C-R><C-W><cr>:cw<cr>
 
 " Ignore test files while searching with AG (customize it based on project you are working)
-map 't :Ack --ignore *.test.js -w -s<space>
+" map 't :Ack --ignore *.test.js -w -s<space>
+map 't :Ack <space>
 
 " Search for word under curser using Ack
 nnoremap 'w :Ack -w -s <C-R><C-W><cr> 
