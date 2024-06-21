@@ -32,6 +32,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
+source ~/workspace/dotfiles/secrets.zsh
+
 bindkey '^ ' autosuggest-accept
 
 # TODO: Bring it back if you need tab completion
