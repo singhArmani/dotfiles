@@ -24,8 +24,8 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
 EDITOR=nvim
 
+alias vi="NVIM_APPNAME=nvim-old nvim"
 alias ni="nvim"
-alias vi="vim"
 alias pn='pnpm'
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
