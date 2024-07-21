@@ -4,3 +4,4 @@
 -- keymap.set("i", "<C-j>", "<cmd>call codeium#CycleCompletions(-1)<cr>", { desc = "Cycle Codeium completions backward" })
 -- keymap.set("i", "<C-x>", "<cmd>call codeium#Clear()<cr>", { desc = "Clear Codeium completion" })
 
+return {}

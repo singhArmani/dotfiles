@@ -5,7 +5,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
-		"seblj/roslyn.nvim",
+		-- "seblj/roslyn.nvim",
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -79,37 +79,37 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		require("roslyn").setup({
-			dotnet_cmd = "dotnet", -- this is the default
-			roslyn_version = "4.8.0-3.23475.7", -- this is the default
-			capabilities = vim.tbl_deep_extend("force", capabilities or {}, {
-				textDocument = {
-					diagnostic = {
-						dynamicRegistration = true,
-					},
-				},
-			}),
-			on_attach = function()
-				vim.cmd([[compiler dotnet]])
-			end,
-			settings = {
-				["csharp|inlay_hints"] = {
-					["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
-					["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
-					["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
-					["csharp_enable_inlay_hints_for_types"] = true,
-					["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
-					["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
-					["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
-					["dotnet_enable_inlay_hints_for_other_parameters"] = true,
-					["dotnet_enable_inlay_hints_for_parameters"] = true,
-					["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
-					["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
-					["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
-				},
-			},
-		})
-
+		-- require("roslyn").setup({
+		-- 	dotnet_cmd = "dotnet", -- this is the default
+		-- 	roslyn_version = "4.8.0-3.23475.7", -- this is the default
+		-- 	capabilities = vim.tbl_deep_extend("force", capabilities or {}, {
+		-- 		textDocument = {
+		-- 			diagnostic = {
+		-- 				dynamicRegistration = true,
+		-- 			},
+		-- 		},
+		-- 	}),
+		-- 	on_attach = function()
+		-- 		vim.cmd([[compiler dotnet]])
+		-- 	end,
+		-- 	settings = {
+		-- 		["csharp|inlay_hints"] = {
+		-- 			["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
+		-- 			["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
+		-- 			["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
+		-- 			["csharp_enable_inlay_hints_for_types"] = true,
+		-- 			["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
+		-- 			["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
+		-- 			["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
+		-- 			["dotnet_enable_inlay_hints_for_other_parameters"] = true,
+		-- 			["dotnet_enable_inlay_hints_for_parameters"] = true,
+		-- 			["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
+		-- 			["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
+		-- 			["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
+		-- 		},
+		-- 	},
+		-- })
+		--
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)

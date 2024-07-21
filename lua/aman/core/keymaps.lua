@@ -30,15 +30,15 @@ keymap.set("n", "c#", "#NcgN", { noremap = true, desc = "Replace with dot comman
 keymap.set("n", "gp", "`[v`]", { noremap = true })
 
 -- Navigation split
-keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
-keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
-keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
-keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
+keymap.set("n", "<leader>j", "<C-W><C-J>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
+keymap.set("n", "<leader>k", "<C-W><C-K>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
+keymap.set("n", "<leader>l", "<C-W><C-L>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
+keymap.set("n", "<leader>h", "<C-W><C-H>", { desc = "Mapping leader key for navigation split windows" }) -- Mapping leader key for navigation split windows
 
 keymap.set("n", "<S-n>", ":bp<CR>", { desc = "Move to the previous buffer with 'Shift+n'" }) -- Move to the previous buffer with "Shift+n"
 keymap.set("n", "<S-m>", ":bn<CR>", { desc = "Move to the next buffer with 'Shift+m'" }) -- Move to the next buffer with "Shift+m"
 
-keymap.set("n", "<Leader>w", ":update<CR>", { noremap = true, desc = "Save current buffer content to file" })
+keymap.set("n", "<leader>w", ":update<CR>", { noremap = true, desc = "Save current buffer content to file" })
 
 keymap.set("v", "J", "<cmd>m '>+1<cr>gv=gv", { desc = "Move visual selection down" })
 keymap.set("v", "K", "<cmd>m '<-2<cr>gv=gv", { desc = "Move visual selection up" })
@@ -47,3 +47,7 @@ keymap.set("n", "cp", "yap<S-}>p", { desc = "Clone paragraph with cp" })
 keymap.set("n", "<leader>p", '"0p', { desc = "Paste yanked content from register 0" })
 keymap.set("n", "<Leader>d", '"_d', { desc = "Use black hole register for deleting" })
 keymap.set("n", "<leader>bb", ":Bdelete<CR>", { desc = "Delete buffers without closing windows" })
+
+-- keymap.set("n", "<leader>>", function()
+-- 	vim.cmd([[exe "vertical resize " . (winwidth(0) * 3/2)]])
+-- end, { desc = "Increase the width of the current window by 50%" })

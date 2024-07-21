@@ -39,3 +39,5 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+opt.scrolloff = 4 -- Keep at least 4 lines below cursor
