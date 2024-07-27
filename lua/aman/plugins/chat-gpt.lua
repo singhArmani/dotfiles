@@ -25,7 +25,7 @@ return {
 				},
 			},
 			chat = {
-				welcome_message = WELCOME_MESSAGE,
+				--welcome_message = WELCOME_MESSAGE,
 				loading_text = "Loading, please wait ...",
 				question_sign = "", -- 🙂
 				answer_sign = "🤖", --
