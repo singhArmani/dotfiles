@@ -1,6 +1,6 @@
 return {
 	"nvim-neotest/neotest",
-	ft = "cs",
+	event = { "BufReadPre *.spec.ts", "BufNewFile *.spec.ts" },
 	dependencies = {
 		"nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
@@ -16,7 +16,7 @@ return {
 			adapters = {
 				-- Jest adapter
 				require("neotest-jest")({
-					jestCommand = "pn test --",
+					jestCommand = "pnpm test --",
 					jestConfigFile = "",
 					env = { CI = true },
 					cwd = function(path)

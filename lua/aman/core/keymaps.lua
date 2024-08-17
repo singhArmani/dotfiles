@@ -38,7 +38,12 @@ keymap.set("n", "<leader>h", "<C-W><C-H>", { desc = "Mapping leader key for navi
 keymap.set("n", "<S-n>", ":bp<CR>", { desc = "Move to the previous buffer with 'Shift+n'" }) -- Move to the previous buffer with "Shift+n"
 keymap.set("n", "<S-m>", ":bn<CR>", { desc = "Move to the next buffer with 'Shift+m'" }) -- Move to the next buffer with "Shift+m"
 
-keymap.set("n", "<leader>w", ":update<CR>", { noremap = true, desc = "Save current buffer content to file" })
+keymap.set(
+	"n",
+	"<leader>w",
+	":update<CR>",
+	{ noremap = true, silent = true, desc = "Save current buffer content to file" }
+)
 
 keymap.set("v", "J", "<cmd>m '>+1<cr>gv=gv", { desc = "Move visual selection down" })
 keymap.set("v", "K", "<cmd>m '<-2<cr>gv=gv", { desc = "Move visual selection up" })

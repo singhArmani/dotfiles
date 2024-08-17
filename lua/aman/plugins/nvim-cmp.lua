@@ -23,12 +23,16 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
 			completion = {
-				completeopt = "menu,menuone,preview,noselect",
+				completeopt = "menu,menuone,preview",
 			},
 			snippet = { -- configure how nvim-cmp interacts with snippet engine
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
 				-- ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
@@ -49,13 +53,14 @@ return {
 					end
 				end, { "i", "s" }),
 			}),
+			-- preselect = cmp.PreselectMode.Item,
 			-- sources for autocompletion
 			sources = cmp.config.sources({
+				{ name = "codeium" },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
-				{ name = "codeium" },
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {

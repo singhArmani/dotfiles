@@ -1,20 +1,6 @@
 return {
-	"Exafunction/codeium.nvim",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"hrsh7th/nvim-cmp",
-	},
+	"Exafunction/codeium.vim",
 	config = function()
-		require("codeium").setup({
-			formatting = {
-				format = require("lspkind").cmp_format({
-					mode = "symbol",
-					maxwidth = 50,
-					ellipsis_char = "...",
-					symbol_map = { Codeium = "" },
-				}),
-			},
-		})
 		vim.keymap.set("i", "<C-Space>", function()
 			return vim.fn["codeium#Accept"]()
 		end, { expr = true, silent = true })
