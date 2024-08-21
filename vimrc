@@ -90,7 +90,7 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 " buffer management
 Plug 'moll/vim-bbye'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v4.7.0' }
 
 " Commenting
 Plug 'numToStr/Comment.nvim'
