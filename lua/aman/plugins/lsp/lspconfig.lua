@@ -7,6 +7,16 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
+		vim.diagnostic.config({
+			virtual_text = false,
+			virtual_improved = {
+				current_line = "only",
+			},
+			float = {
+				border = "rounded",
+				header = "",
+			},
+		})
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 

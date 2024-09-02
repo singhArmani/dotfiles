@@ -41,3 +41,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 
 opt.scrolloff = 4 -- Keep at least 4 lines below cursor
+
+-- autocompletion suggestion window option heigh
+opt.pumheight = 10

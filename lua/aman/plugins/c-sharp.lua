@@ -1,10 +1,10 @@
 return {
 	"seblj/roslyn.nvim",
 	opts = {
-		exe = {
-			"dotnet",
-			vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
-		},
+		-- exe = {
+		-- 	"dotnet",
+		-- 	vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+		-- },
 		config = {
 			on_attach = function()
 				vim.cmd([[compiler dotnet]])
