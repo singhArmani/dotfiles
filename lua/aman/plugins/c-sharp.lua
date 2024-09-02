@@ -1,28 +1,30 @@
 return {
-	"iabdelkareem/csharp.nvim",
-	dependencies = {
-		"williamboman/mason.nvim", -- Required, automatically installs omnisharp
-		"mfussenegger/nvim-dap",
-		"Tastyep/structlog.nvim", -- Optional, but highly recommended for debugging
-		{ "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
-	},
+	"seblj/roslyn.nvim",
 	opts = {
-		lsp = {
-			on_attach = function(_, bufnr)
-				local omnisharp = require("omnisharp_extended")
-				vim.keymap.set("n", "gd", function()
-					omnisharp.telescope_lsp_definitions()
-				end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [D]efinition" })
-				vim.keymap.set("n", "gI", function()
-					omnisharp.telescope_lsp_implementation()
-				end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [I]mplementation" })
-				vim.keymap.set("n", "gr", function()
-					omnisharp.telescope_lsp_references()
-				end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: [G]oto [R]eferences" })
+		exe = {
+			"dotnet",
+			vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+		},
+		config = {
+			on_attach = function()
+				vim.cmd([[compiler dotnet]])
 			end,
-			enable_roslyn_analyzers = true,
-			organize_imports_on_format = true,
-			enable_import_completion = true,
+			settings = {
+				["csharp|inlay_hints"] = {
+					["csharp_enable_inlay_hints_for_implicit_object_creation"] = true,
+					["csharp_enable_inlay_hints_for_implicit_variable_types"] = true,
+					["csharp_enable_inlay_hints_for_lambda_parameter_types"] = true,
+					["csharp_enable_inlay_hints_for_types"] = true,
+					["dotnet_enable_inlay_hints_for_indexer_parameters"] = true,
+					["dotnet_enable_inlay_hints_for_literal_parameters"] = true,
+					["dotnet_enable_inlay_hints_for_object_creation_parameters"] = true,
+					["dotnet_enable_inlay_hints_for_other_parameters"] = true,
+					["dotnet_enable_inlay_hints_for_parameters"] = true,
+					["dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix"] = true,
+					["dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name"] = true,
+					["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
+				},
+			},
 		},
 	},
 }
