@@ -15,8 +15,25 @@ return {
 			float = {
 				border = "rounded",
 				header = "",
+				prefix = "",
 			},
 		})
+
+		-- Set up diagnostic hover
+		vim.api.nvim_create_autocmd("CursorHold", {
+			pattern = "*",
+			callback = function()
+				local opts = {
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+				}
+				vim.diagnostic.open_float(nil, opts)
+			end,
+		})
+
+		-- Optional: Adjust the hover delay
+		vim.o.updatetime = 300
+
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
