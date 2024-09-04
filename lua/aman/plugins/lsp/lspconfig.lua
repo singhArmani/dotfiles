@@ -133,17 +133,18 @@ return {
 					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
 				})
 			end,
-			["tsserver"] = function()
-				-- configure typescript server with plugin
-				lspconfig["tsserver"].setup({
-					capabilities = capabilities,
-					init_options = {
-						preferences = {
-							disableSuggestions = true,
-						},
-					},
-				})
-			end,
+			-- it's managed by typescript-tools.nvim plugin now
+			-- ["tsserver"] = function()
+			-- 	-- configure typescript server with plugin
+			-- 	lspconfig["tsserver"].setup({
+			-- 		capabilities = capabilities,
+			-- 		init_options = {
+			-- 			preferences = {
+			-- 				disableSuggestions = true,
+			-- 			},
+			-- 		},
+			-- 	})
+			-- end,
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
