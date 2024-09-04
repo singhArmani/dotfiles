@@ -111,40 +111,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["svelte"] = function()
-				-- configure svelte server
-				lspconfig["svelte"].setup({
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePost", {
-							pattern = { "*.js", "*.ts" },
-							callback = function(ctx)
-								-- Here use ctx.match instead of ctx.file
-								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-							end,
-						})
-					end,
-				})
-			end,
-			["graphql"] = function()
-				-- configure graphql language server
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-			-- it's managed by typescript-tools.nvim plugin now
-			-- ["tsserver"] = function()
-			-- 	-- configure typescript server with plugin
-			-- 	lspconfig["tsserver"].setup({
-			-- 		capabilities = capabilities,
-			-- 		init_options = {
-			-- 			preferences = {
-			-- 				disableSuggestions = true,
-			-- 			},
-			-- 		},
-			-- 	})
-			-- end,
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
