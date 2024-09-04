@@ -4,8 +4,10 @@ return {
 	version = "*",
 	opts = {
 		options = {
-			mode = "buffers", -- or "tabs"
+			mode = "tabs", -- or "buffers" (set buffers if you want to open multiple buffers at same time)
 			separator_style = "slant",
+			show_buffer_close_icons = false, -- Hides the "x" sign for each buffer
+			show_close_icon = false,
 		},
 	},
 }
