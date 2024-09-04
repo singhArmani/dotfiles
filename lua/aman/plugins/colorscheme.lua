@@ -43,6 +43,16 @@ return {
 			require("catppuccin").setup({
 				flavour = "mocha", -- latte, frappe, macchiato, mocha
 				-- other setup options can be added here
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					nvimtree = true,
+					treesitter = true,
+					mini = {
+						enabled = true,
+						indentscope_color = "",
+					},
+				},
 			})
 			vim.cmd([[colorscheme catppuccin]])
 		end,
