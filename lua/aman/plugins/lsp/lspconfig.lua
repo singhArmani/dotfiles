@@ -34,6 +34,15 @@ return {
 		-- Optional: Adjust the hover delay
 		vim.o.updatetime = 300
 
+		-- Customize the border for hover and signature help
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = "rounded", -- You can use "single", "double", "rounded", "solid", "shadow"
+		})
+
+		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+			border = "rounded", -- Use the same border style for signature help
+		})
+
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
