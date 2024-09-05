@@ -1,6 +1,8 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
+vim.g.maplocalleader = "," -- set local leader key to comma
+
 local keymap = vim.keymap -- for conciseness
 
 ---------------------
