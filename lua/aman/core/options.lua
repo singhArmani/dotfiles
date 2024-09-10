@@ -44,3 +44,14 @@ opt.scrolloff = 4 -- Keep at least 4 lines below cursor
 
 -- autocompletion suggestion window option heigh
 opt.pumheight = 10
+
+-- Highlight yanked text
+-- Ref: https://github.com/zed-industries/zed/issues/7311#issuecomment-1929344154
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})
