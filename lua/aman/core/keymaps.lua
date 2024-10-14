@@ -55,6 +55,6 @@ keymap.set("n", "<leader>p", '"0p', { desc = "Paste yanked content from register
 keymap.set("n", "<Leader>d", '"_d', { desc = "Use black hole register for deleting" })
 keymap.set("n", "<leader>bb", ":Bdelete<CR>", { desc = "Delete buffers without closing windows" })
 
--- keymap.set("n", "<leader>>", function()
--- 	vim.cmd([[exe "vertical resize " . (winwidth(0) * 3/2)]])
--- end, { desc = "Increase the width of the current window by 50%" })
+-- Move visual selection (move lines up or down after selection)
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
