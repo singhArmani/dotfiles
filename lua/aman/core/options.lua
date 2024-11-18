@@ -55,3 +55,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_group,
 	pattern = "*",
 })
+
+-- User command for enabling wrap settings
+vim.api.nvim_create_user_command("Wrap", function()
+	vim.wo.wrap = true
+	vim.wo.linebreak = true
+	vim.opt.list = false
+end, {})

@@ -27,21 +27,81 @@ return {
 			end
 
 			-- Adapters:
-
 			dap.adapters.coreclr = {
 				type = "executable",
 				command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
 				args = { "--interpreter=vscode" },
 			}
 
+			-- dap.configurations.cs = {
+			-- 	{
+			-- 		type = "coreclr",
+			-- 		name = "launch - netcoredbg",
+			-- 		request = "launch",
+			-- 		program = function()
+			-- 			return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+			-- 		end,
+			-- 	},
+			-- }
 			dap.configurations.cs = {
+				-- Web API Configuration
 				{
+					name = ".NET Core Launch (web)",
 					type = "coreclr",
-					name = "launch - netcoredbg",
 					request = "launch",
-					program = function()
-						return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
-					end,
+					program = "${workspaceFolder}/Avarni.Api/bin/Debug/net8.0/Avarni.Api.dll",
+					cwd = "${workspaceFolder}/Avarni.Api",
+					env = {
+						ASPNETCORE_ENVIRONMENT = "Development",
+					},
+					stopAtEntry = false,
+					serverReadyAction = {
+						action = "openExternally",
+						pattern = "\\bNow listening on:\\s+(https?://\\S+)",
+					},
+					sourceFileMap = {
+						["/Views"] = "${workspaceFolder}/Views",
+					},
+				},
+
+				-- Worker Project Configuration
+				{
+					name = ".NET Core Launch (worker)",
+					type = "coreclr",
+					request = "launch",
+					program = "${workspaceFolder}/Avarni.Worker/bin/Debug/net8.0/Avarni.Worker.dll",
+					cwd = "${workspaceFolder}/Avarni.Worker",
+					env = {
+						ASPNETCORE_ENVIRONMENT = "Development",
+					},
+					stopAtEntry = false,
+					sourceFileMap = {
+						["/Views"] = "${workspaceFolder}/Views",
+					},
+				},
+
+				-- Attach Configuration
+				{
+					name = ".NET Core Attach",
+					type = "coreclr",
+					request = "attach",
+				},
+
+				-- Test Project Configuration
+				{
+					name = ".NET Core Launch (test)",
+					type = "coreclr",
+					request = "launch",
+					program = "${workspaceFolder}/Avarni.Tests/bin/Debug/net8.0/Avarni.Tests.dll",
+					args = {
+						"test",
+						"${workspaceFolder}/Avarni.Tests/Avarni.Tests.csproj",
+						"--no-build",
+						"--logger:trx",
+					},
+					cwd = "${workspaceFolder}/Avarni.Tests",
+					stopAtEntry = false,
+					console = "internalConsole",
 				},
 			}
 			vim.cmd("highlight DapRed guifg=#E82424")
@@ -50,3 +110,5 @@ return {
 		end,
 	},
 }
+
+-- command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",

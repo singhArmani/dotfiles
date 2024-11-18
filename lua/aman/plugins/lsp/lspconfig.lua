@@ -7,32 +7,33 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		vim.diagnostic.config({
-			virtual_text = false,
-			virtual_improved = {
-				current_line = "only",
-			},
-			float = {
-				border = "rounded",
-				header = "",
-				prefix = "",
-			},
-		})
+		-- vim.diagnostic.config({
+		-- 	virtual_text = false,
+		-- 	virtual_improved = {
+		-- 		current_line = "only",
+		-- 	},
+		-- 	float = {
+		-- 		border = "rounded",
+		-- 		header = "",
+		-- 		prefix = "",
+		-- 	},
+		-- })
+		vim.diagnostic.config({ virtual_text = false })
 
 		-- Set up diagnostic hover
-		vim.api.nvim_create_autocmd("CursorHold", {
-			pattern = "*",
-			callback = function()
-				local opts = {
-					focusable = false,
-					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-				}
-				vim.diagnostic.open_float(nil, opts)
-			end,
-		})
-
-		-- Optional: Adjust the hover delay
-		vim.o.updatetime = 300
+		-- vim.api.nvim_create_autocmd("CursorHold", {
+		-- 	pattern = "*",
+		-- 	callback = function()
+		-- 		local opts = {
+		-- 			focusable = false,
+		-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+		-- 		}
+		-- 		vim.diagnostic.open_float(nil, opts)
+		-- 	end,
+		-- })
+		--
+		-- -- Optional: Adjust the hover delay
+		-- vim.o.updatetime = 300
 
 		-- Customize the border for hover and signature help
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

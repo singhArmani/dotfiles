@@ -7,6 +7,10 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export DOTNET_ROOT=/usr/local/share/dotnet
 export PATH=$PATH:$DOTNET_ROOT/tools
 
+# Node compile cache. 
+# Ref: https://nolanlawson.com/2024/10/20/why-im-skeptical-of-rewriting-javascript-tools-in-faster-languages
+export NODE_COMPILE_CACHE=~/.cache/nodejs-compile-cache
+
 # export PATH="$PATH:/Users/aman/.dotnet/tools"
 
 
@@ -22,7 +26,7 @@ export ZSH="/Users/aman/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
-EDITOR=nvim
+export EDITOR=nvim
 
 alias vi="NVIM_APPNAME=nvim-old nvim"
 alias ni="nvim"
@@ -114,7 +118,7 @@ alias gs='git status '
 alias gs='git status --branch --short'
 alias ga='git add '
 alias gp='git pull'
-alias gfo='git fetch origin master'
+alias gfo='git fetch origin main'
 alias gap='git add --patch'
 alias gcp='git checkout --patch'
 alias gb='git brunch '
@@ -127,7 +131,7 @@ alias gn='git checkout -b'
 alias grn='git branch -m' # change branch name locally
 alias gcm='git checkout main'
 alias gcd='git checkout dev'
-alias rbi='git rebase -i origin/master'
+alias rbi='git rebase -i origin/main'
 alias rbc='git rebase --continue'
 alias go='git commit -a -m'   # skip the add staging process. TODO: confirm if it doesn't add file to staging area??
 alias gdsw='git wdiff --staged'
