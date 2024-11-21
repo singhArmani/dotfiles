@@ -37,7 +37,7 @@ return {
 			-- Keybinding: Toggle visibility of a particular instance and set title to "Find and Replace"
 			map(
 				"n",
-				"<LocalLeader>to",
+				"<LocalLeader>fr",
 				"<cmd>lua require('grug-far').toggle_instance({ instanceName = 'far', staticTitle = 'Find and Replace' })<CR>",
 				opts
 			)

@@ -62,3 +62,29 @@ vim.api.nvim_create_user_command("Wrap", function()
 	vim.wo.linebreak = true
 	vim.opt.list = false
 end, {})
+
+-- Opens Quickfix for typescript errors
+vim.api.nvim_create_user_command("TSCQuickfix", function()
+	-- Run the tsc command and capture the output
+	local result = vim.fn.systemlist("pnpm tsc --noEmit --pretty false")
+
+	-- Convert the output to quickfix format
+	local quickfix_list = {}
+	for _, line in ipairs(result) do
+		-- Match lines like: src/app.ts(x,y): error TS1234: Message
+		local file, lnum, col, message = line:match("([^:]+)%((%d+),(%d+)%)%: (.+)")
+		if file and lnum and col and message then
+			table.insert(quickfix_list, {
+				filename = file,
+				lnum = tonumber(lnum),
+				col = tonumber(col),
+				text = message,
+			})
+		end
+	end
+
+	-- Populate the quickfix list
+	vim.fn.setqflist(quickfix_list, "r")
+	-- Open the quickfix window
+	vim.cmd("copen")
+end, {})
