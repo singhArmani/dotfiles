@@ -1,7 +1,7 @@
 return {
 	"famiu/bufdelete.nvim",
 	config = function()
-		vim.keymap.set("n", "<leader>bd", ":Bdelete<CR>", { desc = "Delete buffer without closing window" })
+		vim.keymap.set("n", "<leader>bb", ":Bdelete<CR>", { desc = "Delete buffer without closing window" })
 		-- Add new keymapping to delete all buffers except current one
 		vim.keymap.set("n", "<leader>ba", function()
 			local current_buf = vim.api.nvim_get_current_buf()

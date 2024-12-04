@@ -16,23 +16,7 @@ return {
 			)
 
 			-- Keybinding: Launch as a transient buffer (unlisted, deletes itself after use)
-			map("n", "<LocalLeader>t", "<cmd>lua require('grug-far').open({ transient = true })<CR>", opts)
-
-			-- Keybinding: Limit search/replace to the current file
-			map(
-				"n",
-				"<LocalLeader>f",
-				"<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>",
-				opts
-			)
-
-			-- Keybinding: Launch with the current visual selection, searching only in the current file
-			map(
-				"v",
-				"<LocalLeader>v",
-				"<cmd>lua require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand('%') } })<CR>",
-				opts
-			)
+			map("n", "<LocalLeader>s", "<cmd>lua require('grug-far').open({ transient = true })<CR>", opts)
 
 			-- Keybinding: Toggle visibility of a particular instance and set title to "Find and Replace"
 			map(
