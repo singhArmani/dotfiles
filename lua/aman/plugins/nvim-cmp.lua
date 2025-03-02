@@ -60,6 +60,7 @@ return {
 			-- sources for autocompletion
 			sources = cmp.config.sources({
 				{ name = "codeium" },
+				{ name = "codecompanion" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" }, -- text within current buffer

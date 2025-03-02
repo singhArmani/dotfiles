@@ -25,7 +25,7 @@ return {
 				url = "postgres://myuser:mypassword@localhost:54320/avarni-db",
 			},
 			{
-				name = "v2-main",
+				name = "uat",
 				url = "postgres://avarni_core_api:9EBxHAuaZtxVdcKbogYRPCIx6DSV6W5k@dpg-cnoe8aacn0vc73bgqg6g-a.singapore-postgres.render.com:5432/avarni_core_api",
 			},
 		}
