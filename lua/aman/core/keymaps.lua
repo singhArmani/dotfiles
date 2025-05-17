@@ -58,3 +58,9 @@ keymap.set("n", "<leader>bb", ":Bdelete<CR>", { desc = "Delete buffers without c
 -- Move visual selection (move lines up or down after selection)
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- Move line up or down when :wrap is set
+keymap.set("n", "j", "gj", { noremap = true, silent = true })
+keymap.set("n", "k", "gk", { noremap = true, silent = true })
+keymap.set("v", "j", "gj", { noremap = true, silent = true })
+keymap.set("v", "k", "gk", { noremap = true, silent = true })

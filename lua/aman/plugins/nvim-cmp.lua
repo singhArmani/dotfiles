@@ -22,8 +22,10 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
-		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+		-- loads vscode style and Lua style snippets
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
+		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets" })
+		luasnip.filetype_extend("typescriptreact", { "javascript" })
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview",
@@ -65,7 +67,7 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
-				{ name = "luasnip" }, -- snippets
+				{ name = "luasnip", priority = 500 }, -- snippets
 				{ name = "vim-dadbod-completion", priority = 700 }, -- add new source
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
