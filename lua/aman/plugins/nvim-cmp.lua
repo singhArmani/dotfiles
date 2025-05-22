@@ -25,7 +25,7 @@ return {
 		-- loads vscode style and Lua style snippets
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
 		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets" })
-		luasnip.filetype_extend("typescriptreact", { "javascript" })
+		luasnip.filetype_extend("typescriptreact", { "typescript", "javascript" })
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview",

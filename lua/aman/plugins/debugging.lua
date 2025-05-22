@@ -7,12 +7,34 @@ return {
 		},
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
+
+			-- Core stepping
 			vim.keymap.set("n", "<F5>", dap.continue)
 			vim.keymap.set("n", "<F10>", dap.step_over)
 			vim.keymap.set("n", "<F11>", dap.step_into)
 			vim.keymap.set("n", "<F12>", dap.step_out)
+
+			-- Breakpoints
 			vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
 			vim.keymap.set("n", "<Leader>dB", dap.set_breakpoint, { desc = "Set Breakpoint" })
+			vim.keymap.set("n", "<Leader>dt", dapui.toggle, { desc = "Toggle DAP UI" })
+			vim.keymap.set("v", "<Leader>de", dapui.eval, { desc = "Evaluate Expression in Visual Mode" })
+			vim.keymap.set("n", "<Leader>de", function()
+				require("dapui").eval()
+				require("dapui").eval()
+			end, { desc = "Evaluate expression and focus popup" })
+
+			-- Cursor + Terminate
+			vim.keymap.set("n", "<Leader>dn", dap.run_to_cursor, { desc = "Run to Cursor" })
+			-- Disconnect debugger (don't kill the app)
+			vim.keymap.set("n", "<Leader>dq", dap.disconnect, { desc = "Disconnect Debugger" })
+
+			-- Disconnect and close UI (clean quit)
+			vim.keymap.set("n", "<Leader>dx", function()
+				dap.disconnect()
+				dapui.close()
+			end, { desc = "Disconnect + Close UI" })
+
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
 			end
@@ -29,30 +51,31 @@ return {
 			-- Adapters:
 			dap.adapters.coreclr = {
 				type = "executable",
-				command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
+				command = "/usr/local/netcoredbg",
 				args = { "--interpreter=vscode" },
 			}
 
-			-- dap.configurations.cs = {
-			-- 	{
-			-- 		type = "coreclr",
-			-- 		name = "launch - netcoredbg",
-			-- 		request = "launch",
-			-- 		program = function()
-			-- 			return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
-			-- 		end,
-			-- 	},
-			-- }
+			dap.configurations.cs = {
+				{
+					type = "coreclr",
+					name = "launch - netcoredbg",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+					end,
+				},
+			}
 			dap.configurations.cs = {
 				-- Web API Configuration
 				{
 					name = ".NET Core Launch (web)",
 					type = "coreclr",
 					request = "launch",
-					program = "${workspaceFolder}/Avarni.Api/bin/Debug/net8.0/Avarni.Api.dll",
+					program = "${workspaceFolder}/Avarni.Api/bin/Debug/net9.0/Avarni.Api.dll",
 					cwd = "${workspaceFolder}/Avarni.Api",
 					env = {
 						ASPNETCORE_ENVIRONMENT = "Development",
+						ASPNETCORE_URLS = "http://localhost:5118",
 					},
 					stopAtEntry = false,
 					serverReadyAction = {
