@@ -5,7 +5,10 @@ return {
 		-- 	"dotnet",
 		-- 	vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
 		-- },
-		config = {
+	},
+	config = function(_, opts)
+		-- Configure using the modern vim.lsp.config approach
+		vim.lsp.config("roslyn", {
 			on_attach = function()
 				vim.cmd([[compiler dotnet]])
 			end,
@@ -25,6 +28,9 @@ return {
 					["dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent"] = true,
 				},
 			},
-		},
-	},
+		})
+
+		-- Setup roslyn with the provided opts
+		require("roslyn").setup(opts)
+	end,
 }

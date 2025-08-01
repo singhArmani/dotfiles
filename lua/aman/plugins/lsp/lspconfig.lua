@@ -18,7 +18,20 @@ return {
 		-- 		prefix = "",
 		-- 	},
 		-- })
-		vim.diagnostic.config({ virtual_text = false })
+
+		-- Configure diagnostics with modern signs API
+		vim.diagnostic.config({
+			virtual_text = false,
+			-- Modern way to configure diagnostic signs (replaces the old sign_define loop)
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = " ",
+					[vim.diagnostic.severity.WARN] = " ",
+					[vim.diagnostic.severity.HINT] = "󰠠 ",
+					[vim.diagnostic.severity.INFO] = " ",
+				},
+			},
+		})
 
 		-- Set up diagnostic hover
 		-- vim.api.nvim_create_autocmd("CursorHold", {
@@ -35,14 +48,23 @@ return {
 		-- -- Optional: Adjust the hover delay
 		-- vim.o.updatetime = 300
 
-		-- Customize the border for hover and signature help
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "rounded", -- You can use "single", "double", "rounded", "solid", "shadow"
-		})
+		-- Customize the border for hover and signature help (modern way)
+		vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+			config = config or {}
+			config.border = "rounded" -- You can use "single", "double", "rounded", "solid", "shadow"
+			return vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
+		end
 
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "rounded", -- Use the same border style for signature help
-		})
+		vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, ctx, config)
+			config = config or {}
+			config.border = "rounded" -- Use the same border style for signature help
+			if not (result and result.signatures and result.signatures[1]) then
+				return
+			end
+			local signature = result.signatures[1]
+			local contents = vim.split(signature.label, "\n", { plain = true })
+			return vim.lsp.util.open_floating_preview(contents, "markdown", config)
+		end
 
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
@@ -54,6 +76,37 @@ return {
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		local keymap = vim.keymap -- for conciseness
+
+		-- harper_ls setting
+		lspconfig.harper_ls.setup({
+			settings = {
+				["harper-ls"] = {
+					linters = {
+						SpellCheck = true,
+						SpelledNumbers = false,
+						AnA = false,
+						SentenceCapitalization = false,
+						UnclosedQuotes = true,
+						WrongQuotes = false,
+						LongSentences = false,
+						RepeatedWords = true,
+						Spaces = true,
+						Matcher = true,
+						CorrectNumberSuffix = true,
+					},
+					codeActions = {
+						ForceStable = false,
+					},
+					markdown = {
+						IgnoreLinkTitle = false,
+					},
+					diagnosticSeverity = "hint",
+					isolateEnglish = true,
+					dialect = "British",
+					maxFileLength = 120000,
+				},
+			},
+		})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -91,10 +144,14 @@ return {
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1 })
+				end, opts) -- jump to previous diagnostic in buffer
 
 				opts.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+				keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = 1 })
+				end, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -107,14 +164,33 @@ return {
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
+		-- REMOVED: Old deprecated sign_define loop
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		-- for type, icon in pairs(signs) do
+		-- 	local hl = "DiagnosticSign" .. type
+		-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		-- end
+
 		mason_lspconfig.setup_handlers({
+			-- -- Add a custom handler for eslint
+			-- ["eslint"] = function()
+			-- 	lspconfig.eslint.setup({
+			-- 		capabilities = capabilities,
+			-- 		flags = {
+			-- 			allow_incremental_sync = false,
+			-- 			debounce_text_changes = 150,
+			-- 		},
+			-- 		settings = {
+			-- 			workingDirectories = { mode = "auto" },
+			-- 		},
+			-- 		on_attach = function(client, bufnr)
+			-- 			-- Optional: turn off formatting if you use prettier
+			-- 			client.server_capabilities.documentFormattingProvider = false
+			-- 		end,
+			-- 	})
+			-- end,
 			-- default handler for installed servers
 			function(server_name)
 				lspconfig[server_name].setup({
