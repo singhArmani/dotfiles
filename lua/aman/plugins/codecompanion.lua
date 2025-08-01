@@ -15,25 +15,41 @@ return {
 				},
 			},
 		})
+
 		local map = vim.keymap.set
-		-- Define key mappings for CodeCompanion using <LocalLeader>
+		local opts = { noremap = true, silent = true }
+
+		-- 🧠 CodeCompanion Actions UI
 		map(
 			"n",
 			"<LocalLeader>ca",
 			"<cmd>CodeCompanionActions<CR>",
-			{ noremap = true, silent = true, desc = "Open CodeCompanion Actions" }
+			vim.tbl_extend("force", opts, { desc = "CodeCompanion: Actions Palette" })
 		)
+
+		-- 💬 Toggle Chat UI
 		map(
 			"n",
 			"<LocalLeader>cc",
 			"<cmd>CodeCompanionChat Toggle<CR>",
-			{ noremap = true, silent = true, desc = "Toggle CodeCompanion Chat" }
+			vim.tbl_extend("force", opts, { desc = "CodeCompanion: Toggle Chat UI" })
 		)
+
+		-- 🧩 Add selection to chat context (Visual Mode)
 		map(
 			"v",
-			"<LocalLeader>ca",
+			"<LocalLeader>cc",
 			"<cmd>CodeCompanionChat Add<CR>",
-			{ noremap = true, silent = true, desc = "Add to CodeCompanion Chat" }
+			vim.tbl_extend("force", opts, { desc = "CodeCompanion: Add to Chat Context" })
 		)
+
+		-- ⚡ Inline edit (Visual Mode)
+		map("v", "<LocalLeader>ci", function()
+			vim.ui.input({ prompt = "Instruction for CodeCompanion: " }, function(input)
+				if input then
+					vim.cmd("'<,'>CodeCompanion " .. input)
+				end
+			end)
+		end, { noremap = true, silent = true, desc = "CodeCompanion: Inline Edit with Prompt" })
 	end,
 }
