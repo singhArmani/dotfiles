@@ -3,10 +3,61 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			{ "rcarriga/nvim-dap-ui", opts = {} },
+			"mxsdev/nvim-dap-vscode-js",
+			{
+				"microsoft/vscode-js-debug",
+				version = "1.x",
+				build = "npm install && npm run compile vsDebugServerBundle && mv dist out",
+			},
 			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
+			local dap_vscode_js = require("dap-vscode-js")
+
+			dap_vscode_js.setup({
+				debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+				adapters = { "pwa-node", "pwa-chrome" },
+			})
+
+			for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
+				dap.configurations[language] = {
+					{
+						-- use nvim-dap-vscode-js's pwa-node debug adapter
+						type = "pwa-node",
+						-- attach to an already running node process with --inspect flag
+						-- default port: 9222
+						request = "attach",
+						-- allows us to pick the process using a picker
+						processId = require("dap.utils").pick_process,
+						-- name of the debug action you have to select for this config
+						name = "Attach debugger to existing `node --inspect` process",
+						-- for compiled languages like TypeScript or Svelte.js
+						sourceMaps = true,
+						-- resolve source maps in nested locations while ignoring node_modules
+						resolveSourceMapLocations = {
+							"${workspaceFolder}/**",
+							"!**/node_modules/**",
+						},
+						-- path to src in vite based projects (and most other projects as well)
+						cwd = "${workspaceFolder}/src",
+						-- we don't want to debug code inside node_modules, so skip it!
+						skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+					},
+					{
+						type = "pwa-chrome",
+						request = "attach",
+						name = "Launch Chrome to debug client",
+						url = "http://localhost:3000", -- Adjust to your dev server's URL
+						webRoot = "${workspaceFolder}/src",
+						userDataDir = false,
+						-- protocol = "inspector",
+						port = 9222,
+						-- skip files from vite's hmr
+						skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+					},
+				}
+			end
 
 			-- Core stepping
 			vim.keymap.set("n", "<F5>", dap.continue)

@@ -1,5 +1,8 @@
+
 # Homebrew path
 export PATH="/opt/homebrew/bin:$PATH"
+
+eval "$(starship init zsh)"
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -24,7 +27,7 @@ export ZSH="/Users/aman/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaed, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
 export EDITOR=nvim
 
@@ -139,6 +142,7 @@ alias grs='git restore --source HEAD~1 '
 alias ggh='git hist'
 alias ggr='git graph'
 alias wd='git wd'
+alias gpr='gh pr create' # create a pull request using github cli
 
 
 # show list of conflicted files
@@ -228,3 +232,13 @@ export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 #   *) export PATH="$PNPM_HOME:$PATH" ;;
 # esac
 # pnpm end
+
+# bun completions
+[ -s "/Users/aman/.bun/_bun" ] && source "/Users/aman/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/Users/aman/.opencode/bin:$PATH

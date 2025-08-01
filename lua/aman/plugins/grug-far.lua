@@ -5,7 +5,12 @@ return {
 			-- Setup keybindings after plugin is loaded
 			local map = vim.api.nvim_set_keymap
 			local opts = { noremap = true, silent = true }
-			require("grug-far").setup({})
+			require("grug-far").setup({
+				fold_results = false,
+				prefills = {
+					flags = "-i",
+				},
+			})
 
 			-- Keybinding: Launch with the current word under the cursor as the search string
 			map(

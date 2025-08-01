@@ -36,11 +36,6 @@
 	excludesfile = /Users/aman/.gitignore_global
 	attributesfile = ~/.gitattributes
 	pager = diff-so-fancy | less --tabs=4 -RFX
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [diff "image"]
 	textconv = imgcat
 [user]

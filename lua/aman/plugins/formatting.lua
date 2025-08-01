@@ -22,12 +22,12 @@ return {
 				python = { "isort", "black" },
 				cs = { "csharpier" },
 			},
-			formatters = {
-				csharpier = {
-					command = "dotnet-csharpier", -- The command to run csharpier
-					args = { "--write-stdout" }, -- Arguments passed to the command
-				},
-			},
+			-- formatters = {
+			-- 	csharpier = {
+			-- 		command = "dotnet-csharpier", -- The command to run csharpier
+			-- 		args = { "--write-stdout" }, -- Arguments passed to the command
+			-- 	},
+			-- },
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
