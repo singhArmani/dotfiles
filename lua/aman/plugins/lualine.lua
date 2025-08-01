@@ -21,11 +21,9 @@ return {
 				b = { fg = colors.white, bg = colors.grey },
 				c = { fg = colors.white },
 			},
-
 			insert = { a = { fg = colors.black, bg = colors.blue } },
 			visual = { a = { fg = colors.black, bg = colors.cyan } },
 			replace = { a = { fg = colors.black, bg = colors.red } },
-
 			inactive = {
 				a = { fg = colors.white, bg = colors.black },
 				b = { fg = colors.white, bg = colors.black },
@@ -41,10 +39,28 @@ return {
 				section_separators = { left = "", right = "" },
 			},
 			sections = {
-				lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+				lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
 				lualine_b = { "filename", "branch" },
 				lualine_c = {
 					"%=", --[[ add your center compoentnts here in place of this comment ]]
+					-- Nice diagnostics with icons
+					{
+						"diagnostics",
+						sources = { "nvim_diagnostic" },
+						sections = { "error", "warn" }, -- Only errors and warnings
+						symbols = {
+							error = "󰅚 ", -- Error icon
+							warn = "󰀪 ", -- Warning icon
+						},
+						colored = true, -- Enable colors
+						update_in_insert = false,
+						always_visible = false, -- Only show when there are diagnostics
+						-- Custom colors (optional)
+						diagnostics_color = {
+							error = { fg = "#f38ba8" }, -- Red-ish
+							warn = { fg = "#fab387" }, -- Orange-ish
+						},
+					},
 				},
 				lualine_x = {},
 				lualine_y = { "filetype", "progress" },
@@ -62,22 +78,6 @@ return {
 			},
 			tabline = {},
 			extensions = {},
-
-			-- options = {
-			-- 	theme = bubbles_theme,
-			-- },
-			-- sections = {
-			-- 	lualine_x = {
-			-- 		{
-			-- 			lazy_status.updates,
-			-- 			cond = lazy_status.has_updates,
-			-- 			color = { fg = "#ff9e64" },
-			-- 		},
-			-- 		{ "encoding" },
-			-- 		{ "fileformat" },
-			-- 		{ "filetype" },
-			-- 	},
-			-- },
 		})
 	end,
 }
