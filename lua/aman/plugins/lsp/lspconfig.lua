@@ -7,46 +7,36 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- vim.diagnostic.config({
-		-- 	virtual_text = false,
-		-- 	virtual_improved = {
-		-- 		current_line = "only",
-		-- 	},
-		-- 	float = {
-		-- 		border = "rounded",
-		-- 		header = "",
-		-- 		prefix = "",
-		-- 	},
-		-- })
-
 		-- Configure diagnostics with modern signs API
 		vim.diagnostic.config({
 			virtual_text = false,
 			-- Modern way to configure diagnostic signs (replaces the old sign_define loop)
 			signs = {
 				text = {
-					[vim.diagnostic.severity.ERROR] = " ",
-					[vim.diagnostic.severity.WARN] = " ",
-					[vim.diagnostic.severity.HINT] = "󰠠 ",
-					[vim.diagnostic.severity.INFO] = " ",
+					[vim.diagnostic.severity.ERROR] = "",
+					[vim.diagnostic.severity.WARN] = "",
+					[vim.diagnostic.severity.INFO] = "",
+					[vim.diagnostic.severity.HINT] = "󰠠",
 				},
 			},
 		})
 
 		-- Set up diagnostic hover
-		-- vim.api.nvim_create_autocmd("CursorHold", {
-		-- 	pattern = "*",
-		-- 	callback = function()
-		-- 		local opts = {
-		-- 			focusable = false,
-		-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-		-- 		}
-		-- 		vim.diagnostic.open_float(nil, opts)
-		-- 	end,
-		-- })
-		--
-		-- -- Optional: Adjust the hover delay
-		-- vim.o.updatetime = 300
+		vim.o.updatetime = 250
+
+		vim.api.nvim_create_autocmd("CursorHold", {
+			pattern = "*",
+			callback = function()
+				vim.diagnostic.open_float(nil, {
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+					border = "rounded",
+					source = "always",
+					prefix = "",
+					scope = "line", -- or "cursor"
+				})
+			end,
+		})
 
 		-- Customize the border for hover and signature help (modern way)
 		vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
