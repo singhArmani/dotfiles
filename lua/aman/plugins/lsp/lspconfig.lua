@@ -10,7 +10,11 @@ return {
 		-- Configure diagnostics with modern signs API
 		vim.diagnostic.config({
 			virtual_text = false,
-			-- Modern way to configure diagnostic signs (replaces the old sign_define loop)
+			-- virtual_lines = {
+			--   only_current_line = true,
+			--   highlight_mode = "combine", -- or "replace" for better blending
+			-- },
+			--
 			signs = {
 				text = {
 					[vim.diagnostic.severity.ERROR] = "",
@@ -133,15 +137,15 @@ return {
 				opts.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
-				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", function()
-					vim.diagnostic.jump({ count = -1 })
-				end, opts) -- jump to previous diagnostic in buffer
-
-				opts.desc = "Go to next diagnostic"
+				opts.desc = "Next diagnostic (skip hints)"
 				keymap.set("n", "]d", function()
-					vim.diagnostic.jump({ count = 1 })
-				end, opts) -- jump to next diagnostic in buffer
+					vim.diagnostic.jump({ count = 1, severity = { min = vim.diagnostic.severity.WARN } })
+				end, opts)
+
+				opts.desc = "Previous diagnostic (skip hints)"
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, severity = { min = vim.diagnostic.severity.WARN } })
+				end, opts)
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
