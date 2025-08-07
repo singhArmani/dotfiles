@@ -64,3 +64,8 @@ keymap.set("n", "j", "gj", { noremap = true, silent = true })
 keymap.set("n", "k", "gk", { noremap = true, silent = true })
 keymap.set("v", "j", "gj", { noremap = true, silent = true })
 keymap.set("v", "k", "gk", { noremap = true, silent = true })
+
+keymap.set("n", "go", function()
+	vim.cmd("vsplit")
+	vim.lsp.buf.definition()
+end, { noremap = true, silent = true, desc = "Go to definition in vertical split" })

@@ -3,22 +3,15 @@ return {
 	version = "v3.7.1",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
-		-- Disable global auto behaviors
-		-- modes = {
-		-- 	diagnostics = {
-		-- 		auto_open = true, -- Auto open for diagnostics mode
-		-- 		auto_preview = true, -- Auto preview when hover
-		-- 		filter = {
-		-- 			severity = {
-		-- 				min = vim.diagnostic.severity.WARN, -- Show WARN and ERROR only
-		-- 			},
-		-- 		},
-		-- 	},
-		-- },
-		-- win = {
-		-- 	position = "bottom",
-		-- 	size = { height = 0.1 },
-		-- },
+		modes = {
+			diagnostics = {
+				focus = true,
+			},
+		},
+		win = {
+			position = "bottom",
+			size = { height = 0.1 },
+		},
 	},
 	keys = {
 		{
