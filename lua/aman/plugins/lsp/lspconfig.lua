@@ -158,33 +158,7 @@ return {
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- REMOVED: Old deprecated sign_define loop
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
-		-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		-- for type, icon in pairs(signs) do
-		-- 	local hl = "DiagnosticSign" .. type
-		-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		-- end
-
 		mason_lspconfig.setup_handlers({
-			-- -- Add a custom handler for eslint
-			-- ["eslint"] = function()
-			-- 	lspconfig.eslint.setup({
-			-- 		capabilities = capabilities,
-			-- 		flags = {
-			-- 			allow_incremental_sync = false,
-			-- 			debounce_text_changes = 150,
-			-- 		},
-			-- 		settings = {
-			-- 			workingDirectories = { mode = "auto" },
-			-- 		},
-			-- 		on_attach = function(client, bufnr)
-			-- 			-- Optional: turn off formatting if you use prettier
-			-- 			client.server_capabilities.documentFormattingProvider = false
-			-- 		end,
-			-- 	})
-			-- end,
 			-- default handler for installed servers
 			function(server_name)
 				lspconfig[server_name].setup({
