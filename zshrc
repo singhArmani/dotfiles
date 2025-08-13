@@ -242,3 +242,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
 export PATH=/Users/aman/.opencode/bin:$PATH
+
+# Added by Windsurf
+export PATH="/Users/aman/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
