@@ -8,7 +8,7 @@ return {
 			require("grug-far").setup({
 				fold_results = false,
 				prefills = {
-					flags = "-i",
+					flags = "-i -w", -- -w for exact word match
 				},
 			})
 

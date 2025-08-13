@@ -76,7 +76,7 @@ return {
 					"black", -- python formatter
 					"csharpier", -- csharp formatter
 					"pylint", -- python linter
-					"eslint_d", -- js linter
+					"eslint-lsp",
 				},
 			})
 		end,

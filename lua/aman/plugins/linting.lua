@@ -4,20 +4,25 @@ return {
 	config = function()
 		local lint = require("lint")
 
+		-- 🚫 No JS/TS here – eslint-lsp covers those
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
 			python = { "pylint" },
+			-- add others you want nvim-lint to handle:
+			-- markdown = { "markdownlint" },
+			-- dockerfile = { "hadolint" },
+			-- yaml = { "yamllint" },
 		}
 
-		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+		local grp = vim.api.nvim_create_augroup("lint", { clear = true })
 
+		-- Only run nvim-lint when there is a linter configured for this filetype
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			group = lint_augroup,
+			group = grp,
 			callback = function()
-				lint.try_lint()
+				local ft = vim.bo.filetype
+				if lint.linters_by_ft[ft] ~= nil then
+					lint.try_lint()
+				end
 			end,
 		})
 	end,
