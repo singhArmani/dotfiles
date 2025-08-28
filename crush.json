@@ -6,7 +6,7 @@
       "url": "https://api.githubcopilot.com/mcp/",
       "headers": { "Authorization": "$(echo Bearer $GITHUB_PAT)" }
     },
-    "jira": {
+    "atlassian": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
@@ -16,6 +16,7 @@
     "typescript": {
       "command": "typescript-language-server",
       "args": ["--stdio"]
-    }
+    },
+    "csharp": { "command": "csharp-ls", "args": [] }
   }
 }

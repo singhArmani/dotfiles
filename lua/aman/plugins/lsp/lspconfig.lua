@@ -69,7 +69,19 @@ return {
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+		-- copy diagnostics to clipboard
 		local keymap = vim.keymap -- for conciseness
+		local function copy_diagnostic_to_clipboard()
+			local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+			if #diagnostics == 0 then
+				vim.notify("No diagnostic message under cursor.", vim.log.levels.INFO)
+				return
+			end
+			local msg = diagnostics[1].message
+			vim.fn.setreg("+", msg)
+			vim.notify("Diagnostic copied to clipboard!", vim.log.levels.INFO)
+		end
+		-- end --------
 
 		-- harper_ls setting
 		lspconfig.harper_ls.setup({
@@ -152,6 +164,9 @@ return {
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+				opts.desc = "Copy diagnostic to clipboard"
+				keymap.set("n", "<leader>dc", copy_diagnostic_to_clipboard, opts)
 			end,
 		})
 
