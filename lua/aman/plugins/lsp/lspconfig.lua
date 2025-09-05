@@ -62,6 +62,7 @@ return {
 
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
+		local util = require("lspconfig.util")
 
 		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
@@ -112,6 +113,14 @@ return {
 					maxFileLength = 120000,
 				},
 			},
+		})
+
+		-- NEW: oxlint LSP setup
+		local capabilities = cmp_nvim_lsp.default_capabilities()
+		lspconfig.oxlint.setup({
+			capabilities = capabilities,
+			root_dir = util.root_pattern(".oxlintrc.json", "package.json", ".git"),
+			-- cmd = { "/Users/aman/.nvm/versions/node/v20.19.0/bin/oxc_language_server" }, -- optional override
 		})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
