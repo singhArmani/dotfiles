@@ -4,122 +4,58 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		-- 🚫 No JS/TS here – eslint-lsp covers those
+		-- keep per-file linting if you like
 		lint.linters_by_ft = {
+			javascript = { "oxlint" },
+			javascriptreact = { "oxlint" },
+			typescript = { "oxlint" },
+			typescriptreact = { "oxlint" },
 			python = { "pylint" },
-			-- add others you want nvim-lint to handle:
-			-- markdown = { "markdownlint" },
-			-- dockerfile = { "hadolint" },
-			-- yaml = { "yamllint" },
 		}
 
 		local grp = vim.api.nvim_create_augroup("lint", { clear = true })
-
-		-- Only run nvim-lint when there is a linter configured for this filetype
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = grp,
 			callback = function()
-				local ft = vim.bo.filetype
-				if lint.linters_by_ft[ft] ~= nil then
+				if lint.linters_by_ft[vim.bo.filetype] then
 					lint.try_lint()
 				end
 			end,
 		})
 
-		-- Async ESLint over src/ → populate QUICKFIX (no diagnostics/floats)
-		-- after/plugin/lint_qf.lua (or anywhere in your config)
-		local function lint_src_to_qf()
-			local notify = require("notify")
-			local LEVEL = vim.log.levels
-
-			-- spinner frames
-			local frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-			local fi = 1
-
-			-- single toast, CHAIN updates by reassigning `notif`
-			local notif = notify("Linting src/… " .. frames[fi], LEVEL.INFO, {
-				title = "Lint",
-				timeout = false,
-				hide_from_history = true,
-			})
-
-			-- animate spinner (replace the SAME toast each tick)
-			local t = vim.loop.new_timer()
-			t:start(100, 100, function()
-				fi = (fi % #frames) + 1
-				vim.schedule(function()
-					notif = notify("Linting src/… " .. frames[fi], LEVEL.INFO, {
-						title = "Lint",
-						replace = notif, -- <- replace previous
-						hide_from_history = true,
-					})
-				end)
-			end)
-
-			-- run eslint (JSON output)
-			local cmd = { "pnpm", "exec", "eslint", "-f", "json", "src" }
-			local chunks = {}
-
-			local function finish(msg, level)
-				-- stop spinner and replace with final message
-				pcall(function()
-					t:stop()
-					t:close()
-				end)
-				notif = notify(msg, level, { title = "Lint", replace = notif })
+		----------------------------------------------------------------
+		-- Project-wide Oxlint → Quickfix
+		----------------------------------------------------------------
+		vim.api.nvim_create_user_command("LintProject", function()
+			-- detect project root (oxlintrc/package.json/.git)
+			local root
+			local ok, util = pcall(require, "lspconfig.util")
+			if ok then
+				root = util.root_pattern(".oxlintrc.json", "package.json", ".git")(vim.api.nvim_buf_get_name(0))
 			end
+			root = root
+				or vim.fs.dirname(vim.fs.find({ ".oxlintrc.json", "package.json", ".git" }, { upward = true })[1])
+			root = root or vim.loop.cwd()
+			vim.cmd("lcd " .. vim.fn.fnameescape(root))
 
-			vim.fn.jobstart(cmd, {
-				stdout_buffered = true,
-				on_stdout = function(_, data)
-					if not data then
-						return
-					end
-					for _, l in ipairs(data) do
-						if l ~= "" then
-							table.insert(chunks, l)
-						end
-					end
-				end,
-				on_exit = function(_, code)
-					local text = table.concat(chunks, "\n")
-					local ok, json = pcall(vim.json.decode, text)
-					local qf = {}
+			-- oxlint CLI in unix format is easy for quickfix
+			vim.opt.makeprg = table.concat({
+				"oxlint",
+				"--format=unix",
+				"src",
+				"--ignore-pattern",
+				"src/api-lib",
+				"--ignore-pattern",
+				"src/constants/usZipCodeMap.ts",
+				"--ignore-pattern",
+				"src/constants/airports.ts",
+			}, " ")
 
-					if ok and type(json) == "table" then
-						for _, file in ipairs(json) do
-							local fname = file.filePath
-							for _, m in ipairs(file.messages or {}) do
-								qf[#qf + 1] = {
-									filename = fname,
-									lnum = m.line or 1,
-									col = m.column or 1,
-									text = m.message,
-									type = (m.severity == 2) and "E" or "W",
-								}
-							end
-						end
-					end
+			-- errorformat: file:line:col: message
+			vim.opt.errorformat = "%f:%l:%c:%m,%f:%l:%m"
 
-					vim.schedule(function()
-						vim.fn.setqflist({}, "r", { title = "ESLint (src/)", items = qf })
-
-						if #qf > 0 then
-							finish(
-								("Lint finished • %d item(s)"):format(#qf),
-								(code == 0) and LEVEL.WARN or LEVEL.ERROR
-							)
-							vim.cmd("copen") -- auto-open quickfix when issues exist
-						else
-							finish("No ESLint issues found 🎉", LEVEL.INFO)
-						end
-					end)
-				end,
-			})
-		end
-
-		vim.api.nvim_create_user_command("Lint", lint_src_to_qf, {
-			desc = "Run ESLint over src/ (async → quickfix + spinner)",
-		})
+			-- run oxlint, put into quickfix, and open window
+			vim.cmd("silent make | cwindow")
+		end, { desc = "Run Oxlint over src/ (project-wide → quickfix)" })
 	end,
 }
