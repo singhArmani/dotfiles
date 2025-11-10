@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "enabled": true
+    },
+    "sequentialthinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"]
+    }
+  },
+  "lsp": {
+    "oxlint": {
+      "command": ["oxc_language_server", "--stdio"],
+      "extensions": ["/usr/local/bin/oxc"]
+    }
+  }
+}

@@ -6,10 +6,15 @@
       "url": "https://api.githubcopilot.com/mcp/",
       "headers": { "Authorization": "$(echo Bearer $GITHUB_PAT)" }
     },
-    "atlassian": {
+    "sequentialthinking": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
     }
   },
   "lsp": {
@@ -17,6 +22,15 @@
       "command": "typescript-language-server",
       "args": ["--stdio"]
     },
+    "oxlint": { "command": "oxc_language_server" },
     "csharp": { "command": "csharp-ls", "args": [] }
+  },
+  "permissions": {
+    "allowed_tools": [
+      "view",
+      "grep",
+      "ls",
+      "mcp_sequentialthinking_sequential_thinking"
+    ]
   }
 }
