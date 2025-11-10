@@ -7,14 +7,9 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- Configure diagnostics with modern signs API
+		-- Diagnostics (modern signs API)
 		vim.diagnostic.config({
 			virtual_text = false,
-			-- virtual_lines = {
-			--   only_current_line = true,
-			--   highlight_mode = "combine", -- or "replace" for better blending
-			-- },
-			--
 			signs = {
 				text = {
 					[vim.diagnostic.severity.ERROR] = "",
@@ -25,7 +20,7 @@ return {
 			},
 		})
 
-		-- Set up diagnostic hover
+		-- Diagnostic hover timing
 		vim.o.updatetime = 250
 
 		vim.api.nvim_create_autocmd("CursorHold", {
@@ -37,55 +32,109 @@ return {
 					border = "rounded",
 					source = "always",
 					prefix = "",
-					scope = "line", -- or "cursor"
+					scope = "line",
 				})
 			end,
 		})
 
-		-- Customize the border for hover and signature help (modern way)
+		-- Rounded borders for hover + signatureHelp
 		vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
 			config = config or {}
-			config.border = "rounded" -- You can use "single", "double", "rounded", "solid", "shadow"
-			return vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
+			config.border = "rounded"
+			return vim.lsp.util.open_floating_preview(result and result.contents or {}, "markdown", config)
 		end
 
-		vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, ctx, config)
+		vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, _, config)
 			config = config or {}
-			config.border = "rounded" -- Use the same border style for signature help
+			config.border = "rounded"
 			if not (result and result.signatures and result.signatures[1]) then
 				return
 			end
 			local signature = result.signatures[1]
-			local contents = vim.split(signature.label, "\n", { plain = true })
+			local contents = vim.split(signature.label or "", "\n", { plain = true })
 			return vim.lsp.util.open_floating_preview(contents, "markdown", config)
 		end
 
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-		local util = require("lspconfig.util")
-
-		-- import mason_lspconfig plugin
+		-- mason-lspconfig + cmp capabilities
 		local mason_lspconfig = require("mason-lspconfig")
-
-		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- copy diagnostics to clipboard
-		local keymap = vim.keymap -- for conciseness
+		-- Optional: lspconfig util helpers (safe to require; does not use deprecated framework)
+		local util_ok, util = pcall(require, "lspconfig.util")
+
+		-- Copy first diagnostic under cursor to clipboard
+		local keymap = vim.keymap
 		local function copy_diagnostic_to_clipboard()
 			local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
 			if #diagnostics == 0 then
 				vim.notify("No diagnostic message under cursor.", vim.log.levels.INFO)
 				return
 			end
-			local msg = diagnostics[1].message
-			vim.fn.setreg("+", msg)
+			vim.fn.setreg("+", diagnostics[1].message or "")
 			vim.notify("Diagnostic copied to clipboard!", vim.log.levels.INFO)
 		end
-		-- end --------
 
-		-- harper_ls setting
-		lspconfig.harper_ls.setup({
+		-- LspAttach keymaps
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				local opts = { buffer = ev.buf, silent = true }
+
+				opts.desc = "Show LSP references"
+				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+
+				opts.desc = "Go to declaration"
+				keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+				opts.desc = "Show LSP definitions"
+				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+
+				opts.desc = "Show LSP implementations"
+				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+
+				opts.desc = "Show LSP type definitions"
+				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+
+				opts.desc = "See available code actions"
+				keymap.set({ "n", "v" }, "<leader>do", vim.lsp.buf.code_action, opts)
+
+				opts.desc = "Smart rename"
+				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+				opts.desc = "Show buffer diagnostics"
+				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+
+				opts.desc = "Show line diagnostics"
+				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+				opts.desc = "Next diagnostic (skip hints)"
+				keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = 1, severity = { min = vim.diagnostic.severity.WARN } })
+				end, opts)
+
+				opts.desc = "Previous diagnostic (skip hints)"
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, severity = { min = vim.diagnostic.severity.WARN } })
+				end, opts)
+
+				opts.desc = "Show documentation"
+				keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+				opts.desc = "Restart LSP"
+				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+
+				opts.desc = "Copy diagnostic to clipboard"
+				keymap.set("n", "<leader>dc", copy_diagnostic_to_clipboard, opts)
+			end,
+		})
+
+		-------------------------------------------------------------------
+		-- Server configs (new API)
+		-------------------------------------------------------------------
+
+		-- harper_ls
+		vim.lsp.config("harper_ls", {
 			settings = {
 				["harper-ls"] = {
 					linters = {
@@ -101,110 +150,49 @@ return {
 						Matcher = true,
 						CorrectNumberSuffix = true,
 					},
-					codeActions = {
-						ForceStable = false,
-					},
-					markdown = {
-						IgnoreLinkTitle = false,
-					},
+					codeActions = { ForceStable = false },
+					markdown = { IgnoreLinkTitle = false },
 					diagnosticSeverity = "hint",
 					isolateEnglish = true,
 					dialect = "British",
 					maxFileLength = 120000,
 				},
 			},
-		})
-
-		-- NEW: oxlint LSP setup
-		local capabilities = cmp_nvim_lsp.default_capabilities()
-		lspconfig.oxlint.setup({
 			capabilities = capabilities,
-			root_dir = util.root_pattern(".oxlintrc.json", "package.json", ".git"),
-			-- cmd = { "/Users/aman/.nvm/versions/node/v20.19.0/bin/oxc_language_server" }, -- optional override
 		})
+		vim.lsp.enable("harper_ls")
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-			callback = function(ev)
-				-- Buffer local mappings.
-				-- See `:help vim.lsp.*` for documentation on any of the below functions
-				local opts = { buffer = ev.buf, silent = true }
-
-				-- set keybinds
-				opts.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-
-				opts.desc = "Go to declaration"
-				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
-
-				opts.desc = "Show LSP definitions"
-				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
-
-				opts.desc = "Show LSP implementations"
-				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
-
-				opts.desc = "Show LSP type definitions"
-				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
-
-				opts.desc = "See available code actions"
-				keymap.set({ "n", "v" }, "<leader>do", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
-				opts.desc = "Smart rename"
-				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-
-				opts.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-
-				opts.desc = "Show line diagnostics"
-				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-				opts.desc = "Next diagnostic (skip hints)"
-				keymap.set("n", "]d", function()
-					vim.diagnostic.jump({ count = 1, severity = { min = vim.diagnostic.severity.WARN } })
-				end, opts)
-
-				opts.desc = "Previous diagnostic (skip hints)"
-				keymap.set("n", "[d", function()
-					vim.diagnostic.jump({ count = -1, severity = { min = vim.diagnostic.severity.WARN } })
-				end, opts)
-
-				opts.desc = "Show documentation for what is under cursor"
-				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-				opts.desc = "Restart LSP"
-				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-				opts.desc = "Copy diagnostic to clipboard"
-				keymap.set("n", "<leader>dc", copy_diagnostic_to_clipboard, opts)
-			end,
+		-- oxlint
+		vim.lsp.config("oxlint", {
+			capabilities = capabilities,
+			root_dir = util_ok and util.root_pattern(".oxlintrc.json", "package.json", ".git") or nil,
+			-- cmd = { "/Users/aman/.nvm/versions/node/v20.19.0/bin/oxc_language_server" },
 		})
+		vim.lsp.enable("oxlint")
 
-		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		-- lua_ls (special settings)
+		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					diagnostics = { globals = { "vim" } },
+					completion = { callSnippet = "Replace" },
+					workspace = { checkThirdParty = false },
+				},
+			},
+		})
+		vim.lsp.enable("lua_ls")
 
+		-- Everything else via Mason: define minimal configs + enable
 		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
 			function(server_name)
-				lspconfig[server_name].setup({
+				if server_name == "lua_ls" or server_name == "harper_ls" or server_name == "oxlint" then
+					return -- already configured above
+				end
+				vim.lsp.config(server_name, {
 					capabilities = capabilities,
 				})
-			end,
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
+				vim.lsp.enable(server_name)
 			end,
 		})
 	end,
