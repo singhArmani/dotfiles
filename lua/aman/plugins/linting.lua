@@ -1,16 +1,16 @@
 return {
 	"mfussenegger/nvim-lint",
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = { "folke/trouble.nvim" },
 	config = function()
 		local lint = require("lint")
 
-		-- keep per-file linting if you like
 		lint.linters_by_ft = {
-			javascript = { "oxlint" },
-			javascriptreact = { "oxlint" },
+			python = { "pylint" },
 			typescript = { "oxlint" },
 			typescriptreact = { "oxlint" },
-			python = { "pylint" },
+			javascript = { "oxlint" },
+			javascriptreact = { "oxlint" },
 		}
 
 		local grp = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -23,12 +23,8 @@ return {
 			end,
 		})
 
-		----------------------------------------------------------------
-		-- Project-wide Oxlint → Quickfix
-		----------------------------------------------------------------
-		-- Project-wide Oxlint → Quickfix via :make (robust + simple)
-		vim.api.nvim_create_user_command("LintProject", function()
-			-- 1) Find a safe root (never nil)
+		-- :Lint → Run project-wide oxlint, show results in quickfix
+		vim.api.nvim_create_user_command("Lint", function()
 			local function project_root()
 				local buf = vim.api.nvim_buf_get_name(0)
 				local start_dir = buf ~= "" and vim.fs.dirname(buf) or (vim.uv or vim.loop).cwd()
@@ -39,11 +35,12 @@ return {
 				return found and vim.fs.dirname(found) or (vim.uv or vim.loop).cwd()
 			end
 
-			local root = project_root() -- always a string now
-
-			-- 2) Choose command: oxlint or pnpm exec oxlint
-			local runner = (vim.fn.executable("oxlint") == 1) and "oxlint"
-				or ((vim.fn.executable("pnpm") == 1) and "pnpm exec oxlint" or nil)
+			local root = project_root()
+			local src_dir = vim.fn.isdirectory(root .. "/src") == 1 and "src" or "."
+			-- Prefer pnpm exec so we use project's local oxlint with .oxlintrc.json
+			local runner = (vim.fn.executable("pnpm") == 1 and vim.fn.filereadable(root .. "/package.json") == 1)
+					and "pnpm exec oxlint"
+				or ((vim.fn.executable("oxlint") == 1) and "oxlint" or nil)
 
 			if not runner then
 				vim.notify(
@@ -53,28 +50,45 @@ return {
 				return
 			end
 
-			-- 3) Build makeprg with an inline 'cd ROOT && …' (no lcd, no nil)
-			local root_esc = vim.fn.shellescape(root)
-			vim.opt.makeprg = table.concat({
+			local cmd = table.concat({
 				"cd",
-				root_esc,
+				vim.fn.shellescape(root),
 				"&&",
 				runner,
 				"--format=unix",
-				"src",
+				src_dir,
 				"--ignore-pattern",
 				"src/api-lib",
+				"--ignore-pattern",
+				"src/client",
 				"--ignore-pattern",
 				"src/constants/usZipCodeMap.ts",
 				"--ignore-pattern",
 				"src/constants/airports.ts",
 			}, " ")
 
-			-- 4) Basic unix errorformat → file:line:col: message  (fallback: file:line: message)
-			vim.opt.errorformat = "%f:%l:%c:%m,%f:%l:%m"
+			local output = vim.fn.system(cmd)
+			local qf = {}
+			for line in vim.gsplit(output, "\n") do
+				-- file:line:col: message (unix format)
+				local f, l, c, m = line:match("^([^:]+):(%d+):(%d+):(.+)$")
+				if f and l and m then
+					local abs_path = f:match("^/") and f or (root .. "/" .. f)
+					table.insert(qf, {
+						filename = abs_path,
+						lnum = tonumber(l),
+						col = tonumber(c) or 1,
+						text = vim.trim(m),
+					})
+				end
+			end
 
-			-- 5) Run and open quickfix
-			vim.cmd("silent make | cwindow")
-		end, { desc = "Run Oxlint over src/ (project-wide → Quickfix)" })
+			vim.fn.setqflist(qf, "r")
+			if #qf > 0 then
+				vim.cmd("Trouble qflist open")
+			else
+				vim.notify("No lint issues found", vim.log.levels.INFO)
+			end
+		end, { desc = "Run project-wide oxlint (Trouble)" })
 	end,
 }
