@@ -55,6 +55,70 @@ return {
 		end,
 	},
 	{
+		"rebelot/kanagawa.nvim",
+		name = "kanagawa",
+		priority = 1000,
+		config = function()
+			require("kanagawa").setup({
+				theme = "wave",
+			})
+		end,
+	},
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+		name = "oxocarbon",
+		priority = 1000,
+		config = function()
+			vim.opt.background = "dark"
+			vim.opt.termguicolors = true
+		end,
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		priority = 1000,
+		config = function()
+			require("rose-pine").setup({})
+		end,
+	},
+	{
+		"neanias/everforest-nvim",
+		name = "everforest",
+		priority = 1000,
+		config = function()
+			require("everforest").setup({})
+		end,
+	},
+	{
+		"bluz71/vim-moonfly-colors",
+		name = "moonfly",
+		priority = 1000,
+	},
+	{
+		"AlexvZyl/nordic.nvim",
+		name = "nordic",
+		priority = 1000,
+		config = function()
+			require("nordic").setup({})
+		end,
+	},
+	{
+		"Mofiqul/dracula.nvim",
+		name = "dracula",
+		priority = 1000,
+		config = function()
+			require("dracula").setup({})
+		end,
+	},
+	{
+		"Shatur/neovim-ayu",
+		name = "ayu",
+		priority = 1000,
+		config = function()
+			require("ayu").setup({ mirage = true })
+		end,
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,

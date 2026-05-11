@@ -12,6 +12,69 @@ return {
           ]],
 				},
 				{
+					name = "kanagawa wave",
+					colorscheme = "kanagawa-wave",
+					before = [[
+            vim.opt.background = "dark"
+          ]],
+				},
+				{
+					name = "rose pine (moon)",
+					colorscheme = "rose-pine-moon",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "everforest",
+					colorscheme = "everforest",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "moonfly",
+					colorscheme = "moonfly",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nordic",
+					colorscheme = "nordic",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "dracula",
+					colorscheme = "dracula",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "ayu mirage",
+					colorscheme = "ayu-mirage",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "oxocarbon",
+					colorscheme = "oxocarbon",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
 					name = "github light",
 					colorscheme = "github_light_high_contrast",
 					before = [[

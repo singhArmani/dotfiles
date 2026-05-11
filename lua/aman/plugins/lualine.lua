@@ -34,7 +34,7 @@ return {
 		-- configure lualine with modified theme
 		lualine.setup({
 			options = {
-				theme = "catppuccin", -- or use "bubbles_theme"
+				theme = "auto", -- follow active colorscheme
 				component_separators = "",
 				section_separators = { left = "", right = "" },
 			},
