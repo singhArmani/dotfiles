@@ -7,14 +7,11 @@ return {
 
 		lint.linters_by_ft = {
 			python = { "pylint" },
-			typescript = { "oxlint" },
-			typescriptreact = { "oxlint" },
-			javascript = { "oxlint" },
-			javascriptreact = { "oxlint" },
+			-- JS/TS: oxlint via oxc_language_server only (see lspconfig oxlint); avoids duplicate runs + tsgolint in nvim-lint
 		}
 
 		local grp = vim.api.nvim_create_augroup("lint", { clear = true })
-		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 			group = grp,
 			callback = function()
 				if lint.linters_by_ft[vim.bo.filetype] then
@@ -23,8 +20,8 @@ return {
 			end,
 		})
 
-		-- :Lint → Run project-wide oxlint, show results in quickfix
-		vim.api.nvim_create_user_command("Lint", function()
+		-- :Lint → project-wide oxlint | :Lint! → same with --type-aware (tsgolint; heavier)
+		vim.api.nvim_create_user_command("Lint", function(opts)
 			local function project_root()
 				local buf = vim.api.nvim_buf_get_name(0)
 				local start_dir = buf ~= "" and vim.fs.dirname(buf) or (vim.uv or vim.loop).cwd()
@@ -50,11 +47,16 @@ return {
 				return
 			end
 
-			local cmd = table.concat({
+			local pieces = {
 				"cd",
 				vim.fn.shellescape(root),
 				"&&",
 				runner,
+			}
+			if opts.bang then
+				table.insert(pieces, "--type-aware")
+			end
+			vim.list_extend(pieces, {
 				"--format=unix",
 				src_dir,
 				"--ignore-pattern",
@@ -65,7 +67,8 @@ return {
 				"src/constants/usZipCodeMap.ts",
 				"--ignore-pattern",
 				"src/constants/airports.ts",
-			}, " ")
+			})
+			local cmd = table.concat(pieces, " ")
 
 			local output = vim.fn.system(cmd)
 			local qf = {}
@@ -89,6 +92,6 @@ return {
 			else
 				vim.notify("No lint issues found", vim.log.levels.INFO)
 			end
-		end, { desc = "Run project-wide oxlint (Trouble)" })
+		end, { bang = true, desc = ":Lint project oxlint | :Lint! adds --type-aware" })
 	end,
 }

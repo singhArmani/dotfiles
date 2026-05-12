@@ -162,11 +162,15 @@ return {
 		})
 		vim.lsp.enable("harper_ls")
 
-		-- oxlint
+		-- oxlint (LSP; keep type-aware off in-editor — avoids tsgolint + tsgo RAM/CPU doubling)
 		vim.lsp.config("oxlint", {
 			capabilities = capabilities,
 			root_dir = util_ok and util.root_pattern(".oxlintrc.json", "package.json", ".git") or nil,
 			-- cmd = { "/Users/aman/.nvm/versions/node/v20.19.0/bin/oxc_language_server" },
+			settings = {
+				typeAware = false,
+				run = "onSave",
+			},
 		})
 		vim.lsp.enable("oxlint")
 
