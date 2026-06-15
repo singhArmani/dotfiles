@@ -1,6 +1,5 @@
 return {
 	"folke/trouble.nvim",
-	version = "v3.7.1",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		modes = {
