@@ -25,7 +25,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
-source ~/workspace/dotfiles/secrets.zsh
+[ -f ~/workspace/dotfiles/secrets.zsh ] && source ~/workspace/dotfiles/secrets.zsh
 
 bindkey '^ ' autosuggest-accept
 
