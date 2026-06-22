@@ -7,7 +7,6 @@
 
 - link:
     ~/.zshrc: zshrc
-    ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/nvim/lua/config.lua: config.lua
