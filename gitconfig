@@ -68,6 +68,7 @@
 	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
+	external = /Users/aman/.local/bin/sem-diff-wrapper
 [push]
 	autoSetupRemote = true
 [fetch]

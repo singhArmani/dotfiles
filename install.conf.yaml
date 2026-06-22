@@ -11,6 +11,7 @@
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/nvim/lua/config.lua: config.lua
     ~/.tmux.conf: tmux.conf
+    ~/.tmuxinator/avarni.yml: tmuxinator/avarni.yml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
