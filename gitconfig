@@ -29,11 +29,11 @@
 
     # Resets the local master to match the one on the remote
     rogm = reset --hard origin/master
-	b = brunch
+	b = branch
 	praise = blame
 
 [core]
-	excludesfile = /Users/aman/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff "image"]
@@ -68,7 +68,7 @@
 	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
-	external = /Users/aman/.local/bin/sem-diff-wrapper
+	external = ~/.local/bin/sem-diff-wrapper
 [push]
 	autoSetupRemote = true
 [fetch]
