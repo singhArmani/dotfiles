@@ -22,4 +22,5 @@ brew "tmux"
 brew "tmuxinator"
 brew "zoxide"
 
+cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
