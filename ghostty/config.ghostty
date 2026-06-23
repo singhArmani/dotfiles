@@ -1,23 +1,31 @@
-# Load Catppuccin Mocha theme
-import = themes/catppuccin-mocha.theme
+# Theme
+theme = catppuccin-mocha
 
 # Font
 font-family = CaskaydiaCove Nerd Font
-font-size = 16
+font-size = 15
 font-ligatures = true
-font-hinting = slight
+font-thicken = true
 font-antialias = true
 
-# Terminal shell
+# Shell
 shell = /bin/zsh
 term = xterm-256color
 
-# Window behavior
+# Window
 start-fullscreen = true
-window-padding-x = 2
-window-padding-y = 2
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+macos-titlebar-style = hidden
+background-opacity = 0.95
+background-blur-radius = 20
 
-# Rendering & DX
+# DX
 enable-kitty-graphics = true
 copy-on-select = true
 watch-config = true
+mouse-hide-while-typing = true
+scrollback-limit = 10000
+clipboard-read = allow
+clipboard-write = allow
