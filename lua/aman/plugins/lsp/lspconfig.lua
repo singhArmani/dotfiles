@@ -60,9 +60,6 @@ return {
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Optional: lspconfig util helpers (safe to require; does not use deprecated framework)
-		local util_ok, util = pcall(require, "lspconfig.util")
-
 		-- Copy first diagnostic under cursor to clipboard
 		local keymap = vim.keymap
 		local function copy_diagnostic_to_clipboard()
@@ -163,13 +160,16 @@ return {
 		vim.lsp.enable("harper_ls")
 
 		-- oxlint (LSP; keep type-aware off in-editor — avoids tsgolint + tsgo RAM/CPU doubling)
+		-- NOTE: don't override root_dir here. lspconfig's lsp/oxlint.lua resolves the
+		-- root by walking up to .oxlintrc.json (handles git worktrees) and launches the
+		-- project-local `node_modules/.bin/oxlint --lsp`. The old util.root_pattern() has
+		-- the deprecated fun(startpath) signature, which nvim 0.11+ never calls correctly
+		-- (it expects fun(bufnr, on_dir)), so the client failed to attach.
 		vim.lsp.config("oxlint", {
 			capabilities = capabilities,
-			root_dir = util_ok and util.root_pattern(".oxlintrc.json", "package.json", ".git") or nil,
-			-- cmd = { "/Users/aman/.nvm/versions/node/v20.19.0/bin/oxc_language_server" },
 			settings = {
-				typeAware = false,
-				run = "onSave",
+				typeAware = false, -- keep tsgolint/tsgo off in-editor; react-compiler is NOT type-aware
+				run = "onType",
 			},
 		})
 		vim.lsp.enable("oxlint")
