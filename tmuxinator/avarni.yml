@@ -1,25 +1,25 @@
 name: Avarni
-root: ~/workspace
+root: ~/workspace/avarni
 
 windows:
   - 🎃avarni-spa:
-      root: ~/workspace/avarni-dashboard
+      root: ~/workspace/avarni/avarni-spa
       panes:
         - nvim
 
   - 🌐core-api:
-      root: ~/workspace/core-api
+      root: ~/workspace/avarni/avarni-api
       panes:
         - nvim
 
   - 🚀servers:
       layout: main-vertical
       panes:
-        - cd ~/workspace/avarni-dashboard && pnpm start
-        - cd ~/workspace/core-api && dotnet run --project Avarni.Api
-        - cd ~/workspace/core-api && dotnet run --project Avarni.Worker/Avarni.Worker.csproj -- --seed false
+        - cd ~/workspace/avarni/avarni-spa && pnpm start
+        - cd ~/workspace/avarni/avarni-api && dotnet run --project Avarni.Api
+        - cd ~/workspace/avarni/avarni-api && dotnet run --project Avarni.Worker/Avarni.Worker.csproj -- --seed false
 
   - 🧪workbench:
-      root: ~/workspace
+      root: ~/workspace/avarni
       panes:
         -

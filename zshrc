@@ -46,7 +46,7 @@ alias mux="tmuxinator"
 alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias blog="cd ~/workspace/ && tmuxinator start blog"
-alias avarni="cd ~/workspace/ && tmuxinator start avarni"
+alias avarni="cd ~/workspace/avarni && tmuxinator start avarni"
 alias tn="tmux rename-window"
 
 alias dot="cd ~/workspace/dotfiles/"
