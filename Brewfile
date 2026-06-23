@@ -20,6 +20,7 @@ brew "tmux"
 brew "tmuxinator"
 brew "zoxide"
 
+cask "dotnet-sdk"
 cask "ghostty"
 cask "orbstack"
 cask "font-caskaydia-cove-nerd-font"
