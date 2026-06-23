@@ -1,19 +1,13 @@
 # Theme
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 # Font
 font-family = CaskaydiaCove Nerd Font
 font-size = 15
-font-ligatures = true
 font-thicken = true
-font-antialias = true
-
-# Shell
-shell = /bin/zsh
-term = xterm-256color
 
 # Window
-start-fullscreen = true
+fullscreen = true
 window-padding-x = 12
 window-padding-y = 10
 window-padding-balance = true
@@ -22,9 +16,7 @@ background-opacity = 0.95
 background-blur-radius = 20
 
 # DX
-enable-kitty-graphics = true
 copy-on-select = true
-watch-config = true
 mouse-hide-while-typing = true
 scrollback-limit = 10000
 clipboard-read = allow
