@@ -9,6 +9,8 @@
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.config/nvim/init.lua: init.lua
+    ~/.config/nvim/lua/aman: lua/aman
     ~/.config/nvim/lua/config.lua: config.lua
     ~/.tmux.conf: tmux.conf
     ~/.config/ghostty/config: ghostty/config.ghostty
