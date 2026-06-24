@@ -3,22 +3,18 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("oil").setup({
-			default_file_explorer = true,
-			columns = { "icon" },
+			columns = {},
 			view_options = {
-				show_hidden = false,
+				show_hidden = true,
 			},
-			float = {
-				padding = 2,
-				border = "rounded",
+			keymaps = {
+				["<C-h>"] = false,
+				["<C-l>"] = false,
+				["<C-p>"] = false,
+				["_"] = false,
 			},
 		})
 
-		local keymap = vim.keymap
-		keymap.set("n", "<leader>u", "<cmd>Oil<CR>", { desc = "Open file explorer" })
-		keymap.set("n", "<leader>v", "<cmd>Oil<CR>", { desc = "Open file explorer" })
-		keymap.set("n", "<leader>ef", function()
-			require("oil").open(vim.fn.expand("%:p:h"))
-		end, { desc = "Open file explorer at current file" })
+		vim.keymap.set("n", "<leader>v", "<cmd>Oil<cr>", { silent = true, desc = "Open parent directory" })
 	end,
 }
