@@ -17,7 +17,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 export EDITOR=nvim
 
-alias vi="NVIM_APPNAME=nvim-old nvim"
 alias ni="nvim"
 alias pn='pnpm'
 
@@ -25,7 +24,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn alias-tips)
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
-[ -f ~/workspace/dotfiles/secrets.zsh ] && source ~/workspace/dotfiles/secrets.zsh
 
 bindkey '^ ' autosuggest-accept
 
@@ -37,7 +35,7 @@ alias lg="lazygit"
 # config file aliases
 alias zc="nvim ~/.zshrc"
 alias gitc="nvim ~/.gitconfig"
-alias ac="nvim ~/.config/alacritty/alacritty.toml"
+alias gc="nvim ~/.config/ghostty/config"
 alias lc="nvim ~/.config/nvim/lua/config.lua"
 alias lu="cd ~/.config/nvim/lua && nvim"
 
@@ -45,7 +43,6 @@ alias lu="cd ~/.config/nvim/lua && nvim"
 alias mux="tmuxinator"
 alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
-alias blog="cd ~/workspace/ && tmuxinator start blog"
 alias avarni="cd ~/workspace/avarni && tmuxinator start avarni"
 alias tn="tmux rename-window"
 
