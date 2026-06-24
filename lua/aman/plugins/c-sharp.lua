@@ -1,13 +1,7 @@
 return {
 	"seblj/roslyn.nvim",
-	opts = {
-		-- exe = {
-		-- 	"dotnet",
-		-- 	vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
-		-- },
-	},
+	opts = {},
 	config = function(_, opts)
-		-- Configure using the modern vim.lsp.config approach
 		vim.lsp.config("roslyn", {
 			on_attach = function()
 				vim.cmd([[compiler dotnet]])
@@ -29,8 +23,6 @@ return {
 				},
 			},
 		})
-
-		-- Setup roslyn with the provided opts
 		require("roslyn").setup(opts)
 	end,
 }
