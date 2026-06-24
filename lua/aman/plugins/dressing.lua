@@ -4,7 +4,7 @@ return {
 	opts = {
 		input = {
 			enabled = true,
-			prefer_width = 60, -- 👈 increase width here
+			prefer_width = 60,
 			win_options = {
 				winblend = 0,
 			},

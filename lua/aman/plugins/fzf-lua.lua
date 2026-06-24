@@ -1,5 +1,6 @@
 return {
 	"ibhagwan/fzf-lua",
+	event = "VeryLazy",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"folke/todo-comments.nvim",
@@ -20,6 +21,10 @@ return {
 				},
 			},
 		})
+
+		vim.schedule(function()
+			fzf.register_ui_select()
+		end)
 
 		local keymap = vim.keymap
 
