@@ -154,35 +154,6 @@ return {
 		-- Server configs (new API)
 		-------------------------------------------------------------------
 
-		-- harper_ls
-		vim.lsp.config("harper_ls", {
-			settings = {
-				["harper-ls"] = {
-					linters = {
-						SpellCheck = true,
-						SpelledNumbers = false,
-						AnA = false,
-						SentenceCapitalization = false,
-						UnclosedQuotes = true,
-						WrongQuotes = false,
-						LongSentences = false,
-						RepeatedWords = true,
-						Spaces = true,
-						Matcher = true,
-						CorrectNumberSuffix = true,
-					},
-					codeActions = { ForceStable = false },
-					markdown = { IgnoreLinkTitle = false },
-					diagnosticSeverity = "hint",
-					isolateEnglish = true,
-					dialect = "British",
-					maxFileLength = 120000,
-				},
-			},
-			capabilities = capabilities,
-		})
-		vim.lsp.enable("harper_ls")
-
 		-- oxlint (LSP; keep type-aware off in-editor — avoids tsgolint + tsgo RAM/CPU doubling)
 		-- NOTE: don't override root_dir here. lspconfig's lsp/oxlint.lua resolves the
 		-- root by walking up to .oxlintrc.json (handles git worktrees) and launches the
@@ -213,7 +184,7 @@ return {
 
 		-- All Mason-installed servers are enabled automatically by
 		-- mason-lspconfig's `automatic_enable`, inheriting the vim.lsp.config("*")
-		-- defaults above. The servers configured above (lua_ls, harper_ls, oxlint)
-		-- and roslyn (via roslyn.nvim) provide their own per-server overrides.
+		-- defaults above. The servers configured above (oxlint, lua_ls) and
+		-- roslyn (via roslyn.nvim) provide their own per-server overrides.
 	end,
 }
