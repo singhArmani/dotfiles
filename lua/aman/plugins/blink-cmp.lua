@@ -2,12 +2,14 @@ return {
 	"saghen/blink.cmp",
 	version = "*",
 	dependencies = {
-		"saghen/blink.compat",
 		{
 			"supermaven-inc/supermaven-nvim",
 			opts = {
-				disable_inline_completion = true, -- let blink.cmp render suggestions
-				disable_keymaps = true, -- don't bind its own keys; use blink's
+				-- Inline AI ghost text is ON (default). Supermaven binds its own
+				-- insert-mode accept key, independent of the blink popup menu.
+				keymaps = {
+					accept_suggestion = "<C-Space>", -- accept the full ghost suggestion
+				},
 			},
 		},
 		{
@@ -35,9 +37,8 @@ return {
 		},
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "supermaven", "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
 			providers = {
-				supermaven = { name = "Supermaven", module = "blink.compat.source", async = true },
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				codecompanion = { name = "CodeCompanion", module = "codecompanion.providers.completion.blink" },
 			},
