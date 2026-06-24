@@ -78,20 +78,22 @@ return {
 			callback = function(ev)
 				local opts = { buffer = ev.buf, silent = true }
 
+			local fzf = require("fzf-lua")
+
 				opts.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+				keymap.set("n", "gR", fzf.lsp_references, opts)
 
 				opts.desc = "Go to declaration"
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
 				opts.desc = "Show LSP definitions"
-				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+				keymap.set("n", "gd", fzf.lsp_definitions, opts)
 
 				opts.desc = "Show LSP implementations"
-				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+				keymap.set("n", "gi", fzf.lsp_implementations, opts)
 
 				opts.desc = "Show LSP type definitions"
-				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+				keymap.set("n", "gt", fzf.lsp_typedefs, opts)
 
 				opts.desc = "See available code actions"
 				keymap.set({ "n", "v" }, "<leader>do", vim.lsp.buf.code_action, opts)
@@ -100,7 +102,7 @@ return {
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 				opts.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+				keymap.set("n", "<leader>D", fzf.diagnostics_document, opts)
 
 				opts.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -190,7 +192,7 @@ return {
 		-- Everything else via Mason: define minimal configs + enable
 		mason_lspconfig.setup_handlers({
 			function(server_name)
-				if server_name == "lua_ls" or server_name == "harper_ls" or server_name == "oxlint" then
+				if server_name == "lua_ls" or server_name == "harper_ls" or server_name == "oxlint" or server_name == "roslyn" then
 					return -- already configured above
 				end
 				vim.lsp.config(server_name, {
