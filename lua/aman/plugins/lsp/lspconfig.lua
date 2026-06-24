@@ -55,9 +55,10 @@ return {
 			return vim.lsp.util.open_floating_preview(contents, "markdown", config)
 		end
 
-		-- mason-lspconfig + blink.cmp capabilities
-		local mason_lspconfig = require("mason-lspconfig")
+		-- blink.cmp capabilities applied as the default for every server,
+		-- including those auto-enabled by mason-lspconfig (v2 automatic_enable).
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		vim.lsp.config("*", { capabilities = capabilities })
 
 		-- Copy first diagnostic under cursor to clipboard
 		local keymap = vim.keymap
@@ -188,17 +189,9 @@ return {
 		})
 		vim.lsp.enable("lua_ls")
 
-		-- Everything else via Mason: define minimal configs + enable
-		mason_lspconfig.setup_handlers({
-			function(server_name)
-				if server_name == "lua_ls" or server_name == "harper_ls" or server_name == "oxlint" or server_name == "roslyn" then
-					return -- already configured above
-				end
-				vim.lsp.config(server_name, {
-					capabilities = capabilities,
-				})
-				vim.lsp.enable(server_name)
-			end,
-		})
+		-- All Mason-installed servers are enabled automatically by
+		-- mason-lspconfig's `automatic_enable`, inheriting the vim.lsp.config("*")
+		-- defaults above. The servers configured above (lua_ls, harper_ls, oxlint)
+		-- and roslyn (via roslyn.nvim) provide their own per-server overrides.
 	end,
 }

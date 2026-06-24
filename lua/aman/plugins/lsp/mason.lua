@@ -1,10 +1,7 @@
 return {
 	-- Mason.nvim plugin
-	-- Pinned to v1: lspconfig.lua relies on mason-lspconfig's `setup_handlers`,
-	-- which was removed in Mason/mason-lspconfig 2.0.
 	{
 		"mason-org/mason.nvim",
-		version = "^1.0.0",
 		cmd = {
 			"Mason",
 			"MasonInstall",
@@ -34,7 +31,6 @@ return {
 	-- Mason-lspconfig plugin
 	{
 		"mason-org/mason-lspconfig.nvim",
-		version = "^1.0.0",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"mason-org/mason.nvim",
@@ -43,8 +39,12 @@ return {
 			-- import mason-lspconfig
 			local mason_lspconfig = require("mason-lspconfig")
 
-			-- Setup mason-lspconfig
+			-- Setup mason-lspconfig (v2)
+			-- `automatic_enable` (default true) calls vim.lsp.enable() for every
+			-- installed server, replacing the removed `setup_handlers`. Per-server
+			-- settings/capabilities are defined via vim.lsp.config() in lspconfig.lua.
 			mason_lspconfig.setup({
+				automatic_enable = true,
 				-- list of servers for mason to install
 				ensure_installed = {
 					-- "tsserver", (powered by typescript-tools.nvim)
