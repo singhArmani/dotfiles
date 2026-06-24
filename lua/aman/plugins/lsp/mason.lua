@@ -1,7 +1,10 @@
 return {
 	-- Mason.nvim plugin
+	-- Pinned to v1: lspconfig.lua relies on mason-lspconfig's `setup_handlers`,
+	-- which was removed in Mason/mason-lspconfig 2.0.
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
+		version = "^1.0.0",
 		cmd = {
 			"Mason",
 			"MasonInstall",
@@ -30,10 +33,11 @@ return {
 
 	-- Mason-lspconfig plugin
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
+		version = "^1.0.0",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 		},
 		config = function()
 			-- import mason-lspconfig
@@ -61,7 +65,7 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 		},
 		config = function()
 			-- import mason-tool-installer
