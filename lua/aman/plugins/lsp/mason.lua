@@ -56,6 +56,7 @@ return {
 					"emmet_ls",
 					"prismals",
 					"pyright",
+					"typos_lsp", -- code-aware spell/typo checker (replaces harper_ls)
 				},
 			})
 		end,
