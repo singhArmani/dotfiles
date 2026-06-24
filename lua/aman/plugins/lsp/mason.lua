@@ -47,7 +47,7 @@ return {
 				automatic_enable = true,
 				-- list of servers for mason to install
 				ensure_installed = {
-					-- "tsserver", (powered by typescript-tools.nvim)
+					"tsgo", -- JS/TS LSP (TypeScript 7 native); also tsc.nvim's type-checker
 					"html",
 					"cssls",
 					"tailwindcss",
