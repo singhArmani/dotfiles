@@ -45,10 +45,17 @@ return {
 		)
 
 		-- ⚡ Inline edit (Visual Mode)
-		map("v", "<LocalLeader>ci", function()
+		map("x", "<LocalLeader>ci", function()
+			-- Leave visual mode so the '< / '> marks are committed, then capture
+			-- the selected line range *before* the async prompt. vim.ui.input
+			-- clears the selection, so referencing '<,'> in on_confirm raised
+			-- E20: Mark not set.
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
+			local start_line = vim.api.nvim_buf_get_mark(0, "<")[1]
+			local end_line = vim.api.nvim_buf_get_mark(0, ">")[1]
 			vim.ui.input({ prompt = "Instruction for CodeCompanion: " }, function(input)
-				if input then
-					vim.cmd("'<,'>CodeCompanion " .. input)
+				if input and input ~= "" then
+					vim.cmd(string.format("%d,%dCodeCompanion %s", start_line, end_line, input))
 				end
 			end)
 		end, { noremap = true, silent = true, desc = "CodeCompanion: Inline Edit with Prompt" })
