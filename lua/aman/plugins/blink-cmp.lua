@@ -3,6 +3,10 @@ return {
 	version = "*",
 	dependencies = {
 		{
+			"Exafunction/codeium.nvim",
+			opts = {},
+		},
+		{
 			"L3MON4D3/LuaSnip",
 			version = "v2.*",
 			build = "make install_jsregexp",
@@ -27,8 +31,9 @@ return {
 		},
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
+			default = { "codeium", "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
 			providers = {
+				codeium = { name = "Codeium", module = "codeium.blink", async = true },
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				codecompanion = { name = "CodeCompanion", module = "codecompanion.providers.completion.blink" },
 			},
