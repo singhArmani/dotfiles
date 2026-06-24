@@ -185,9 +185,17 @@ return {
 		})
 		vim.lsp.enable("lua_ls")
 
+		-- tsgo (TypeScript 7 native LSP). Enabled explicitly rather than via
+		-- mason-lspconfig's automatic_enable: newer mason registries no longer
+		-- expose tsgo as an lspconfig server, so automatic_enable skips it. The
+		-- runtime config (cmd/filetypes/root_dir) is shipped by nvim-lspconfig's
+		-- lsp/tsgo.lua; the binary is project-local node_modules/.bin/tsgo, falling
+		-- back to the mason-tool-installer one.
+		vim.lsp.enable("tsgo")
+
 		-- All Mason-installed servers are enabled automatically by
 		-- mason-lspconfig's `automatic_enable`, inheriting the vim.lsp.config("*")
-		-- defaults above. The servers configured above (oxlint, lua_ls) and
+		-- defaults above. The servers configured above (oxlint, lua_ls, tsgo) and
 		-- roslyn (via roslyn.nvim) provide their own per-server overrides.
 	end,
 }

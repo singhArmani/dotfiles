@@ -45,9 +45,13 @@ return {
 			-- settings/capabilities are defined via vim.lsp.config() in lspconfig.lua.
 			mason_lspconfig.setup({
 				automatic_enable = true,
-				-- list of servers for mason to install
+				-- list of servers for mason to install.
+				-- NOTE: tsgo is intentionally NOT here. Newer mason registries no
+				-- longer advertise the tsgo package as an lspconfig server, so
+				-- mason-lspconfig rejects it ("not a valid entry in ensure_installed").
+				-- Its binary is installed via mason-tool-installer below, and it is
+				-- enabled explicitly in lspconfig.lua.
 				ensure_installed = {
-					"tsgo", -- JS/TS LSP (TypeScript 7 native); also tsc.nvim's type-checker
 					"html",
 					"cssls",
 					"tailwindcss",
@@ -82,6 +86,9 @@ return {
 					"csharpier", -- csharp formatter
 					"pylint", -- python linter
 					"oxlint",
+					"tsgo", -- JS/TS LSP (TypeScript 7 native) + tsc.nvim's type-checker;
+					-- installed by package name here because newer mason registries no
+					-- longer expose it as an lspconfig server (see mason-lspconfig above)
 				},
 			})
 		end,
