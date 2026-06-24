@@ -2,9 +2,13 @@ return {
 	"saghen/blink.cmp",
 	version = "*",
 	dependencies = {
+		"saghen/blink.compat",
 		{
-			"Exafunction/codeium.nvim",
-			opts = {},
+			"supermaven-inc/supermaven-nvim",
+			opts = {
+				disable_inline_completion = true, -- let blink.cmp render suggestions
+				disable_keymaps = true, -- don't bind its own keys; use blink's
+			},
 		},
 		{
 			"L3MON4D3/LuaSnip",
@@ -31,9 +35,9 @@ return {
 		},
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "codeium", "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
+			default = { "supermaven", "lsp", "path", "snippets", "buffer", "dadbod", "codecompanion" },
 			providers = {
-				codeium = { name = "Codeium", module = "codeium.blink", async = true },
+				supermaven = { name = "Supermaven", module = "blink.compat.source", async = true },
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				codecompanion = { name = "CodeCompanion", module = "codecompanion.providers.completion.blink" },
 			},
