@@ -2,7 +2,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
@@ -55,10 +55,9 @@ return {
 			return vim.lsp.util.open_floating_preview(contents, "markdown", config)
 		end
 
-		-- mason-lspconfig + cmp capabilities
+		-- mason-lspconfig + blink.cmp capabilities
 		local mason_lspconfig = require("mason-lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Copy first diagnostic under cursor to clipboard
 		local keymap = vim.keymap
