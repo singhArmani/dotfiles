@@ -19,6 +19,7 @@ brew "sem-cli"
 brew "starship"
 brew "tmux"
 brew "tmuxinator"
+brew "tree-sitter-cli"
 brew "zoxide"
 
 cask "claude-code"
