@@ -10,8 +10,8 @@ return {
 		fzf.setup({
 			winopts = {
 				preview = {
-					layout = "vertical",
-					vertical = "down:50%",
+					layout = "horizontal",
+					horizontal = "right:50%",
 				},
 			},
 			keymap = {
