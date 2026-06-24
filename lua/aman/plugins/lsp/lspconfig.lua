@@ -154,7 +154,10 @@ return {
 		-- Server configs (new API)
 		-------------------------------------------------------------------
 
-		-- oxlint (LSP; keep type-aware off in-editor — avoids tsgolint + tsgo RAM/CPU doubling)
+		-- oxlint (LSP). Type-aware rules ON: catches rules that need type info,
+		-- e.g. no-floating-promises (the "void a fire-and-forget promise" rule).
+		-- This spawns tsgolint + tsgo, so it roughly doubles oxlint's RAM/CPU —
+		-- acceptable on this machine (M-series, 24GB).
 		-- NOTE: don't override root_dir here. lspconfig's lsp/oxlint.lua resolves the
 		-- root by walking up to .oxlintrc.json (handles git worktrees) and launches the
 		-- project-local `node_modules/.bin/oxlint --lsp`. The old util.root_pattern() has
@@ -163,7 +166,7 @@ return {
 		vim.lsp.config("oxlint", {
 			capabilities = capabilities,
 			settings = {
-				typeAware = false, -- keep tsgolint/tsgo off in-editor; react-compiler is NOT type-aware
+				typeAware = true, -- run type-aware rules (tsgolint) in-editor
 				run = "onType",
 			},
 		})
