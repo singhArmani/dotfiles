@@ -98,6 +98,28 @@ return {
 				opts.desc = "See available code actions"
 				keymap.set({ "n", "v" }, "<leader>do", fzf.lsp_code_actions, opts)
 
+				-- Whole-file code actions: tsserver-family servers (tsgo) only
+				-- return import quick-fixes when the diagnostics are passed in the
+				-- request context. The default (cursor-scoped) request only includes
+				-- diagnostics under the cursor, so "Add all missing imports" etc.
+				-- need every buffer diagnostic + a whole-file range.
+				opts.desc = "Code actions (whole file)"
+				keymap.set("n", "<leader>ca", function()
+					local lsp_diags = {}
+					for _, d in ipairs(vim.diagnostic.get(ev.buf)) do
+						if d.user_data and d.user_data.lsp then
+							table.insert(lsp_diags, d.user_data.lsp)
+						end
+					end
+					vim.lsp.buf.code_action({
+						context = { diagnostics = lsp_diags },
+						range = {
+							start = { 1, 0 },
+							["end"] = { vim.api.nvim_buf_line_count(ev.buf), 0 },
+						},
+					})
+				end, opts)
+
 				opts.desc = "Smart rename"
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
