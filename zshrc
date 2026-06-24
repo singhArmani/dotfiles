@@ -112,8 +112,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 
-# Google Cloud SDK
-_gc_sdk="$HOME/workspace/GCP/google-cloud-sdk"
+# Google Cloud SDK (Homebrew cask `gcloud-cli`)
+_gc_sdk="/opt/homebrew/share/google-cloud-sdk"
 if [ -f "$_gc_sdk/path.zsh.inc" ]; then
   . "$_gc_sdk/path.zsh.inc"
   [ -f "$_gc_sdk/completion.zsh.inc" ] && . "$_gc_sdk/completion.zsh.inc"

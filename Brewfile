@@ -24,6 +24,7 @@ brew "zoxide"
 
 cask "claude-code"
 cask "dotnet-sdk"
+cask "gcloud-cli"
 cask "ghostty"
 cask "orbstack"
 cask "font-caskaydia-cove-nerd-font"
