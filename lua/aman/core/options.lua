@@ -1,9 +1,15 @@
 -- Compatibility shim for telescope 0.1.x with Neovim 0.11+ (ft_to_lang was removed)
-if vim.treesitter.language.ft_to_lang == nil then
-	vim.treesitter.language.ft_to_lang = vim.treesitter.language.get_lang or function(ft)
-		return ft
-	end
-end
+-- Runs after VimEnter to ensure vim.treesitter.language is fully initialized
+vim.api.nvim_create_autocmd("VimEnter", {
+	once = true,
+	callback = function()
+		if vim.treesitter.language.ft_to_lang == nil then
+			vim.treesitter.language.ft_to_lang = vim.treesitter.language.get_lang or function(ft)
+				return ft
+			end
+		end
+	end,
+})
 
 vim.cmd("let g:netrw_liststyle = 3")
 
