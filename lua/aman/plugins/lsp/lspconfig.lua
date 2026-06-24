@@ -96,7 +96,7 @@ return {
 				keymap.set("n", "gt", fzf.lsp_typedefs, opts)
 
 				opts.desc = "See available code actions"
-				keymap.set({ "n", "v" }, "<leader>do", vim.lsp.buf.code_action, opts)
+				keymap.set({ "n", "v" }, "<leader>do", fzf.lsp_code_actions, opts)
 
 				opts.desc = "Smart rename"
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
