@@ -19,7 +19,9 @@ return {
 		vim.g.db_ui_win_position = "left"
 
 		-- Define your database connections here
-		vim.g.dbs = {
+		-- Build in a local table, then assign vim.g.dbs ONCE. `table.insert(vim.g.dbs, ...)`
+		-- is a no-op: reading vim.g.dbs returns a copy, not a reference to the global.
+		local dbs = {
 			{
 				name = "local",
 				url = "postgres://myuser:mypassword@localhost:54320/avarni-db",
@@ -32,8 +34,10 @@ return {
 		-- Set it in your gitignored secrets file, e.g.:
 		--   export UAT_DB_URL="postgres://core_api:<password>@127.0.0.1:5433/app"
 		if vim.env.UAT_DB_URL and vim.env.UAT_DB_URL ~= "" then
-			table.insert(vim.g.dbs, { name = "uat", url = vim.env.UAT_DB_URL })
+			table.insert(dbs, { name = "uat-db", url = vim.env.UAT_DB_URL })
 		end
+
+		vim.g.dbs = dbs
 
 		-- Set the location to save the connection details
 		vim.g.db_ui_save_location = "~/workspace/db_ui"
