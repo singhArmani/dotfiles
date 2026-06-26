@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# tmux-sessionizer — fuzzy-pick a project directory under ~/workspace and
+# open/switch to a tmux session named after it. Bound to ^f at the zsh prompt
+# (see `bindkey -s` in zshrc). Pass a directory as $1 to skip the picker.
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find -L ~/workspace -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf --prompt "  ")
+fi
+
+# Nothing picked (Esc/Ctrl-c) — bail without doing anything.
+[[ -z $selected ]] && exit 0
+
+# tmux session names can't contain dots; normalise them to underscores.
+selected_name=$(basename "$selected" | tr . _)
+
+# Outside tmux: create the session (or attach if it exists) directly.
+if [[ -z $TMUX ]]; then
+    tmux new-session -A -s "$selected_name" -c "$selected"
+    exit 0
+fi
+
+# Inside tmux: create it detached if it doesn't exist yet, then switch to it.
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+tmux switch-client -t "$selected_name"

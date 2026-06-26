@@ -45,6 +45,9 @@ alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias avarni="cd ~/workspace/avarni && tmuxinator start avarni"
 alias tn="tmux rename-window"
+# ^f at the prompt: fuzzy-pick a ~/workspace project and jump to its tmux session.
+# (Only fires at the shell prompt, so it doesn't clobber <C-f> page-down in nvim.)
+bindkey -s '^f' '\C-utmux-sessionizer\n'
 
 # UAT DB tunnel: IAP SSH via the bastion so localhost:5433 = UAT Postgres.
 # Run when you need the DB, Ctrl-C when done. DB login still needs the password.

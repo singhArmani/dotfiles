@@ -16,6 +16,7 @@
     ~/.config/ghostty/config: ghostty/config.ghostty
     ~/.tmuxinator/avarni.yml: tmuxinator/avarni.yml
     ~/bin/uatdb-tunnel: bin/uatdb-tunnel
+    ~/bin/tmux-sessionizer: bin/tmux-sessionizer
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
