@@ -15,6 +15,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.config/ghostty/config: ghostty/config.ghostty
     ~/.tmuxinator/avarni.yml: tmuxinator/avarni.yml
+    ~/bin/uatdb-tunnel: bin/uatdb-tunnel
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

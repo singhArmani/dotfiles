@@ -24,11 +24,16 @@ return {
 				name = "local",
 				url = "postgres://myuser:mypassword@localhost:54320/avarni-db",
 			},
-			{
-				name = "uat",
-				url = "postgres://avarni_core_api:9EBxHAuaZtxVdcKbogYRPCIx6DSV6W5k@dpg-cnoe8aacn0vc73bgqg6g-a.singapore-postgres.render.com:5432/avarni_core_api",
-			},
 		}
+
+		-- UAT (GCP Cloud SQL) is reached through the `uatdb` SSH tunnel:
+		-- run `uatdb` first so localhost:5433 maps to the UAT Postgres, then open DBUI.
+		-- The password is NOT hardcoded here (this file is committed to a public repo).
+		-- Set it in your gitignored secrets file, e.g.:
+		--   export UAT_DB_URL="postgres://core_api:<password>@127.0.0.1:5433/app"
+		if vim.env.UAT_DB_URL and vim.env.UAT_DB_URL ~= "" then
+			table.insert(vim.g.dbs, { name = "uat", url = vim.env.UAT_DB_URL })
+		end
 
 		-- Set the location to save the connection details
 		vim.g.db_ui_save_location = "~/workspace/db_ui"

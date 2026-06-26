@@ -46,6 +46,10 @@ alias tkill="tmux kill-server"
 alias avarni="cd ~/workspace/avarni && tmuxinator start avarni"
 alias tn="tmux rename-window"
 
+# UAT DB tunnel: IAP SSH via the bastion so localhost:5433 = UAT Postgres.
+# Run when you need the DB, Ctrl-C when done. DB login still needs the password.
+alias uatdb="$HOME/bin/uatdb-tunnel"
+
 alias dot="cd ~/workspace/dotfiles/"
 
 # yarn
@@ -126,3 +130,6 @@ wt() {
   dir=$(git worktree list | awk '{print $1}' | fzf)
   [ -n "$dir" ] && cd "$dir"
 }
+
+# Load local secrets (API keys, UAT_DB_URL, etc.) — gitignored, not committed
+[ -f ~/workspace/dotfiles/secrets.zsh ] && source ~/workspace/dotfiles/secrets.zsh
