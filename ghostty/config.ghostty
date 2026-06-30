@@ -2,7 +2,16 @@
 theme = Catppuccin Mocha
 
 # Font
-font-family = CaskaydiaCove Nerd Font
+# Uncomment one (keep the rest commented) to switch font:
+# font-family = CaskaydiaCove Nerd Font
+# font-family = FiraCode Nerd Font
+# font-family = GeistMono Nerd Font
+# font-family = MonaspiceNe Nerd Font
+# font-family = MonaspiceAr Nerd Font
+# font-family = MonaspiceXe Nerd Font
+# font-family = MonaspiceRn Nerd Font
+# font-family = MonaspiceKr Nerd Font
+font-family = Maple Mono NF
 font-size = 15
 font-thicken = true
 
