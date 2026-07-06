@@ -16,11 +16,11 @@ font-size = 15
 font-thicken = true
 
 # Window
-fullscreen = true
+fullscreen = false
 window-padding-x = 12
 window-padding-y = 10
 window-padding-balance = true
-macos-titlebar-style = hidden
+macos-titlebar-style = transparent
 background-opacity = 0.95
 background-blur-radius = 20
 
