@@ -117,6 +117,13 @@ return {
 							start = { 1, 0 },
 							["end"] = { vim.api.nvim_buf_line_count(ev.buf), 0 },
 						},
+						-- oxlint offers "Disable <rule> for this line/file" per
+						-- diagnostic; with every buffer diagnostic in context that
+						-- floods the menu (2 entries × N diagnostics). Cursor-scoped
+						-- <leader>do still offers them for deliberate use.
+						filter = function(action)
+							return not (action.title or ""):match("^Disable ")
+						end,
 					})
 				end, opts)
 
@@ -143,7 +150,10 @@ return {
 				keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
 				opts.desc = "Restart LSP"
-				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+				keymap.set("n", "<leader>rs", function()
+					vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = ev.buf }))
+					vim.cmd("e")
+				end, opts)
 
 				opts.desc = "Copy diagnostic to clipboard"
 				keymap.set("n", "<leader>dc", copy_diagnostic_to_clipboard, opts)
@@ -154,10 +164,9 @@ return {
 		-- Server configs (new API)
 		-------------------------------------------------------------------
 
-		-- oxlint (LSP). Type-aware rules ON: catches rules that need type info,
-		-- e.g. no-floating-promises (the "void a fire-and-forget promise" rule).
-		-- This spawns tsgolint + tsgo, so it roughly doubles oxlint's RAM/CPU —
-		-- acceptable on this machine (M-series, 24GB).
+		-- oxlint (LSP). typeAware=false: avoids spawning a second tsgolint process
+		-- alongside the tsgo LSP (was causing ~100% CPU). Type-aware rules (e.g.
+		-- no-floating-promises) are available on demand via :Lint!
 		-- NOTE: don't override root_dir here. lspconfig's lsp/oxlint.lua resolves the
 		-- root by walking up to .oxlintrc.json (handles git worktrees) and launches the
 		-- project-local `node_modules/.bin/oxlint --lsp`. The old util.root_pattern() has
@@ -166,8 +175,16 @@ return {
 		vim.lsp.config("oxlint", {
 			capabilities = capabilities,
 			settings = {
-				typeAware = true, -- run type-aware rules (tsgolint) in-editor
+				typeAware = false, -- tsgolint in-editor doubles CPU; use :Lint! for on-demand type-aware linting
+				-- onType is cheap with typeAware=false (ms-fast); the old onSave was
+				-- part of the type-aware CPU fight and kept oxc diagnostics/fixes
+				-- stale between saves while tsgo's updated live.
 				run = "onType",
+				-- Offer dangerous fixes/suggestions (e.g. no-unused-vars removal) as
+				-- quick-fix code actions. Default "safe_fix" hides them. Applying is
+				-- still explicit — an action only runs when picked from <leader>ca/do,
+				-- and nothing here enables fix-on-save.
+				fixKind = "all",
 			},
 		})
 		vim.lsp.enable("oxlint")
