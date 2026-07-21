@@ -17,7 +17,7 @@ windows:
       panes:
         - cd ~/workspace/avarni/avarni-client && pnpm start
         - cd ~/workspace/avarni/avarni-api && dotnet run --project Avarni.Api
-        - cd ~/workspace/avarni/avarni-api && dotnet run --project Avarni.Worker/Avarni.Worker.csproj -- --seed false
+        - cd ~/workspace/avarni/avarni-api && dotnet run --project Avarni.Api -- worker
 
   - 🧪workbench:
       root: ~/workspace/avarni
