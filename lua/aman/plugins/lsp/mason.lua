@@ -44,13 +44,18 @@ return {
 			-- installed server, replacing the removed `setup_handlers`. Per-server
 			-- settings/capabilities are defined via vim.lsp.config() in lspconfig.lua.
 			mason_lspconfig.setup({
-				automatic_enable = true,
+				-- exclude, not `true`: the mason registry maps the installed tsgo
+				-- package to the lspconfig server of the same name, so automatic_enable
+				-- would start it alongside the tsc client lspconfig.lua enables -- two
+				-- TS servers on every buffer, and tsgo is the deprecated alias that
+				-- warns on init. Everything else installed still auto-enables.
+				automatic_enable = { exclude = { "tsgo" } },
 				-- list of servers for mason to install.
-				-- NOTE: tsgo is intentionally NOT here. Newer mason registries no
-				-- longer advertise the tsgo package as an lspconfig server, so
-				-- mason-lspconfig rejects it ("not a valid entry in ensure_installed").
-				-- Its binary is installed via mason-tool-installer below, and it is
-				-- enabled explicitly in lspconfig.lua.
+				-- NOTE: tsgo is intentionally NOT here either. Its binary is installed
+				-- via mason-tool-installer below (only as the $PATH fallback for the
+				-- tsc server's binary probe outside a project); the server itself is
+				-- configured and enabled explicitly, under its new name tsc, in
+				-- lspconfig.lua.
 				ensure_installed = {
 					"html",
 					"cssls",
