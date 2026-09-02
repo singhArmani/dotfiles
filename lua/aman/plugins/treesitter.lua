@@ -29,6 +29,7 @@ return {
 			"markdown_inline",
 			"prisma",
 			"query",
+			"sql",
 			"tsx",
 			"typescript",
 			"vim",

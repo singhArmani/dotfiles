@@ -66,6 +66,11 @@ return {
 					"prismals",
 					"pyright",
 					"typos_lsp", -- code-aware spell/typo checker (replaces harper_ls)
+					-- Postgres LSP (libpg_query -- the real PG parser, so diagnostics
+					-- match what the server would say). workspace_required, so it stays
+					-- dormant until a project adds postgres-language-server.jsonc; see
+					-- the note in lspconfig.lua.
+					"postgres_lsp",
 				},
 			})
 		end,
@@ -91,6 +96,7 @@ return {
 					"csharpier", -- csharp formatter
 					"pylint", -- python linter
 					"oxlint",
+					"sql-formatter", -- SQL formatter (<leader>mp); see formatting.lua
 					"tsgo", -- JS/TS LSP (TypeScript 7 native) + tsc.nvim's type-checker;
 					-- installed by package name here because newer mason registries no
 					-- longer expose it as an lspconfig server (see mason-lspconfig above)

@@ -246,6 +246,19 @@ return {
 		})
 		vim.lsp.enable("tsc")
 
+		-- postgres_lsp (postgres-language-server). Installed via mason-lspconfig's
+		-- ensure_installed, so automatic_enable starts it -- but its lspconfig
+		-- config sets workspace_required with root marker
+		-- postgres-language-server.jsonc, so it attaches to nothing until a project
+		-- opts in by adding that file. To opt one in, drop a
+		-- postgres-language-server.jsonc at the project root pointing at a LOCAL
+		-- database (it connects, to read the schema -- do not point it at UAT):
+		--   { "db": { "host": "localhost", "port": 54320, "username": "myuser",
+		--             "password": "mypassword", "database": "avarni-db" } }
+		-- Diagnostics come from libpg_query, the actual Postgres parser, so syntax
+		-- errors match what the server would report. No config needed here; the
+		-- vim.lsp.config("*") capabilities above apply.
+
 		-- All Mason-installed servers are enabled automatically by
 		-- mason-lspconfig's `automatic_enable`, inheriting the vim.lsp.config("*")
 		-- defaults above. The servers configured above (oxlint, lua_ls, tsc) and

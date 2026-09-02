@@ -18,6 +18,16 @@ return {
 		vim.g.db_ui_auto_execute_table_helpers = 1 -- auto execute table query when opening a table
 		vim.g.db_ui_win_position = "left"
 
+		-- Pin scratch query buffers to a fixed directory. Without this they land in
+		-- a fresh tempname() dir each session, which has no stable ancestor -- and
+		-- postgres_lsp only starts when it finds postgres-language-server.jsonc in
+		-- one (workspace_required; see lsp/lspconfig.lua). With both this and
+		-- db_ui_save_location under ~/workspace/db_ui, that single marker file
+		-- covers saved and scratch queries alike, so live Postgres diagnostics
+		-- (syntax, unknown table/column) show up as you type instead of only after
+		-- :w executes the query. Created automatically if missing.
+		vim.g.db_ui_tmp_query_location = "~/workspace/db_ui/tmp"
+
 		-- Define your database connections here
 		-- Build in a local table, then assign vim.g.dbs ONCE. `table.insert(vim.g.dbs, ...)`
 		-- is a no-op: reading vim.g.dbs returns a copy, not a reference to the global.
