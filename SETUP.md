@@ -54,7 +54,7 @@ ssh -T git@github.com       # verify
 ## 9. Clone Avarni Repos
 ```bash
 mkdir ~/workspace/avarni
-git clone git@github.com:<org>/avarni-spa.git ~/workspace/avarni/avarni-spa
+git clone git@github.com:<org>/avarni-dashboard.git ~/workspace/avarni/avarni-client
 git clone git@github.com:<org>/avarni-api.git ~/workspace/avarni/avarni-api
 ```
 

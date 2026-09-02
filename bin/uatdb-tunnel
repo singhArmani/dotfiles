@@ -1,0 +1,23 @@
+#!/bin/sh
+# UAT DB tunnel — IAP SSH to bastion-vm, forwarding localhost:5433 -> Cloud SQL UAT (db-uat-1).
+# Run it (via the `uatdb` alias) when you need the DB; Ctrl-C to close. Login still needs the password.
+#
+# Resolve gcloud across common install locations (manual SDK in ~/workspace/GCP, or Homebrew
+# on a new laptop) so the script works regardless of where gcloud is installed.
+for d in "$HOME/workspace/GCP/google-cloud-sdk/bin" \
+         /opt/homebrew/share/google-cloud-sdk/bin \
+         /usr/local/share/google-cloud-sdk/bin; do
+  [ -x "$d/gcloud" ] && PATH="$d:$PATH"
+done
+export PATH
+
+# -N: no remote command (tunnel only). ServerAlive*: detect a dead link so the
+# process exits and launchd restarts it. ExitOnForwardFailure: bail if 5433 is taken
+# (e.g. another tunnel already running) instead of staying up without the forward.
+exec gcloud compute ssh bastion-vm \
+  --project av-uat-backend-c398 \
+  --zone australia-southeast1-a \
+  --tunnel-through-iap \
+  -- -N \
+  -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes \
+  -L 5433:10.126.1.3:5432

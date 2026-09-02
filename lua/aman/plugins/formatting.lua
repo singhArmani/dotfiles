@@ -21,6 +21,17 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				cs = { "csharpier" },
+				sql = { "sql_formatter" },
+			},
+			formatters = {
+				-- conform's builtin passes no dialect; sql-formatter then defaults to
+				-- generic SQL and mangles Postgres-isms (::casts, $$ bodies, RETURNING).
+				-- NOTE: sqlfluff would lint as well as format, but its conform entry sets
+				-- require_cwd with a .sqlfluff/pyproject.toml root marker, so it silently
+				-- does nothing on an ad-hoc query buffer. postgres_lsp covers linting.
+				sql_formatter = {
+					prepend_args = { "--language", "postgresql" },
+				},
 			},
 			-- formatters = {
 			-- 	csharpier = {
@@ -28,12 +39,20 @@ return {
 			-- 		args = { "--write-stdout" }, -- Arguments passed to the command
 			-- 	},
 			-- },
-			format_on_save = {
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 1000,
-				quiet = true,
-			},
+			format_on_save = function(bufnr)
+				-- Not SQL: in a dadbod-ui query buffer (filetype sql) `:w` executes the
+				-- query, so formatting on the way through rewrites the buffer under you
+				-- every single run. Format SQL deliberately with <leader>mp instead.
+				if vim.bo[bufnr].filetype == "sql" then
+					return nil
+				end
+				return {
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 1000,
+					quiet = true,
+				}
+			end,
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()

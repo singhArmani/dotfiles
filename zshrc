@@ -1,6 +1,7 @@
 
 # Homebrew path
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 eval "$(starship init zsh)"
 
@@ -45,6 +46,13 @@ alias tc="nvim ~/.tmux.conf"
 alias tkill="tmux kill-server"
 alias avarni="cd ~/workspace/avarni && tmuxinator start avarni"
 alias tn="tmux rename-window"
+# ^f at the prompt: fuzzy-pick a ~/workspace project and jump to its tmux session.
+# (Only fires at the shell prompt, so it doesn't clobber <C-f> page-down in nvim.)
+bindkey -s '^f' '\C-utmux-sessionizer\n'
+
+# UAT DB tunnel: IAP SSH via the bastion so localhost:5433 = UAT Postgres.
+# Run when you need the DB, Ctrl-C when done. DB login still needs the password.
+alias uatdb="$HOME/bin/uatdb-tunnel"
 
 alias dot="cd ~/workspace/dotfiles/"
 
@@ -112,8 +120,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 
-# Google Cloud SDK
-_gc_sdk="$HOME/workspace/GCP/google-cloud-sdk"
+# Google Cloud SDK (Homebrew cask `gcloud-cli`)
+_gc_sdk="/opt/homebrew/share/google-cloud-sdk"
 if [ -f "$_gc_sdk/path.zsh.inc" ]; then
   . "$_gc_sdk/path.zsh.inc"
   [ -f "$_gc_sdk/completion.zsh.inc" ] && . "$_gc_sdk/completion.zsh.inc"
@@ -126,3 +134,9 @@ wt() {
   dir=$(git worktree list | awk '{print $1}' | fzf)
   [ -n "$dir" ] && cd "$dir"
 }
+
+# Load local secrets (API keys, UAT_DB_URL, etc.) — gitignored, not committed
+[ -f ~/workspace/dotfiles/secrets.zsh ] && source ~/workspace/dotfiles/secrets.zsh
+
+# Created by `pipx` on 2026-09-02 06:34:50
+export PATH="$PATH:/Users/aman/.local/bin"

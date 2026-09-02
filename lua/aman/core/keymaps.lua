@@ -53,7 +53,7 @@ keymap.set("v", "K", "<cmd>m '<-2<cr>gv=gv", { desc = "Move visual selection up"
 keymap.set("n", "cp", "yap<S-}>p", { desc = "Clone paragraph with cp" })
 keymap.set("n", "<leader>p", '"0p', { desc = "Paste yanked content from register 0" })
 keymap.set("n", "<Leader>d", '"_d', { desc = "Use black hole register for deleting" })
-keymap.set("n", "<leader>bb", ":Bdelete<CR>", { desc = "Delete buffers without closing windows" })
+-- <leader>bb / <leader>ba (buffer delete) live in plugins/snacks.lua (Snacks.bufdelete)
 
 -- Move visual selection (move lines up or down after selection)
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })

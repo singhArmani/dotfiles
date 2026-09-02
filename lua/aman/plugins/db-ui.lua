@@ -18,17 +18,36 @@ return {
 		vim.g.db_ui_auto_execute_table_helpers = 1 -- auto execute table query when opening a table
 		vim.g.db_ui_win_position = "left"
 
+		-- Pin scratch query buffers to a fixed directory. Without this they land in
+		-- a fresh tempname() dir each session, which has no stable ancestor -- and
+		-- postgres_lsp only starts when it finds postgres-language-server.jsonc in
+		-- one (workspace_required; see lsp/lspconfig.lua). With both this and
+		-- db_ui_save_location under ~/workspace/db_ui, that single marker file
+		-- covers saved and scratch queries alike, so live Postgres diagnostics
+		-- (syntax, unknown table/column) show up as you type instead of only after
+		-- :w executes the query. Created automatically if missing.
+		vim.g.db_ui_tmp_query_location = "~/workspace/db_ui/tmp"
+
 		-- Define your database connections here
-		vim.g.dbs = {
+		-- Build in a local table, then assign vim.g.dbs ONCE. `table.insert(vim.g.dbs, ...)`
+		-- is a no-op: reading vim.g.dbs returns a copy, not a reference to the global.
+		local dbs = {
 			{
 				name = "local",
 				url = "postgres://myuser:mypassword@localhost:54320/avarni-db",
 			},
-			{
-				name = "uat",
-				url = "postgres://avarni_core_api:9EBxHAuaZtxVdcKbogYRPCIx6DSV6W5k@dpg-cnoe8aacn0vc73bgqg6g-a.singapore-postgres.render.com:5432/avarni_core_api",
-			},
 		}
+
+		-- UAT (GCP Cloud SQL) is reached through the `uatdb` SSH tunnel:
+		-- run `uatdb` first so localhost:5433 maps to the UAT Postgres, then open DBUI.
+		-- The password is NOT hardcoded here (this file is committed to a public repo).
+		-- Set it in your gitignored secrets file, e.g.:
+		--   export UAT_DB_URL="postgres://core_api:<password>@127.0.0.1:5433/app"
+		if vim.env.UAT_DB_URL and vim.env.UAT_DB_URL ~= "" then
+			table.insert(dbs, { name = "uat-db", url = vim.env.UAT_DB_URL })
+		end
+
+		vim.g.dbs = dbs
 
 		-- Set the location to save the connection details
 		vim.g.db_ui_save_location = "~/workspace/db_ui"

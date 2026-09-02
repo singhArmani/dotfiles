@@ -15,6 +15,12 @@ opt.autoindent = true -- copy indent from current line when starting new one
 -- line wrapping
 opt.wrap = false -- disable line wrapping
 
+-- always show the tabline so bufferline's buffer tabs are visible with a single
+-- tab page. Set here (before any plugin loads) so the snacks dashboard snapshots
+-- and restores 2 rather than the default 1 — otherwise tabs vanish after the
+-- dashboard closes (load-order race: dashboard loads before bufferline).
+opt.showtabline = 2
+
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive

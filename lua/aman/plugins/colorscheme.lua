@@ -141,6 +141,32 @@ return {
 		end,
 	},
 	{
+		"craftzdog/solarized-osaka.nvim",
+		name = "solarized-osaka",
+		priority = 1000,
+		config = function()
+			require("solarized-osaka").setup({
+				transparent = false, -- default is true; let the theme paint its own bg
+			})
+		end,
+	},
+	{
+		"vague-theme/vague.nvim",
+		name = "vague",
+		priority = 1000,
+		config = function()
+			require("vague").setup({})
+		end,
+	},
+	{
+		"EdenEast/nightfox.nvim",
+		name = "nightfox",
+		priority = 1000,
+		config = function()
+			require("nightfox").setup({})
+		end,
+	},
+	{
 		"NLKNguyen/papercolor-theme",
 		name = "paper",
 	},
