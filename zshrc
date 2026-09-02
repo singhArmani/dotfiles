@@ -139,4 +139,4 @@ wt() {
 [ -f ~/workspace/dotfiles/secrets.zsh ] && source ~/workspace/dotfiles/secrets.zsh
 
 # Created by `pipx` on 2026-09-02 06:34:50
-export PATH="$PATH:/Users/aman/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
