@@ -1,2 +1,5 @@
 .DS_Store
 secrets.zsh
+
+# nvim falls back to logging into the cwd when ~/.local/state/nvim is unwritable
+nvim.log
