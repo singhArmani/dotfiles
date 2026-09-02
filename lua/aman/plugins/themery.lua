@@ -75,6 +75,62 @@ return {
           ]],
 				},
 				{
+					name = "solarized osaka",
+					colorscheme = "solarized-osaka",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "vague",
+					colorscheme = "vague",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nightfox",
+					colorscheme = "nightfox",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nightfox (duskfox)",
+					colorscheme = "duskfox",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nightfox (carbonfox)",
+					colorscheme = "carbonfox",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nightfox (terafox)",
+					colorscheme = "terafox",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
+					name = "nightfox (nordfox)",
+					colorscheme = "nordfox",
+					before = [[
+            vim.opt.background = "dark"
+            vim.opt.termguicolors = true
+          ]],
+				},
+				{
 					name = "github light",
 					colorscheme = "github_light_high_contrast",
 					before = [[
